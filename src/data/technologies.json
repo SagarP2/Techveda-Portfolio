@@ -1,0 +1,452 @@
+{
+  "technologies": [
+    {
+      "id": 1,
+      "name": "React",
+      "logo": "/images/technologies/react.svg",
+      "category": "frontend",
+      "isSelected": true
+    },
+    {
+      "id": 2,
+      "name": "Vue.js",
+      "logo": "/images/technologies/vue.svg",
+      "category": "frontend",
+      "isSelected": false
+    },
+    {
+      "id": 3,
+      "name": "Angular",
+      "logo": "/images/technologies/angular.svg",
+      "category": "frontend",
+      "isSelected": false
+    },
+    {
+      "id": 4,
+      "name": "Next.js",
+      "logo": "/images/technologies/nextjs.svg",
+      "category": "frontend",
+      "isSelected": true
+    },
+    {
+      "id": 5,
+      "name": "Svelte",
+      "logo": "/images/technologies/svelte.svg",
+      "category": "frontend",
+      "isSelected": false
+    },
+    {
+      "id": 6,
+      "name": "TypeScript",
+      "logo": "/images/technologies/typescript.svg",
+      "category": "frontend",
+      "isSelected": true
+    },
+    {
+      "id": 7,
+      "name": "Node.js",
+      "logo": "/images/technologies/nodejs.svg",
+      "category": "backend",
+      "isSelected": true
+    },
+    {
+      "id": 8,
+      "name": "Express",
+      "logo": "/images/technologies/express.svg",
+      "category": "backend",
+      "isSelected": true
+    },
+    {
+      "id": 9,
+      "name": "Django",
+      "logo": "/images/technologies/django.svg",
+      "category": "backend",
+      "isSelected": false
+    },
+    {
+      "id": 10,
+      "name": "Spring Boot",
+      "logo": "/images/technologies/spring.svg",
+      "category": "backend",
+      "isSelected": false
+    },
+    {
+      "id": 11,
+      "name": "Laravel",
+      "logo": "/images/technologies/laravel.svg",
+      "category": "backend",
+      "isSelected": false
+    },
+    {
+      "id": 12,
+      "name": "Ruby on Rails",
+      "logo": "/images/technologies/rails.svg",
+      "category": "backend",
+      "isSelected": false
+    },
+    {
+      "id": 13,
+      "name": "MongoDB",
+      "logo": "/images/technologies/mongodb.svg",
+      "category": "database",
+      "isSelected": true
+    },
+    {
+      "id": 14,
+      "name": "PostgreSQL",
+      "logo": "/images/technologies/postgresql.svg",
+      "category": "database",
+      "isSelected": true
+    },
+    {
+      "id": 15,
+      "name": "MySQL",
+      "logo": "/images/technologies/mysql.svg",
+      "category": "database",
+      "isSelected": false
+    },
+    {
+      "id": 16,
+      "name": "Redis",
+      "logo": "/images/technologies/redis.svg",
+      "category": "database",
+      "isSelected": false
+    },
+    {
+      "id": 17,
+      "name": "Figma",
+      "logo": "/images/technologies/figma.svg",
+      "category": "design",
+      "isSelected": true
+    },
+    {
+      "id": 18,
+      "name": "Adobe XD",
+      "logo": "/images/technologies/adobexd.svg",
+      "category": "design",
+      "isSelected": false
+    },
+    {
+      "id": 19,
+      "name": "Sketch",
+      "logo": "/images/technologies/sketch.svg",
+      "category": "design",
+      "isSelected": false
+    },
+    {
+      "id": 20,
+      "name": "Adobe Illustrator",
+      "logo": "/images/technologies/illustrator.svg",
+      "category": "design",
+      "isSelected": false
+    },
+    {
+      "id": 21,
+      "name": "Docker",
+      "logo": "/images/technologies/docker.svg",
+      "category": "devops",
+      "isSelected": true
+    },
+    {
+      "id": 22,
+      "name": "Kubernetes",
+      "logo": "/images/technologies/kubernetes.svg",
+      "category": "devops",
+      "isSelected": false
+    },
+    {
+      "id": 23,
+      "name": "AWS",
+      "logo": "/images/technologies/aws.svg",
+      "category": "devops",
+      "isSelected": true
+    },
+    {
+      "id": 24,
+      "name": "Git",
+      "logo": "/images/technologies/git.svg",
+      "category": "devops",
+      "isSelected": true
+    },
+    {
+      "id": 25,
+      "name": "Jenkins",
+      "logo": "/images/technologies/jenkins.svg",
+      "category": "devops",
+      "isSelected": false
+    },
+    {
+      "id": 26,
+      "name": "Terraform",
+      "logo": "/images/technologies/terraform.svg",
+      "category": "devops",
+      "isSelected": false
+    },
+    {
+      "id": 27,
+      "name": "GraphQL",
+      "logo": "/images/technologies/graphql.svg",
+      "category": "api",
+      "isSelected": true
+    },
+    {
+      "id": 28,
+      "name": "REST API",
+      "logo": "/images/technologies/rest.svg",
+      "category": "api",
+      "isSelected": true
+    },
+    {
+      "id": 29,
+      "name": "WebSocket",
+      "logo": "/images/technologies/websocket.svg",
+      "category": "api",
+      "isSelected": false
+    },
+    {
+      "id": 30,
+      "name": "gRPC",
+      "logo": "/images/technologies/grpc.svg",
+      "category": "api",
+      "isSelected": false
+    },
+    {
+      "id": 31,
+      "name": "SvelteKit",
+      "logo": "/images/technologies/svelte.svg",
+      "category": "frontend",
+      "isSelected": false
+    },
+    {
+      "id": 32,
+      "name": "Nuxt.js",
+      "logo": "/images/technologies/nuxt.svg",
+      "category": "frontend",
+      "isSelected": false
+    },
+    {
+      "id": 33,
+      "name": "Gatsby",
+      "logo": "/images/technologies/gatsby.svg",
+      "category": "frontend",
+      "isSelected": false
+    },
+    {
+      "id": 34,
+      "name": "Tailwind CSS",
+      "logo": "/images/technologies/tailwind.svg",
+      "category": "frontend",
+      "isSelected": true
+    },
+    {
+      "id": 35,
+      "name": "Bootstrap",
+      "logo": "/images/technologies/bootstrap.svg",
+      "category": "frontend",
+      "isSelected": false
+    },
+    {
+      "id": 36,
+      "name": "Material-UI",
+      "logo": "/images/technologies/materialui.svg",
+      "category": "frontend",
+      "isSelected": false
+    },
+    {
+      "id": 37,
+      "name": "Chakra UI",
+      "logo": "/images/technologies/chakra.svg",
+      "category": "frontend",
+      "isSelected": false
+    },
+    {
+      "id": 38,
+      "name": "Flask",
+      "logo": "/images/technologies/flask.svg",
+      "category": "backend",
+      "isSelected": false
+    },
+    {
+      "id": 39,
+      "name": "FastAPI",
+      "logo": "/images/technologies/fastapi.svg",
+      "category": "backend",
+      "isSelected": false
+    },
+    {
+      "id": 40,
+      "name": "NestJS",
+      "logo": "/images/technologies/nestjs.svg",
+      "category": "backend",
+      "isSelected": false
+    },
+    {
+      "id": 41,
+      "name": "Go",
+      "logo": "/images/technologies/go.svg",
+      "category": "backend",
+      "isSelected": false
+    },
+    {
+      "id": 42,
+      "name": "Rust",
+      "logo": "/images/technologies/rust.svg",
+      "category": "backend",
+      "isSelected": false
+    },
+    {
+      "id": 43,
+      "name": "Elixir",
+      "logo": "/images/technologies/elixir.svg",
+      "category": "backend",
+      "isSelected": false
+    },
+    {
+      "id": 44,
+      "name": "Phoenix",
+      "logo": "/images/technologies/phoenix.svg",
+      "category": "backend",
+      "isSelected": false
+    },
+    {
+      "id": 45,
+      "name": "Cassandra",
+      "logo": "/images/technologies/cassandra.svg",
+      "category": "database",
+      "isSelected": false
+    },
+    {
+      "id": 46,
+      "name": "Elasticsearch",
+      "logo": "/images/technologies/elasticsearch.svg",
+      "category": "database",
+      "isSelected": false
+    },
+    {
+      "id": 47,
+      "name": "Neo4j",
+      "logo": "/images/technologies/neo4j.svg",
+      "category": "database",
+      "isSelected": false
+    },
+    {
+      "id": 48,
+      "name": "DynamoDB",
+      "logo": "/images/technologies/dynamodb.svg",
+      "category": "database",
+      "isSelected": false
+    },
+    {
+      "id": 49,
+      "name": "Firebase",
+      "logo": "/images/technologies/firebase.svg",
+      "category": "database",
+      "isSelected": false
+    },
+    {
+      "id": 50,
+      "name": "Adobe Photoshop",
+      "logo": "/images/technologies/photoshop.svg",
+      "category": "design",
+      "isSelected": false
+    },
+    {
+      "id": 51,
+      "name": "Adobe InDesign",
+      "logo": "/images/technologies/indesign.svg",
+      "category": "design",
+      "isSelected": false
+    },
+    {
+      "id": 52,
+      "name": "Adobe After Effects",
+      "logo": "/images/technologies/aftereffects.svg",
+      "category": "design",
+      "isSelected": false
+    },
+    {
+      "id": 53,
+      "name": "InVision",
+      "logo": "/images/technologies/invision.svg",
+      "category": "design",
+      "isSelected": false
+    },
+    {
+      "id": 54,
+      "name": "Zeplin",
+      "logo": "/images/technologies/zeplin.svg",
+      "category": "design",
+      "isSelected": false
+    },
+    {
+      "id": 55,
+      "name": "Ansible",
+      "logo": "/images/technologies/ansible.svg",
+      "category": "devops",
+      "isSelected": false
+    },
+    {
+      "id": 56,
+      "name": "Prometheus",
+      "logo": "/images/technologies/prometheus.svg",
+      "category": "devops",
+      "isSelected": false
+    },
+    {
+      "id": 57,
+      "name": "Grafana",
+      "logo": "/images/technologies/grafana.svg",
+      "category": "devops",
+      "isSelected": false
+    },
+    {
+      "id": 58,
+      "name": "Azure",
+      "logo": "/images/technologies/azure.svg",
+      "category": "devops",
+      "isSelected": false
+    },
+    {
+      "id": 59,
+      "name": "Google Cloud",
+      "logo": "/images/technologies/gcp.svg",
+      "category": "devops",
+      "isSelected": false
+    },
+    {
+      "id": 60,
+      "name": "OpenAPI",
+      "logo": "/images/technologies/openapi.svg",
+      "category": "api",
+      "isSelected": false
+    },
+    {
+      "id": 61,
+      "name": "Swagger",
+      "logo": "/images/technologies/swagger.svg",
+      "category": "api",
+      "isSelected": false
+    },
+    {
+      "id": 62,
+      "name": "Postman",
+      "logo": "/images/technologies/postman.svg",
+      "category": "api",
+      "isSelected": false
+    },
+    {
+      "id": 63,
+      "name": "Apollo",
+      "logo": "/images/technologies/apollo.svg",
+      "category": "api",
+      "isSelected": false
+    },
+    {
+      "id": 64,
+      "name": "Prisma",
+      "logo": "/images/technologies/prisma.svg",
+      "category": "api",
+      "isSelected": false
+    }
+  ]
+} 
