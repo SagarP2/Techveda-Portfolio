@@ -1,10 +1,6 @@
-# Portfolio
+# Techveda Portfolio
 
 Welcome to my Portfolio repository! This project showcases my skills and experience as a **MERN Stack Developer**. It is built using **React.js**, **Node.js**, **Express.js**, and **MongoDB**.
-
-## 🚀 Live Demo
-Check out the live version of my portfolio:
-[Portfolio Live](#) *(Update with your live link)*
 
 ## 🛠️ Technologies Used
 - **Frontend:** React.js, TailwindCSS
