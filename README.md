@@ -1,28 +1,52 @@
-# Techveda Portfolio
+# Techveda-Portfolio
 
-Welcome to my Portfolio repository! This project showcases my skills and experience as a **MERN Stack Developer**. It is built using **React.js**, **Node.js**, **Express.js**, and **MongoDB**.
+A modern and responsive personal portfolio website built using the **MERN Stack** – React.js, Node.js, Express.js, and MongoDB. This project showcases the developer's skills, projects, and provides a platform for potential clients or employers to get in touch.
 
-## 🛠️ Technologies Used
-- **Frontend:** React.js, TailwindCSS
-- **Backend:** Node.js, Express.js
-- **Database:** MongoDB
-- **Hosting:** AWS S3
-- **Version Control:** Git & GitHub
+## Features
 
-## 🔧 Features
-- 🖥️ **Responsive Design** - Works seamlessly across all devices
-- ⚡ **Fast & Optimized** - Uses lazy loading for improved performance
-- 🌐 **SEO Friendly** - Optimized for search engines
-- 📩 **Contact Form** - Users can reach out via a functional contact form
-- 📌 **Projects Showcase** - Displays my past work and contributions
+- **Responsive Design**: Ensures optimal viewing experience across various devices.
+- **Interactive Elements**: Incorporates animations and interactive components to enhance user engagement.
+- **Project Showcase**: Highlights key projects with descriptions and links.
+- **Contact Form**: Allows visitors to send messages directly through the website.
+- **Clean UI/UX**: Simple yet elegant layout designed with user experience in mind.
+- **Navigation**: Smooth navigation bar for easy access to sections.
 
-## 🤝 Contributing
-If you have suggestions or improvements, feel free to fork this repository and submit a pull request.
+## Technologies Used
 
-## 📬 Contact
-Feel free to reach out via:
-- **GitHub:** [SagarP2](https://github.com/SagarP2)
+- React.js
+- Node.js
+- Express.js
+- MongoDB
+- HTML5 & CSS3
+- JavaScript (ES6+)
+- Git & GitHub
 
----
+To run this project locally:
 
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/SagarP2/Techveda-Portfolio.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd Techveda-Portfolio
+   ```
+3. Install dependencies:
+   ```bash
+   npm install && cd client && npm install
+   ```
+4. Create a `.env` file in the root with your MongoDB URI and required variables.
+5. Run the server and client:
+   ```bash
+   npm run dev
+   ```
 
+## Contributing
+
+Contributions are welcome! If you have suggestions or improvements, please fork the repository and submit a pull request.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
