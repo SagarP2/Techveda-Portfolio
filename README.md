@@ -31,14 +31,10 @@ To run this project locally:
    ```bash
    cd Techveda-Portfolio
    ```
-3. Install dependencies:
+3. Create a `.env` file in the root with your MongoDB URI and required variables.
+4. Run the server and client:
    ```bash
-   npm install && cd client && npm install
-   ```
-4. Create a `.env` file in the root with your MongoDB URI and required variables.
-5. Run the server and client:
-   ```bash
-   npm run dev
+   npm start
    ```
 
 ## Contributing
