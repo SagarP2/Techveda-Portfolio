@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import axios from 'axios';
 import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../../components/Toast';
+import LoadingSpinner from '../../components/LoadingSpinner';
 
 const Container = styled.div`
   padding: 2rem;
@@ -494,16 +495,7 @@ const BlogManagement = () => {
   if (loading) {
     return (
       <Container>
-        <Header>
-          <h1>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
-              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-            </svg>
-            Blog Management
-          </h1>
-        </Header>
-        <div style={{ textAlign: 'center', padding: '2rem' }}>Loading blog posts...</div>
+        <LoadingSpinner />
       </Container>
     );
   }

@@ -5,6 +5,7 @@ import API from '../../api';
 import { useToast } from '../../components/Toast';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import LoadingSpinner from '../../components/LoadingSpinner';
 
 const Container = styled.div`
   padding: 2rem;
@@ -503,15 +504,7 @@ const ServiceManagement = () => {
   if (loading) {
     return (
       <Container>
-        <Header>
-          <h1>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-            </svg>
-            Service Management
-          </h1>
-        </Header>
-        <div style={{ textAlign: 'center', padding: '2rem' }}>Loading services...</div>
+        <LoadingSpinner />
       </Container>
     );
   }

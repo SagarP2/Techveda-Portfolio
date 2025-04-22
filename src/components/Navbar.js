@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -54,83 +55,153 @@ const Navbar = () => {
     { path: '/blog', label: 'Blog' },
     { path: '/contact', label: 'Contact' }
   ];
+
+  const backdropVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 }
+  };
+
+  const mobileMenuVariants = {
+    hidden: { 
+      opacity: 0,
+      height: 0,
+      transition: {
+        duration: 0.3,
+        ease: "easeInOut"
+      }
+    },
+    visible: { 
+      opacity: 1,
+      height: "auto",
+      transition: {
+        duration: 0.3,
+        ease: "easeInOut"
+      }
+    }
+  };
   
   return (
     <>
-      {/* Backdrop blur overlay for mobile menu */}
-      <div 
-        className={`fixed inset-0 bg-black/30 backdrop-blur-md z-40 md:hidden transition-opacity duration-300 ${
-          mobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
-        }`}
-        onClick={() => setMobileMenuOpen(false)}
-      />
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div 
+            className="fixed inset-0 backdrop-blur-sm z-40 md:hidden"
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+            variants={backdropVariants}
+            onClick={() => setMobileMenuOpen(false)}
+          />
+        )}
+      </AnimatePresence>
       
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'shadow-md' : ''
-      }`}>
+      <motion.nav 
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          scrolled ? 'backdrop-blur-md shadow-sm' : ''
+        }`}
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ type: "spring", stiffness: 100, damping: 15 }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4 md:justify-start md:space-x-10">
-            <Link 
-              to="/" 
-              className="flex items-center text-2xl font-bold text-white font-heading hoverable"
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              TECHVEDA<span className="text-primary-500">.</span>
-            </Link>
+              <Link 
+                to="/" 
+                className="flex items-center text-2xl font-bold text-white font-heading hoverable"
+              >
+                TECHVEDA<span className="text-primary-500">.</span>
+              </Link>
+            </motion.div>
             
             <div className="hidden md:flex items-center space-x-8">
               {navLinks.map((link) => (
-                <Link 
+                <motion.div
                   key={link.path}
-                  to={link.path}
-                  className={`${isActive(link.path)} transition-colors duration-200 text-sm font-medium hoverable`}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  {link.label}
-                </Link>
+                  <Link 
+                    to={link.path}
+                    className={`${isActive(link.path)} transition-colors duration-200 text-sm font-medium hoverable`}
+                  >
+                    {link.label}
+                  </Link>
+                </motion.div>
               ))}
             </div>
             
-            <button
+            <motion.button
               onClick={toggleMobileMenu}
               aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
               className="md:hidden flex items-center hoverable z-50"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
             >
               <div className="w-6 h-6 flex flex-col justify-between items-center relative">
-                <span className={`w-full h-0.5 bg-gray-100 transition-all duration-300 transform ${
-                  mobileMenuOpen ? 'rotate-45 translate-y-2.5' : ''
-                }`}></span>
-                <span className={`w-full h-0.5 bg-gray-100 transition-all duration-300 ${
-                  mobileMenuOpen ? 'opacity-0' : 'opacity-100'
-                }`}></span>
-                <span className={`w-full h-0.5 bg-gray-100 transition-all duration-300 transform ${
-                  mobileMenuOpen ? '-rotate-45 -translate-y-2.5' : ''
-                }`}></span>
+                <motion.span 
+                  className="w-full h-0.5 bg-gray-100"
+                  animate={{
+                    rotate: mobileMenuOpen ? 45 : 0,
+                    y: mobileMenuOpen ? 10 : 0
+                  }}
+                  transition={{ duration: 0.3 }}
+                />
+                <motion.span 
+                  className="w-full h-0.5 bg-gray-100"
+                  animate={{
+                    opacity: mobileMenuOpen ? 0 : 1
+                  }}
+                  transition={{ duration: 0.3 }}
+                />
+                <motion.span 
+                  className="w-full h-0.5 bg-gray-100"
+                  animate={{
+                    rotate: mobileMenuOpen ? -45 : 0,
+                    y: mobileMenuOpen ? -10 : 0
+                  }}
+                  transition={{ duration: 0.3 }}
+                />
               </div>
-            </button>
+            </motion.button>
           </div>
         </div>
         
-        {/* Mobile menu */}
-        <div 
-          className={`md:hidden transition-all duration-300 ease-in-out overflow-hidden z-50 bg-gray-900/95 backdrop-blur-sm ${
-            mobileMenuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
-          }`}
-        >
-          <div className="px-4 pt-2 pb-6 space-y-6">
-            <div className="grid grid-cols-1 gap-y-6">
-              {navLinks.map((link) => (
-                <Link 
-                  key={link.path}
-                  to={link.path}
-                  className={`${isActive(link.path)} text-lg font-medium block text-center py-2 hoverable`}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-          </div>
-        </div>
-      </nav>
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div 
+              className="md:hidden overflow-hidden z-50 backdrop-blur-md"
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              variants={mobileMenuVariants}
+            >
+              <div className="px-4 pt-2 pb-6 space-y-6">
+                <div className="grid grid-cols-1 gap-y-6">
+                  {navLinks.map((link) => (
+                    <motion.div
+                      key={link.path}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <Link 
+                        to={link.path}
+                        className={`${isActive(link.path)} text-lg font-medium block text-center py-2 hoverable`}
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        {link.label}
+                      </Link>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.nav>
     </>
   );
 };

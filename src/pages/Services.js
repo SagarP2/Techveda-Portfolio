@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import API from '../api';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const ServicesContainer = styled.div`
   padding: 4rem 2rem;
@@ -185,31 +186,6 @@ const ServiceLink = styled(Link)`
   }
 `;
 
-const LoadingSpinner = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 200px;
-  color: var(--color-primary);
-  font-size: 1.2rem;
-  gap: 1rem;
-
-  svg {
-    width: 24px;
-    height: 24px;
-    animation: spin 1s linear infinite;
-  }
-
-  @keyframes spin {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-`;
-
 const ErrorMessage = styled.div`
   text-align: center;
   padding: 2rem;
@@ -218,6 +194,43 @@ const ErrorMessage = styled.div`
   border-radius: 8px;
   margin: 1rem 0;
 `;
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2
+    }
+  }
+};
+
+const cardVariants = {
+  hidden: { 
+    opacity: 0,
+    y: 20,
+    scale: 0.95
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      type: "spring",
+      stiffness: 100,
+      damping: 15
+    }
+  },
+  hover: {
+    scale: 1.02,
+    transition: {
+      type: "spring",
+      stiffness: 400,
+      damping: 10
+    }
+  }
+};
 
 const Services = () => {
   const [services, setServices] = useState([]);
@@ -250,19 +263,7 @@ const Services = () => {
   if (loading) {
     return (
       <ServicesContainer>
-        <LoadingSpinner>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <line x1="12" y1="2" x2="12" y2="6"/>
-            <line x1="12" y1="18" x2="12" y2="22"/>
-            <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/>
-            <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/>
-            <line x1="2" y1="12" x2="6" y2="12"/>
-            <line x1="18" y1="12" x2="22" y2="12"/>
-            <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/>
-            <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/>
-          </svg>
-          Loading services...
-        </LoadingSpinner>
+        <LoadingSpinner />
       </ServicesContainer>
     );
   }
@@ -278,46 +279,93 @@ const Services = () => {
   return (
     <ServicesContainer>
       <ServicesHeader>
-        <h1>Our Services</h1>
-        <p>Explore our comprehensive range of services designed to meet your business needs</p>
+        <motion.h1
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          Our Services
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+        >
+          Explore our comprehensive range of services designed to meet your business needs
+        </motion.p>
       </ServicesHeader>
 
-      <ServicesGrid>
-        {services.map((service) => (
-          <ServiceCard
-            key={service._id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 * (services.indexOf(service) % 3) }}
-            whileHover={{ scale: 1.02 }}
-          >
-            <IconWrapper>
-              {service.icon && (
-                service.icon.startsWith('http') ? 
-                <img src={service.icon} alt={service.title} /> : 
-                <span>{service.icon}</span>
-              )}
-            </IconWrapper>
-            <h3>{service.title}</h3>
-            <p>{service.description}</p>
-            <ServiceLink 
-              to={`/services/${service.slug}`}
-              state={{ 
-                title: service.title, 
-                description: service.description, 
-                slug: service.slug,
-                icon: service.icon,
-                subServices: service.subServices
-              }}
+      <ServicesGrid
+        as={motion.div}
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        <AnimatePresence>
+          {services.map((service) => (
+            <ServiceCard
+              key={service._id}
+              as={motion.div}
+              variants={cardVariants}
+              whileHover="hover"
+              layout
             >
-              <span>Learn More</span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M5 12h14"/>
-                <path d="m12 5 7 7-7 7"/>
-              </svg>
-            </ServiceLink>
-          </ServiceCard>
-        ))}
+              <motion.div
+                layout
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.1 }}
+              >
+                <IconWrapper>
+                  {service.icon && (
+                    service.icon.startsWith('http') ? 
+                    <img src={service.icon} alt={service.title} /> : 
+                    <span>{service.icon}</span>
+                  )}
+                </IconWrapper>
+              </motion.div>
+              <motion.h3
+                layout
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.2 }}
+              >
+                {service.title}
+              </motion.h3>
+              <motion.p
+                layout
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3 }}
+              >
+                {service.description}
+              </motion.p>
+              <motion.div
+                layout
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.4 }}
+              >
+                <ServiceLink 
+                  to={`/services/${service.slug}`}
+                  state={{ 
+                    title: service.title, 
+                    description: service.description, 
+                    slug: service.slug,
+                    icon: service.icon,
+                    subServices: service.subServices
+                  }}
+                >
+                  <span>Learn More</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M5 12h14"/>
+                    <path d="m12 5 7 7-7 7"/>
+                  </svg>
+                </ServiceLink>
+              </motion.div>
+            </ServiceCard>
+          ))}
+        </AnimatePresence>
       </ServicesGrid>
     </ServicesContainer>
   );

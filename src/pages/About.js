@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaInstagram, FaGlobe } from 'react-icons/fa';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 // Create axios instance with base URL
 const api = axios.create({
@@ -388,7 +389,7 @@ const About = () => {
     return (
       <PageContainer>
         <ContentContainer>
-          <LoadingContainer>Loading about content...</LoadingContainer>
+          <LoadingSpinner />
         </ContentContainer>
       </PageContainer>
     );

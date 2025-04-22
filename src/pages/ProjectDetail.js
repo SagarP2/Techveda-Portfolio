@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import axios from 'axios';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const Container = styled.div`
   max-width: 1200px;
@@ -177,13 +178,6 @@ const ProjectLink = styled.a`
   }
 `;
 
-const LoadingContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 400px;
-`;
-
 const ProjectDetail = () => {
   const { id } = useParams();
   const [project, setProject] = useState(null);
@@ -210,9 +204,9 @@ const ProjectDetail = () => {
 
   if (loading) {
     return (
-      <LoadingContainer>
-        <div className="loading-spinner">Loading...</div>
-      </LoadingContainer>
+      <Container>
+        <LoadingSpinner />
+      </Container>
     );
   }
 

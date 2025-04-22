@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const Container = styled.div`
   max-width: 1200px;
@@ -207,6 +208,7 @@ const Blog = () => {
         <Header>
           <h1>Loading...</h1>
         </Header>
+        <LoadingSpinner />
       </Container>
     );
   }

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const Container = styled.div`
   max-width: 1200px;
@@ -138,13 +139,6 @@ const GitHubLink = styled.a`
   }
 `;
 
-const LoadingContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 400px;
-`;
-
 const ProjectsList = () => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -170,9 +164,9 @@ const ProjectsList = () => {
 
   if (loading) {
     return (
-      <LoadingContainer>
-        <div className="loading-spinner">Loading...</div>
-      </LoadingContainer>
+      <Container>
+        <LoadingSpinner />
+      </Container>
     );
   }
 

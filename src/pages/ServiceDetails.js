@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import API from '../api';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const Container = styled.div`
   padding: 0;
@@ -178,14 +179,6 @@ const RequestButton = styled.button`
   &:hover {
     background: #5a35a0;
   }
-`;
-
-const LoadingSpinner = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 400px;
-  color: #6d43b8;
 `;
 
 const ErrorMessage = styled.div`
@@ -485,7 +478,7 @@ const ServiceDetails = () => {
   if (loading) {
     return (
       <Container>
-        <LoadingSpinner>Loading...</LoadingSpinner>
+        <LoadingSpinner />
       </Container>
     );
   }

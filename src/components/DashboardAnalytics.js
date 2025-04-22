@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import axios from 'axios';
 import { useToast } from './Toast';
+import LoadingSpinner from './LoadingSpinner';
 
 const StatsGrid = styled.div`
   display: grid;
@@ -107,13 +108,6 @@ const ActivityTime = styled.p`
   color: ${props => props.theme.colors.gray};
   margin: 0;
   font-size: 0.85rem;
-`;
-
-const LoadingSpinner = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
 `;
 
 const DashboardAnalytics = () => {
@@ -236,6 +230,14 @@ const DashboardAnalytics = () => {
     fetchRecentActivities();
   }, []);
 
+  if (loading) {
+    return (
+      <StatsGrid>
+        <LoadingSpinner />
+      </StatsGrid>
+    );
+  }
+
   return (
     <>
       <StatsGrid>
@@ -258,27 +260,23 @@ const DashboardAnalytics = () => {
         <ActivityHeader>
           <ActivitySectionTitle>Recent Activity</ActivitySectionTitle>
         </ActivityHeader>
-        {loading ? (
-          <LoadingSpinner>Loading...</LoadingSpinner>
-        ) : (
-          <ActivityList>
-            {recentActivities.map((activity, index) => (
-              <ActivityItem
-                key={activity.title}
-                as={motion.div}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-              >
-                <ActivityIcon>{activity.icon}</ActivityIcon>
-                <ActivityContent>
-                  <ActivityTitle recent={activity.isRecent}>{activity.title}</ActivityTitle>
-                  <ActivityTime>{activity.time}</ActivityTime>
-                </ActivityContent>
-              </ActivityItem>
-            ))}
-          </ActivityList>
-        )}
+        <ActivityList>
+          {recentActivities.map((activity, index) => (
+            <ActivityItem
+              key={activity.title}
+              as={motion.div}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
+            >
+              <ActivityIcon>{activity.icon}</ActivityIcon>
+              <ActivityContent>
+                <ActivityTitle recent={activity.isRecent}>{activity.title}</ActivityTitle>
+                <ActivityTime>{activity.time}</ActivityTime>
+              </ActivityContent>
+            </ActivityItem>
+          ))}
+        </ActivityList>
       </ActivitySection>
     </>
   );
