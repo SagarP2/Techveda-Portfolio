@@ -120,21 +120,21 @@ const Services = () => {
               whileTap={{ scale: 0.95 }}
             >
               <Link
-                to={`/services/${service.slug}`}
-                state={{ 
-                  title: service.title, 
-                  description: service.description, 
-                  slug: service.slug,
-                  icon: service.icon,
-                  subServices: service.subServices
-                }}
+              to={`/services/${service.slug}`}
+              state={{ 
+                title: service.title, 
+                description: service.description, 
+                slug: service.slug,
+                icon: service.icon,
+                subServices: service.subServices
+              }}
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-blue-600 to-blue-400 text-white font-medium shadow-lg hover:shadow-xl transition-all"
-              >
-                <span>Learn More</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M5 12h14"/>
-                  <path d="m12 5 7 7-7 7"/>
-                </svg>
+            >
+              <span>Learn More</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M5 12h14"/>
+                <path d="m12 5 7 7-7 7"/>
+              </svg>
               </Link>
             </motion.div>
           </motion.div>
