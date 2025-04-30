@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import LoadingSpinner from '../components/LoadingSpinner';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const Container = styled.div`
   max-width: 1200px;
@@ -16,13 +16,13 @@ const Header = styled.div`
   margin-bottom: 3rem;
 
   h1 {
-    color: ${props => props.theme.colors.text};
+    color: ${(props) => props.theme.colors.text};
     font-size: 2.5rem;
     margin-bottom: 1rem;
   }
 
   p {
-    color: ${props => props.theme.colors.textSecondary};
+    color: ${(props) => props.theme.colors.textSecondary};
     font-size: 1.1rem;
     max-width: 600px;
     margin: 0 auto;
@@ -36,7 +36,7 @@ const BlogGrid = styled.div`
 `;
 
 const BlogCard = styled(motion.div)`
-  background: ${props => props.theme.colors.cardBg};
+  background: ${(props) => props.theme.colors.cardBg};
   border-radius: 0.5rem;
   overflow: hidden;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -75,7 +75,7 @@ const BlogContent = styled.div`
 `;
 
 const BlogTitle = styled.h2`
-  color: ${props => props.theme.colors.text};
+  color: ${(props) => props.theme.colors.text};
   font-size: 1.5rem;
   margin-bottom: 1rem;
   line-height: 1.4;
@@ -86,13 +86,13 @@ const BlogTitle = styled.h2`
     transition: color 0.2s ease;
 
     &:hover {
-      color: ${props => props.theme.colors.primary};
+      color: ${(props) => props.theme.colors.primary};
     }
   }
 `;
 
 const BlogExcerpt = styled.p`
-  color: ${props => props.theme.colors.textSecondary};
+  color: ${(props) => props.theme.colors.textSecondary};
   margin-bottom: 1rem;
   line-height: 1.6;
   display: -webkit-box;
@@ -109,8 +109,8 @@ const TagsContainer = styled.div`
 `;
 
 const Tag = styled.span`
-  background: ${props => props.theme.colors.primary}20;
-  color: ${props => props.theme.colors.primary};
+  background: ${(props) => props.theme.colors.primary}20;
+  color: ${(props) => props.theme.colors.primary};
   padding: 0.25rem 0.75rem;
   border-radius: 1rem;
   font-size: 0.875rem;
@@ -119,10 +119,10 @@ const Tag = styled.span`
 const MetaInfo = styled.div`
   display: flex;
   justify-content: space-between;
-  color: ${props => props.theme.colors.textSecondary};
+  color: ${(props) => props.theme.colors.textSecondary};
   font-size: 0.875rem;
   padding-top: 1rem;
-  border-top: 1px solid ${props => props.theme.colors.border};
+  border-top: 1px solid ${(props) => props.theme.colors.border};
 `;
 
 const SearchContainer = styled.div`
@@ -134,42 +134,42 @@ const SearchContainer = styled.div`
 const SearchInput = styled.input`
   flex: 1;
   padding: 0.75rem;
-  border: 1px solid ${props => props.theme.colors.border};
+  border: 1px solid ${(props) => props.theme.colors.border};
   border-radius: 0.5rem;
-  background: ${props => props.theme.colors.background};
-  color: ${props => props.theme.colors.text};
+  background: ${(props) => props.theme.colors.background};
+  color: ${(props) => props.theme.colors.text};
   font-size: 1rem;
   transition: all 0.2s ease;
 
   &:focus {
     outline: none;
-    border-color: ${props => props.theme.colors.primary};
-    box-shadow: 0 0 0 2px ${props => props.theme.colors.primary}20;
+    border-color: ${(props) => props.theme.colors.primary};
+    box-shadow: 0 0 0 2px ${(props) => props.theme.colors.primary}20;
   }
 `;
 
 const Select = styled.select`
   padding: 0.75rem;
-  border: 1px solid ${props => props.theme.colors.border};
+  border: 1px solid ${(props) => props.theme.colors.border};
   border-radius: 0.5rem;
-  background: ${props => props.theme.colors.background};
-  color: ${props => props.theme.colors.text};
+  background: ${(props) => props.theme.colors.background};
+  color: ${(props) => props.theme.colors.text};
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.2s ease;
 
   &:focus {
     outline: none;
-    border-color: ${props => props.theme.colors.primary};
-    box-shadow: 0 0 0 2px ${props => props.theme.colors.primary}20;
+    border-color: ${(props) => props.theme.colors.primary};
+    box-shadow: 0 0 0 2px ${(props) => props.theme.colors.primary}20;
   }
 `;
 
 const Blog = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedTag, setSelectedTag] = useState('all');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedTag, setSelectedTag] = useState("all");
   const [tags, setTags] = useState([]);
 
   useEffect(() => {
@@ -178,40 +178,32 @@ const Blog = () => {
 
   const fetchPosts = async () => {
     try {
-      const response = await axios.get('/api/content');
+      const response = await axios.get("/api/content");
       setPosts(response.data);
-      
+
       // Extract unique tags
-      const uniqueTags = [...new Set(response.data.flatMap(post => post.tags))];
+      const uniqueTags = [
+        ...new Set(response.data.flatMap((post) => post.tags)),
+      ];
       setTags(uniqueTags);
-      
+
       setLoading(false);
     } catch (error) {
-      console.error('Error fetching blog posts:', error);
+      console.error("Error fetching blog posts:", error);
       setLoading(false);
     }
   };
 
-  const filteredPosts = posts.filter(post => {
-    const matchesSearch = post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         post.content.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         post.author.toLowerCase().includes(searchTerm.toLowerCase());
-    
-    const matchesTag = selectedTag === 'all' || post.tags.includes(selectedTag);
-    
+  const filteredPosts = posts.filter((post) => {
+    const matchesSearch =
+      post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      post.content.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      post.author.toLowerCase().includes(searchTerm.toLowerCase());
+
+    const matchesTag = selectedTag === "all" || post.tags.includes(selectedTag);
+
     return matchesSearch && matchesTag;
   });
-
-  if (loading) {
-    return (
-      <Container>
-        <Header>
-          <h1>Loading...</h1>
-        </Header>
-        <LoadingSpinner />
-      </Container>
-    );
-  }
 
   return (
     <Container>
@@ -220,26 +212,33 @@ const Blog = () => {
         <p>Discover insights, updates, and stories from our team</p>
       </Header>
 
-      <SearchContainer>
-        <SearchInput
-          type="text"
-          placeholder="Search posts..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        <Select
-          value={selectedTag}
-          onChange={(e) => setSelectedTag(e.target.value)}
-        >
-          <option value="all">All Tags</option>
-          {tags.map(tag => (
-            <option key={tag} value={tag}>{tag}</option>
-          ))}
-        </Select>
-      </SearchContainer>
-
+      {loading ? (
+        <LoadingSpinner />
+      ) : (
+        <>
+          <SearchContainer>
+            <SearchInput
+              type="text"
+              placeholder="Search posts..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            <Select
+              value={selectedTag}
+              onChange={(e) => setSelectedTag(e.target.value)}
+            >
+              <option value="all">All Tags</option>
+              {tags.map((tag) => (
+                <option key={tag} value={tag}>
+                  {tag}
+                </option>
+              ))}
+            </Select>
+          </SearchContainer>
+        </>
+      )}
       <BlogGrid>
-        {filteredPosts.map(post => (
+        {filteredPosts.map((post) => (
           <BlogCard
             key={post._id}
             initial={{ opacity: 0, y: 20 }}
@@ -257,7 +256,7 @@ const Blog = () => {
               </BlogTitle>
               <BlogExcerpt>{post.content.substring(0, 150)}...</BlogExcerpt>
               <TagsContainer>
-                {post.tags.map(tag => (
+                {post.tags.map((tag) => (
                   <Tag key={tag}>{tag}</Tag>
                 ))}
               </TagsContainer>
@@ -273,4 +272,4 @@ const Blog = () => {
   );
 };
 
-export default Blog; 
+export default Blog;

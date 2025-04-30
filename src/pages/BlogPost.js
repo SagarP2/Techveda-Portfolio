@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import axios from 'axios';
-import { useParams, Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import axios from "axios";
+import { useParams, Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const Container = styled.div`
   max-width: 800px;
@@ -15,14 +16,14 @@ const Header = styled.div`
   text-align: center;
 
   h1 {
-    color: ${props => props.theme.colors.text};
+    color: ${(props) => props.theme.colors.text};
     font-size: 2.5rem;
     margin-bottom: 1rem;
     line-height: 1.3;
   }
 
   .meta {
-    color: ${props => props.theme.colors.textSecondary};
+    color: ${(props) => props.theme.colors.textSecondary};
     font-size: 1rem;
     display: flex;
     justify-content: center;
@@ -31,13 +32,13 @@ const Header = styled.div`
   }
 
   .date {
-    color: ${props => props.theme.colors.textSecondary};
+    color: ${(props) => props.theme.colors.textSecondary};
     font-size: 0.875rem;
   }
 `;
 
 const Content = styled.div`
-  color: ${props => props.theme.colors.text};
+  color: ${(props) => props.theme.colors.text};
   font-size: 1.1rem;
   line-height: 1.8;
   margin-bottom: 2rem;
@@ -55,8 +56,8 @@ const TagsContainer = styled.div`
 `;
 
 const Tag = styled.span`
-  background: ${props => props.theme.colors.primary}20;
-  color: ${props => props.theme.colors.primary};
+  background: ${(props) => props.theme.colors.primary}20;
+  color: ${(props) => props.theme.colors.primary};
   padding: 0.25rem 0.75rem;
   border-radius: 1rem;
   font-size: 0.875rem;
@@ -65,14 +66,14 @@ const Tag = styled.span`
 const BackButton = styled(Link)`
   display: inline-flex;
   align-items: center;
-  color: ${props => props.theme.colors.primary};
+  color: ${(props) => props.theme.colors.primary};
   text-decoration: none;
   font-weight: 500;
   margin-bottom: 2rem;
   transition: all 0.2s ease;
 
   &:hover {
-    color: ${props => props.theme.colors.primaryDark};
+    color: ${(props) => props.theme.colors.primaryDark};
   }
 
   svg {
@@ -97,67 +98,91 @@ const BlogPost = () => {
       setPost(response.data);
       setLoading(false);
     } catch (error) {
-      console.error('Error fetching blog post:', error);
+      console.error("Error fetching blog post:", error);
       setLoading(false);
     }
   };
 
-  if (loading) {
-    return (
-      <Container>
-        <Header>
-          <h1>Loading...</h1>
-        </Header>
-      </Container>
-    );
-  }
-
   if (!post) {
     return (
       <Container>
-        <Header>
-          <h1>Post not found</h1>
-          <BackButton to="/blog">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-            Back to Blog
-          </BackButton>
-        </Header>
+        {loading ? (
+          <LoadingSpinner />
+        ) : (
+          <>
+            <Header>
+              <h1>Post not found</h1>
+              <BackButton to="/blog">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                  />
+                </svg>
+                Back to Blog
+              </BackButton>
+            </Header>
+          </>
+        )}
       </Container>
     );
   }
 
   return (
     <Container>
-      <BackButton to="/blog">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-        </svg>
-        Back to Blog
-      </BackButton>
+      {loading ? (
+        <LoadingSpinner />
+      ) : (
+        <>
+          <BackButton to="/blog">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              />
+            </svg>
+            Back to Blog
+          </BackButton>
 
-      <Header>
-        <h1>{post.title}</h1>
-        <div className="meta">
-          <span>By {post.author}</span>
-          <span>•</span>
-          <span className="date">{new Date(post.date).toLocaleDateString()}</span>
-        </div>
-        <TagsContainer>
-          {post.tags.map(tag => (
-            <Tag key={tag}>{tag}</Tag>
-          ))}
-        </TagsContainer>
-      </Header>
+          <Header>
+            <h1>{post.title}</h1>
+            <div className="meta">
+              <span>By {post.author}</span>
+              <span>•</span>
+              <span className="date">
+                {new Date(post.date).toLocaleDateString()}
+              </span>
+            </div>
+            <TagsContainer>
+              {post.tags.map((tag) => (
+                <Tag key={tag}>{tag}</Tag>
+              ))}
+            </TagsContainer>
+          </Header>
 
-      <Content>
-        {post.content.split('\n').map((paragraph, index) => (
-          <p key={index}>{paragraph}</p>
-        ))}
-      </Content>
+          <Content>
+            {post.content.split("\n").map((paragraph, index) => (
+              <p key={index}>{paragraph}</p>
+            ))}
+          </Content>
+        </>
+      )}
     </Container>
   );
 };
 
-export default BlogPost; 
+export default BlogPost;
