@@ -8,36 +8,15 @@ import LoadingSpinner from "./LoadingSpinner";
 
 const ProjectsSection = styled.section`
   padding: 6rem 0;
-  background: linear-gradient(180deg, #0a0a0a 0%, #111111 100%);
+  background: #0a0a0a;
   position: relative;
   overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(66, 153, 225, 0.3), transparent);
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(66, 153, 225, 0.1) 0%, transparent 50%);
-    pointer-events: none;
-  }
 `;
 
 const Container = styled(motion.div)`
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0;
 `;
 
 const ProjectsGrid = styled(motion.div)`
@@ -48,45 +27,27 @@ const ProjectsGrid = styled(motion.div)`
 `;
 
 const ProjectCard = styled(motion.div)`
-  background: rgba(17, 17, 17, 0.8);
+  background: #0a0a0a;
   backdrop-filter: blur(10px);
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(66, 153, 225, 0.1);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   isolation: isolate;
 
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      to bottom right,
-      transparent,
-      rgba(66, 153, 225, 0.1)
-    );
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    z-index: -1;
-  }
-
   &:hover {
     transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 12px 40px rgba(66, 153, 225, 0.2);
-    border-color: rgba(66, 153, 225, 0.3);
-
-    &::before {
-      opacity: 1;
-    }
+    box-shadow: 0 12px 40px rgba(66, 153, 225, 0.1);
+    border-color: rgba(66, 153, 225, 0.2);
   }
 `;
 
 const ProjectImageWrapper = styled.div`
   position: relative;
   overflow: hidden;
-  height: 240px;
+  height: 200px;
 
   &::after {
     content: '';
@@ -134,18 +95,14 @@ const ProjectContent = styled.div`
 `;
 
 const ProjectTitle = styled.h3`
-  color: #ffffff;
+  color: linear-gradient(135deg, #4299e1, #38b2ac);
   font-size: 1.75rem;
   margin-bottom: 1rem;
   font-weight: 600;
-  background: linear-gradient(90deg, #ffffff, #4299e1);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   transition: all 0.3s ease;
 
   ${ProjectCard}:hover & {
-    background: linear-gradient(90deg, #4299e1, #2563eb);
-    -webkit-background-clip: text;
+    color: #4299e1;
   }
 `;
 
@@ -178,13 +135,10 @@ const TechStack = styled.div`
   scrollbar-width: none;
   white-space: nowrap;
   position: relative;
-
-
-
 `;
 
 const TechBadge = styled(motion.span)`
-  background: rgba(66, 153, 225, 0.15);
+  background: rgba(66, 153, 225, 0.1);
   color: #4299e1;
   padding: 0.5rem 1rem;
   border-radius: 12px;
@@ -196,9 +150,9 @@ const TechBadge = styled(motion.span)`
   cursor: default;
 
   &:hover {
-    background: rgba(66, 153, 225, 0.25);
+    background: rgba(66, 153, 225, 0.2);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(66, 153, 225, 0.2);
+    box-shadow: 0 4px 12px rgba(66, 153, 225, 0.1);
   }
 `;
 
@@ -260,8 +214,6 @@ const ProjectLink = styled.a`
     transform: scale(1.1);
   }
 `;
-
-
 
 const ViewMoreSection = styled.div`
   display: flex;

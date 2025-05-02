@@ -4,11 +4,33 @@ import { motion } from 'framer-motion';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import LoadingSpinner from '../components/LoadingSpinner';
-
+import CallToAction from '../components/CallToAction';
 const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 4rem 0rem;
+  padding-bottom: 10rem;
+`;
+
+
+const Emphasis = styled.span`
+  background: linear-gradient(90deg, #4299e1, #2563eb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    opacity: 0;
+    transform: scaleX(0.7);
+    transition: all 0.3s ease;
+  }  
 `;
 
 const Header = styled.div`
@@ -31,9 +53,10 @@ const Header = styled.div`
 
 const ProjectsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
-  padding: 1rem;
+  padding: rem;
+  padding-bottom: 10rem;
 `;
 
 const ProjectCard = styled(motion.div)`
@@ -44,6 +67,7 @@ const ProjectCard = styled(motion.div)`
   display: flex;
   flex-direction: column;
   height: 100%;
+  padding-bottom: 1rem;
 `;
 
 const ProjectImage = styled.img`
@@ -59,30 +83,43 @@ const ProjectContent = styled.div`
   flex-grow: 1;
 `;
 
-const ProjectTitle = styled.h2`
-  color: #ffffff;
+const ProjectTitle = styled.h3`
+  color:linear-gradient(135deg, #4299e1, #38b2ac);
   font-size: 1.75rem;
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
   font-weight: 600;
+  transition: all 0.3s ease;
+
+  ${ProjectCard}:hover & {
+    color: #4299e1;
+  }
 `;
 
 const ProjectDescription = styled.p`
-  color: #a1a1aa;
-  margin-bottom: 1.5rem;
-  line-height: 1.6;
-  font-size: 1rem;
+  color: #cbd5e0;
+  font-size: 1.1rem;
+  margin-bottom: 1.75rem;
+  line-height: 1.7;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+  height: 5.1rem;
+  transition: color 0.3s ease;
 `;
 
 const TechnologiesContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin: auto 0 1.5rem 0;
+   display: flex;
+  flex-wrap: nowrap;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  white-space: nowrap;
+  position: relative;
 `;
 
 const Technology = styled.span`
@@ -181,7 +218,7 @@ const ProjectsList = () => {
   return (
     <Container>
       <Header>
-        <h1>Our Projects</h1>
+        <h1>All <Emphasis>Projects</Emphasis></h1>
         <p>Explore our portfolio of innovative and impactful projects</p>
       </Header>
 
@@ -219,8 +256,11 @@ const ProjectsList = () => {
           </ProjectCard>
         ))}
       </ProjectsGrid>
+      <CallToAction />
     </Container>
-  );
+ 
+       
+    );
 };
 
 export default ProjectsList; 

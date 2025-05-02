@@ -4,10 +4,11 @@ import { motion } from 'framer-motion';
 import Contact from '../components/Contact';
 
 const PageContainer = styled(motion.div)`
-  min-height: 100vh;
+  
   position: relative;
   overflow-x: hidden;
   z-index: 1;
+  padding: 1rem 1rem;
 `;
 
 // Animation variants

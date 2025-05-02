@@ -51,8 +51,13 @@ const InstagramIcon = () => (
   </svg>
 );
 
+
+const Emphasis = styled.span`
+  color: var(--color-primary);
+  font-weight: 4000;
+`;
 const ContactSection = styled(motion.section)`
-  padding: 8rem 2rem;
+  padding: 5rem 2rem;
   position: relative;
   overflow: hidden;
   
@@ -507,6 +512,7 @@ const Contact = () => {
   
   const [loading, setLoading] = useState(false);
   
+  
   // Use reduced motion for accessibility
   const prefersReducedMotion = useReducedMotion();
   
@@ -600,7 +606,7 @@ const Contact = () => {
               whileInView="animate"
               viewport={{ once: true }}
             >
-              Get In Touch
+              Get In <Emphasis>Touch</Emphasis>
             </ContactTitle>
             
             <ContactSubtitle 

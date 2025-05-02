@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { fetchTechnologies as fetchTechnologiesAPI } from '../api';
-
+import LoadingSpinner from './LoadingSpinner';
 const TechnologiesSection = styled(motion.section)`
   padding: 8rem 2rem;
+  background: #0a0a0a;
   position: relative;
   overflow: hidden;
   
@@ -59,9 +60,9 @@ const TabsContainer = styled(motion.div)`
 
 const Tab = styled(motion.button)`
   padding: 0.75rem 1.5rem;
-  background: ${props => props.active ? 'var(--color-primary)' : 'rgba(255, 255, 255, 0.05)'};
-  color: ${props => props.active ? '#fff' : 'var(--color-text-light)'};
-  border: none;
+  background: ${props => props.active ? 'rgba(66, 153, 225, 0.2)' : 'rgba(0, 0, 0, 0.8)'};
+  color: ${props => props.active ? '#4299e1' : '#cbd5e0'};
+  border: 1px solid ${props => props.active ? 'rgba(66, 153, 225, 0.3)' : 'rgba(66, 153, 225, 0.1)'};
   border-radius: 30px;
   font-size: 1rem;
   font-weight: 500;
@@ -69,7 +70,8 @@ const Tab = styled(motion.button)`
   transition: all 0.3s ease;
   
   &:hover {
-    background: ${props => props.active ? 'var(--color-primary)' : 'rgba(255, 255, 255, 0.1)'};
+    background: rgba(66, 153, 225, 0.2);
+    color: #4299e1;
     transform: translateY(-3px);
   }
 `;
@@ -110,9 +112,9 @@ const TechCard = styled(motion.div)`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: rgba(30, 30, 30, 0.4);
+  background: hsla(0, 2.60%, 7.60%, 0.80);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(66, 153, 225, 0.1);
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
   padding: 1rem;
   transition: all 0.3s ease;
@@ -137,6 +139,7 @@ const TechName = styled(motion.h4)`
   font-size: 0.9rem;
   font-weight: 500;
   text-align: center;
+  color:rgb(255, 255, 255);
   
   @media (max-width: 768px) {
     font-size: 0.8rem;
@@ -368,6 +371,8 @@ const Technologies = () => {
             </Tab>
           ))}
         </TabsContainer>
+        
+
         
         {isLoading ? (
           <div style={{ textAlign: 'center', padding: '2rem' }}>

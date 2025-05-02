@@ -8,7 +8,8 @@ import LoadingSpinner from "../components/LoadingSpinner";
 const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 3rem 1rem;
+  padding-bottom: 6rem;
 `;
 
 const Header = styled.div`

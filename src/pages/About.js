@@ -17,7 +17,7 @@ const api = axios.create({
 const PageContainer = styled.div`
   min-height: 100vh;
   position: relative;
-  padding: 6rem 1rem;
+  padding: 4rem 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;

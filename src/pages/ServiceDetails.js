@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import { motion, AnimatePresence } from 'framer-motion';
 import API from '../api';
 import LoadingSpinner from '../components/LoadingSpinner';
 
@@ -8,14 +9,21 @@ const Container = styled.div`
   padding: 0;
   margin: 0 auto;
   width: 100%;
+  font-family: 'Inter', sans-serif;
+  background: #0a0a0a;
+  color: var(--color-text-primary);
+  min-height: 100vh;
 `;
 
 const ServiceHeader = styled.div`
-  background: linear-gradient(135deg, #e9ddfd 0%, #ffffff 70%);
-  padding: 6rem 2rem;
+  background: linear-gradient(135deg, rgba(var(--color-primary-rgb), 0.1) 0%, rgba(66, 63, 63, 0.8) 100%);
+  padding: 8rem 2rem 6rem;
   position: relative;
   overflow: hidden;
   margin-bottom: 4rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+  backdrop-filter: blur(10px);
 `;
 
 const HeaderContent = styled.div`
@@ -23,68 +31,132 @@ const HeaderContent = styled.div`
   margin: 0 auto;
   position: relative;
   z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
 `;
 
 const DecorativeCircle = styled.div`
   position: absolute;
-  width: 400px;
-  height: 400px;
-  background: rgba(205, 180, 255, 0.5);
+  width: 600px;
+  height: 600px;
+  background: linear-gradient(135deg, rgba(var(--color-primary-rgb), 0.1) 0%, rgba(var(--color-primary-rgb), 0) 70%);
   border-radius: 50%;
-  top: -100px;
-  left: -100px;
+  top: -200px;
+  left: -200px;
   z-index: 1;
+  animation: float 6s ease-in-out infinite;
+  filter: blur(40px);
+
+  @keyframes float {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(20px, 20px) rotate(5deg); }
+    100% { transform: translate(0, 0) rotate(0deg); }
+  }
 `;
 
-const Title = styled.h1`
-  font-size: 3.5rem;
-  font-weight: 800;
-  color: #333;
+const Title = styled(motion.h1)`
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  color: var(--color-heading);
   margin-bottom: 1.5rem;
   max-width: 800px;
+  line-height: 1.2;
+  position: relative;
+  display: inline-block;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light));
+    border-radius: 2px;
+    transition: width 0.3s ease;
+  }
+
+  &:hover::after {
+    width: 100px;
+  }
 `;
 
-const Description = styled.p`
-  font-size: 1.2rem;
+const Description = styled(motion.p)`
+  font-size: clamp(1rem, 2vw, 1.25rem);
   line-height: 1.8;
-  color: #555;
+  color: var(--color-text-secondary);
   max-width: 800px;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
+  font-weight: 400;
+  position: relative;
+  padding-left: 1.5rem;
+  border-left: 3px solid rgba(var(--color-primary-rgb), 0.2);
+  backdrop-filter: blur(5px);
 `;
 
 const ContentSection = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem 4rem;
+  padding: 0 2rem 6rem;
 `;
 
-const SubSectionTitle = styled.h2`
-  font-size: 2rem;
-  color: #333;
-  margin-bottom: 2rem;
+const SubSectionTitle = styled(motion.h2)`
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  color: var(--color-heading);
+  margin-bottom: 3rem;
+  font-weight: 600;
+  text-align: center;
+  position: relative;
+  padding-bottom: 1rem;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light));
+    border-radius: 2px;
+    transition: width 0.3s ease;
+  }
+
+  &:hover::after {
+    width: 120px;
+  }
 `;
 
 const SubServicesGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 2.5rem;
   margin-top: 3rem;
+  padding: 1rem;
 `;
 
-const SubServiceCard = styled.div`
-  background: white;
-  border-radius: 12px;
+const SubServiceCard = styled(motion.div)`
+  background: rgba(30, 30, 30, 0.8);
+  border-radius: 24px;
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
   position: relative;
-  border-top: 4px solid #6d43b8;
+  border: 1px solid var(--color-border);
+  transform-origin: center;
+  backdrop-filter: blur(10px);
 
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    border-color: rgba(var(--color-primary-rgb), 0.3);
   }
 
   &::before {
@@ -94,34 +166,51 @@ const SubServiceCard = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(109, 67, 184, 0.05) 0%, rgba(255, 255, 255, 0) 60%);
-    pointer-events: none;
+    background: linear-gradient(135deg, rgba(var(--color-primary-rgb), 0.1) 0%, rgba(var(--color-primary-rgb), 0) 60%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover::before {
+    opacity: 1;
   }
 `;
 
-const SubServiceImage = styled.img`
+const SubServiceImage = styled(motion.img)`
   width: 100%;
-  height: 200px;
+  height: 240px;
   object-fit: cover;
   display: block;
-  background-color: #f0f0f0;
-  min-height: 200px; /* Ensure minimum height even before loading */
-  border-bottom: 1px solid #eee;
+  background-color: rgba(var(--color-primary-rgb), 0.2);
+  min-height: 240px;
+  border-bottom: 1px solid var(--color-border);
+  transform-origin: center;
+  transition: transform 0.3s ease;
+  filter: grayscale(20%);
+
+  ${SubServiceCard}:hover & {
+    transform: scale(1.05);
+    filter: grayscale(0%);
+  }
 `;
 
 const SubServiceContent = styled.div`
-  padding: 1.8rem;
+  padding: 2rem;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  position: relative;
+  z-index: 1;
 `;
 
 const SubServiceTitle = styled.h3`
-  font-size: 1.4rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.5rem;
   margin-bottom: 1rem;
-  color: #333;
+  color: var(--color-heading);
   position: relative;
   padding-bottom: 0.8rem;
+  font-weight: 600;
   
   &::after {
     content: '';
@@ -130,67 +219,91 @@ const SubServiceTitle = styled.h3`
     left: 0;
     height: 3px;
     width: 50px;
-    background: linear-gradient(90deg, #6d43b8, #9a7ed0);
+    background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light));
     border-radius: 3px;
+    transition: width 0.3s ease;
+  }
+
+  ${SubServiceCard}:hover &::after {
+    width: 100px;
   }
 `;
 
 const SubServiceDescription = styled.p`
-  color: #333;
+  color: var(--color-text-secondary);
   line-height: 1.7;
-  margin-bottom: 1.2rem;
-`;
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 
-const SubServiceFooter = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  margin-top: auto;
-`;
-
-const LearnMoreButton = styled.button`
-  background: transparent;
-  color: #6d43b8;
-  border: 1px solid #6d43b8;
-  padding: 0.6rem 1.2rem;
-  font-size: 0.9rem;
-  font-weight: 600;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-
-  &:hover {
-    background: #6d43b8;
-    color: white;
+  ${SubServiceCard}:hover & {
+    color: var(--color-text-primary);
   }
 `;
 
-const RequestButton = styled.button`
-  background: #6d43b8;
-  color: white;
+const RequestButton = styled(motion.button)`
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  color: var(--color-text-primary);
   border: none;
-  padding: 0.8rem 2rem;
-  font-size: 1rem;
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
   font-weight: 600;
-  border-radius: 4px;
+  border-radius: 12px;
   cursor: pointer;
-  transition: background 0.3s ease;
-  margin-top: 1rem;
+  transition: all 0.3s ease;
+  margin-top: 1.5rem;
+  box-shadow: 0 4px 15px rgba(var(--color-primary-rgb), 0.3);
+  position: relative;
+  overflow: hidden;
+  align-self: flex-start;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
 
   &:hover {
-    background: #5a35a0;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(var(--color-primary-rgb), 0.4);
+  }
+
+  &:hover::before {
+    transform: translateX(100%);
+  }
+
+  &:active {
+    transform: translateY(0);
   }
 `;
 
 const ErrorMessage = styled.div`
   text-align: center;
-  color: #e74c3c;
+  color: #ff6b6b;
   padding: 2rem;
+  font-size: 1.1rem;
+  background: rgba(255, 107, 107, 0.1);
+  border-radius: 12px;
+  margin: 2rem auto;
+  max-width: 600px;
+  border: 1px solid rgba(255, 107, 107, 0.2);
+  backdrop-filter: blur(5px);
 `;
 
 // New styled components for service features cards
 const FeaturesSection = styled.div`
   margin-top: 4rem;
-  background: #f9f9fb;
+  background:rgb(84, 84, 155);
   padding: 4rem 0;
 `;
 
@@ -509,43 +622,74 @@ const ServiceDetails = () => {
       <ServiceHeader>
         <DecorativeCircle />
         <HeaderContent>
-          <Title>{service.title}</Title>
-          <Description>{service.description}</Description>
-          <RequestButton>Request {service.title}</RequestButton>
+          <AnimatePresence>
+            <Title
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              {service.title}
+            </Title>
+            <Description
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              {service.description}
+            </Description>
+            <RequestButton
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              Request {service.title}
+            </RequestButton>
+          </AnimatePresence>
         </HeaderContent>
       </ServiceHeader>
 
       <ContentSection>
-      
-        {/* SubServices Grid - Only displayed if there are subServices */}
         {subServices.length > 0 && (
           <>
-            <SubSectionTitle>Our Services</SubSectionTitle>
+            <SubSectionTitle
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              Our Services
+            </SubSectionTitle>
             <SubServicesGrid>
-              {subServices.map((subService, index) => (
-                <SubServiceCard key={index}>
-                  <SubServiceImage 
-                    src={subService.imageUrl || 'https://placehold.co/800x400/cccccc/666666?text=No+Image'}
-                    alt={subService.title || 'Untitled Service'} 
-                    onLoad={(e) => {
-                      // Image loaded successfully, make sure it's visible
-                      e.target.style.display = 'block';
-                    }}
-                    onError={(e) => {
-                      // On error, replace with fallback image
-                      e.target.onerror = null; // Prevents infinite loop
-                      e.target.src = 'https://placehold.co/800x400/cccccc/666666?text=Image+Not+Available';
-                    }}
-                  />
-                  <SubServiceContent>
-                    <SubServiceTitle>{subService.title || 'Untitled Service'}</SubServiceTitle>
-                    <SubServiceDescription>
-                      {subService.description || 'No description available'}
-                    </SubServiceDescription>
-                    
-                  </SubServiceContent>
-                </SubServiceCard>
-              ))}
+              <AnimatePresence>
+                {subServices.map((subService, index) => (
+                  <SubServiceCard
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    whileHover={{ y: -8 }}
+                  >
+                    <SubServiceImage 
+                      src={subService.imageUrl || 'https://placehold.co/800x400/cccccc/666666?text=No+Image'}
+                      alt={subService.title || 'Untitled Service'} 
+                      onLoad={(e) => {
+                        e.target.style.display = 'block';
+                      }}
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = 'https://placehold.co/800x400/cccccc/666666?text=Image+Not+Available';
+                      }}
+                    />
+                    <SubServiceContent>
+                      <SubServiceTitle>{subService.title || 'Untitled Service'}</SubServiceTitle>
+                      <SubServiceDescription>
+                        {subService.description || 'No description available'}
+                      </SubServiceDescription>
+                    </SubServiceContent>
+                  </SubServiceCard>
+                ))}
+              </AnimatePresence>
             </SubServicesGrid>
           </>
         )}

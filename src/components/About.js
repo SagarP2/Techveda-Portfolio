@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 
 const AboutSection = styled.section`
   padding: ${props => props.theme.spacing.xxl} 0;
+  background: #0a0a0a;
   position: relative;
   overflow: hidden;
 `;
@@ -11,7 +12,7 @@ const AboutSection = styled.section`
 const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 ${props => props.theme.spacing.md};
+  padding: 0 ;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: ${props => props.theme.spacing.xl};
@@ -80,13 +81,16 @@ const Stats = styled(motion.div)`
 
 const StatItem = styled.div`
   padding: ${props => props.theme.spacing.md};
-  background: rgba(255, 255, 255, 0.05);
+  background: hsla(0, 2.60%, 7.60%, 0.80);
+  border: 1px solid rgba(66, 153, 225, 0.1);
   border-radius: 8px;
   backdrop-filter: blur(10px);
   transition: transform 0.3s ease;
   
   &:hover {
     transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(66, 153, 225, 0.1);
+    border-color: rgba(66, 153, 225, 0.2);
   }
 `;
 
@@ -94,7 +98,7 @@ const StatNumber = styled.h3`
   font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 5px;
-  color: var(--color-primary);
+  color: #4299e1;
 `;
 
 const StatTitle = styled.p`
@@ -124,17 +128,18 @@ const SkillTags = styled.div`
 
 const SkillTag = styled(motion.span)`
   padding: 8px 16px;
-  background: rgba(91, 61, 245, 0.1);
-  color: var(--color-secondary);
+  background: hsla(0, 2.60%, 7.60%, 0.80);
+  color: #4299e1;
   border-radius: 20px;
   font-size: 0.9rem;
   font-weight: 500;
   transition: all 0.3s ease;
   
   &:hover {
-    background: var(--color-secondary);
-    color: white;
+    background: rgba(66, 153, 225, 0.2);
+    color: #4299e1;
     transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(66, 153, 225, 0.1);
   }
 `;
 
@@ -159,11 +164,11 @@ const ExperienceBox = styled(motion.div)`
   position: absolute;
   bottom: -25px;
   left: -25px;
-  background: var(--color-primary);
-  color: white;
+  background: #4299e1;
   padding: ${props => props.theme.spacing.md};
   border-radius: 12px;
-  box-shadow: ${props => props.theme.shadows.medium};
+  box-shadow: 0 8px 24px rgba(66, 153, 225, 0.1);
+  border: 1px solid rgba(66, 153, 225, 0.1);
   
   @media (max-width: 992px) {
     left: 0;
@@ -188,16 +193,15 @@ const BackgroundShape = styled.div`
   width: 400px;
   height: 400px;
   border-radius: 50%;
-  background: ${props => props.theme.gradients.secondary};
+  background: rgba(66, 153, 225, 0.1);
   opacity: 0.05;
   z-index: -1;
-  filter: blur(60px);
 `;
 
 const About = () => {
   return (
     <AboutSection id="about">
-      <BackgroundShape />
+    
       <Container>
         <ContentWrapper>
           <SectionHeading
