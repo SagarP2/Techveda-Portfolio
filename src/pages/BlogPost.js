@@ -6,9 +6,9 @@ import { motion } from "framer-motion";
 import LoadingSpinner from "../components/LoadingSpinner";
 
 const Container = styled.div`
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 4rem 0;
 `;
 
 const Header = styled.div`
@@ -83,6 +83,25 @@ const BackButton = styled(Link)`
   }
 `;
 
+
+const BlogImage = styled.div`
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  position: relative;
+  
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover img {
+    transform: scale(1.05);
+  }
+`;
 const BlogPost = () => {
   const { id } = useParams();
   const [post, setPost] = useState(null);
@@ -160,6 +179,11 @@ const BlogPost = () => {
 
           <Header>
             <h1>{post.title}</h1>
+            {post.image && (
+              <BlogImage>
+                <img src={post.image} alt={post.title} />
+              </BlogImage>
+            )}
             <div className="meta">
               <span>By {post.author}</span>
               <span>•</span>
@@ -167,6 +191,7 @@ const BlogPost = () => {
                 {new Date(post.date).toLocaleDateString()}
               </span>
             </div>
+           
             <TagsContainer>
               {post.tags.map((tag) => (
                 <Tag key={tag}>{tag}</Tag>

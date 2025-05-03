@@ -59,7 +59,7 @@ const TabsContainer = styled(motion.div)`
 `;
 
 const Tab = styled(motion.button)`
-  padding: 0.75rem 1.5rem;
+  padding: 0.75rem 2rem;
   background: ${props => props.active ? 'rgba(66, 153, 225, 0.2)' : 'rgba(0, 0, 0, 0.8)'};
   color: ${props => props.active ? '#4299e1' : '#cbd5e0'};
   border: 1px solid ${props => props.active ? 'rgba(66, 153, 225, 0.3)' : 'rgba(66, 153, 225, 0.1)'};
@@ -68,6 +68,7 @@ const Tab = styled(motion.button)`
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
+  margin-bottom:2rem;
   
   &:hover {
     background: rgba(66, 153, 225, 0.2);
@@ -76,10 +77,11 @@ const Tab = styled(motion.button)`
   }
 `;
 
+
 const TechGrid = styled(motion.div)`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 2rem;
+  gap: 6rem;
   
   @media (max-width: 768px) {
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
@@ -106,17 +108,14 @@ const BackgroundGlow = styled(motion.div)`
 
 const TechCard = styled(motion.div)`
   position: relative;
-  width: 100%;
+  width: 90%;
   aspect-ratio: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: hsla(0, 2.60%, 7.60%, 0.80);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(66, 153, 225, 0.1);
-  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-  padding: 1rem;
+margin-bottom:-3rem;
   transition: all 0.3s ease;
   
   @media (max-width: 768px) {
@@ -125,7 +124,7 @@ const TechCard = styled(motion.div)`
 `;
 
 const TechLogo = styled(motion.img)`
-  width: 50%;
+  width: 100%;
   height: auto;
   margin-bottom: 0.75rem;
   object-fit: contain;
@@ -233,7 +232,7 @@ const techCardVariants = {
   hover: { 
     y: -10, 
     scale: 1.05,
-    boxShadow: "0 15px 30px rgba(0, 0, 0, 0.2)",
+   
     transition: { 
       duration: 0.3,
       ease: "easeOut"
@@ -276,8 +275,7 @@ const Technologies = () => {
     { id: 'backend', label: 'Backend' },
     { id: 'database', label: 'Database' },
     { id: 'design', label: 'Design' },
-    { id: 'devops', label: 'DevOps' },
-    { id: 'api', label: 'API' }
+    { id: 'devops', label: 'DevOps' }
   ];
 
   useEffect(() => {
@@ -297,8 +295,7 @@ const Technologies = () => {
         backend: [],
         database: [],
         design: [],
-        devops: [],
-        api: []
+        devops: []
       };
 
       selectedTechs.forEach(tech => {
@@ -393,6 +390,7 @@ const Technologies = () => {
             >
               {technologies[activeTab].length > 0 ? (
                 technologies[activeTab].map((tech, index) => (
+                  <div style={{display:'flex',justifyContent:'center'}}>
                   <TechCard
                     key={tech.name}
                     variants={techCardVariants}
@@ -407,6 +405,7 @@ const Technologies = () => {
                     />
                     <TechName variants={nameVariants}>{tech.name}</TechName>
                   </TechCard>
+                  </div>
                 ))
               ) : (
                 <div style={{ 

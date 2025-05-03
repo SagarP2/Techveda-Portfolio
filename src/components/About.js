@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 const AboutSection = styled.section`
-  padding: ${props => props.theme.spacing.xxl} 0;
+  padding-top:2rem;
   background: #0a0a0a;
   position: relative;
   overflow: hidden;

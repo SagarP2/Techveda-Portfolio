@@ -17,7 +17,7 @@ const api = axios.create({
 const PageContainer = styled.div`
   min-height: 100vh;
   position: relative;
-  padding: 4rem 1rem;
+  padding: 4rem 0rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -81,14 +81,7 @@ const Highlight = styled.span`
   font-weight: 600;
 `;
 
-const LoadingContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 50vh;
-  font-size: 1.2rem;
-  color: var(--color-text-secondary);
-`;
+
 
 const ErrorContainer = styled.div`
   display: flex;
@@ -157,7 +150,7 @@ const FounderCard = styled.div`
   grid-template-columns: ${props => props.imagePosition === 'left' ? '250px 1fr' : '1fr 250px'};
   gap: 2rem;
   margin-bottom: 2rem;
-  padding: 2rem;
+  padding: 2rem 0;
   background: var(--color-background);
   border-radius: 1rem;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);

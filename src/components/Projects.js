@@ -11,6 +11,7 @@ const ProjectsSection = styled.section`
   background: #0a0a0a;
   position: relative;
   overflow: hidden;
+  id: "Projects";
 `;
 
 const Container = styled(motion.div)`
@@ -23,7 +24,7 @@ const ProjectsGrid = styled(motion.div)`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 2.5rem;
-  margin-top: 4rem;
+  margin-top: 2.2rem;
 `;
 
 const ProjectCard = styled(motion.div)`
@@ -128,7 +129,7 @@ const TechStack = styled.div`
   display: flex;
   flex-wrap: nowrap;
   gap: 0.75rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   overflow-x: auto;
   padding-bottom: 0.5rem;
   -ms-overflow-style: none;
@@ -167,53 +168,6 @@ const ProjectLinks = styled.div`
   }
 `;
 
-const ProjectLink = styled.a`
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  color: #4299e1;
-  text-decoration: none;
-  font-size: 1rem;
-  padding: 0.75rem 1.25rem;
-  border-radius: 12px;
-  background: rgba(66, 153, 225, 0.1);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  font-weight: 500;
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    height: 100%;
-    background: rgba(66, 153, 225, 0.2);
-    transform: translate(-50%, -50%) scale(0);
-    border-radius: 50%;
-    transition: transform 0.4s ease;
-  }
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(66, 153, 225, 0.2);
-
-    &::before {
-      transform: translate(-50%, -50%) scale(2);
-    }
-  }
-
-  svg {
-    width: 22px;
-    height: 22px;
-    transition: transform 0.3s ease;
-  }
-
-  &:hover svg {
-    transform: scale(1.1);
-  }
-`;
 
 const ViewMoreSection = styled.div`
   display: flex;
@@ -289,59 +243,49 @@ const Emphasis = styled.span`
   }  
 `;
 
+
 const ViewDetailsButton = styled(Link)`
   display: inline-flex;
   align-items: center;
-  gap: 0.75rem;
-  background: linear-gradient(135deg, #4299e1 0%, #2563eb 100%);
-  color: #ffffff;
+  gap: 0.5rem;
+  padding: 0.75rem 1.8rem;
+  background: #3b82f6;
+  color: white;
   text-decoration: none;
-  font-size: 0.95rem;
-  padding: 0.75rem 5.1rem;
-  border-radius: 8px;
+  border-radius: 0.3rem;
   font-weight: 500;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(66, 153, 225, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
-
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: -1;
-  }
+  transition: background 0.2s ease;
+  margin-left:auto;
 
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(66, 153, 225, 0.25);
-
-    &::before {
-      opacity: 1;
-    }
-
-    svg {
-      transform: translateX(3px);
-    }
-  }
-
-  &:active {
-    transform: translateY(0);
-    box-shadow: 0 4px 12px rgba(66, 153, 225, 0.2);
+    background: #2563eb;
   }
 
   svg {
-    width: 18px;
-    height: 18px;
-    transition: transform 0.3s ease;
+    width: 20px;
+    height: 20px;
   }
 `;
 
+const GitHubLink = styled.a`
+  display: inline-flex;
+  align-items: center;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+
+  svg {
+    width: 30px;
+    height: 30px;
+  }
+  span{
+    padding-left:10px;
+  }
+
+  &:hover {
+    color: #3b82f6;
+  }
+`;
 const container = {
   hidden: { opacity: 0 },
   visible: {
@@ -376,6 +320,11 @@ const techBadgeVariants = {
   },
 };
 
+const Description = styled(motion.p)`
+  font-size: 1rem;
+  max-width: 1200px;
+  color: rgba(255, 255, 255, 0.7);
+`;
 const Projects = () => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -399,7 +348,7 @@ const Projects = () => {
   }, []);
 
   return (
-    <ProjectsSection>
+    <ProjectsSection id="Projects">
       <Container>
         <SectionHeading
           initial={{ opacity: 0, y: 20 }}
@@ -408,7 +357,17 @@ const Projects = () => {
           viewport={{ once: true }}
         >
           Latest <Emphasis>Projects</Emphasis>
-        </SectionHeading>
+           </SectionHeading>
+           <Description
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          viewport={{ once: true }}
+        >
+          At Techveda, we deliver tailored solutions for businesses of all sizes. 
+          Explore our portfolio of successfully completed client projects that demonstrate 
+          our technical expertise and commitment to excellence.
+        </Description>
         {loading ? (
           <LoadingSpinner />
         ) : (
@@ -434,21 +393,20 @@ const Projects = () => {
                         </TechBadge>
                       ))}
                     </TechStack>
-                    <ViewDetailsButton to={`/projects/${project._id}`}>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                        <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                      </svg>
-                      View Details
-                    </ViewDetailsButton>
+                    <ProjectLinks>
+                      <GitHubLink href={project.githubLink} target="_blank" rel="noopener noreferrer">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                        </svg><span>GitHub</span>
+
+                      </GitHubLink>
+                      <ViewDetailsButton to={`/projects/${project._id}`}>
+                        View Details
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                      </ViewDetailsButton>
+                    </ProjectLinks>
                   </ProjectContent>
                 </ProjectCard>
               ))}

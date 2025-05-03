@@ -48,8 +48,8 @@ const Hero = () => {
   
   return (
     <section 
-      className="relative min-h-screen w-full flex flex-col justify-center items-center px-4 sm:px-6 overflow-hidden"
-      onMouseMove={handleMouseMove}
+    className="relative min-h-screen w-full flex flex-col justify-center items-center px-4 sm:px-6 overflow-hidden -mt-[36px]"
+    onMouseMove={handleMouseMove}
     >
       {/* Hero content */}
       <div className="container mx-auto max-w-7xl relative z-10">
@@ -162,10 +162,16 @@ const Hero = () => {
       
       {/* Scroll indicator */}
       <motion.div 
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-gray-400"
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-gray-400 cursor-pointer hover:text-primary-500 transition-colors duration-300"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: animationReady ? 1 : 0, y: animationReady ? 0 : -20 }}
         transition={{ delay: 1.2, duration: 0.6 }}
+        onClick={() => {
+          const projectsSection = document.getElementById('Projects');
+          if (projectsSection) {
+            projectsSection.scrollIntoView({ behavior: 'smooth' });
+          }
+        }}
       >
         <p className="text-sm mb-2 font-body">Scroll Down</p>
         <motion.svg 

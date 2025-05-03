@@ -1,28 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import styled from 'styled-components';
-import { motion } from 'framer-motion';
-import axios from 'axios';
-import LoadingSpinner from '../components/LoadingSpinner';
+import React, { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
+import styled from "styled-components";
+import { motion } from "framer-motion";
+import CallToAction from "../components/CallToAction";
+import axios from "axios";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 2rem 0;
 `;
 
 const BackButton = styled(Link)`
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  color: ${props => props.theme.colors.primary};
+  color: ${(props) => props.theme.colors.primary};
   text-decoration: none;
   margin-bottom: 2rem;
   font-weight: 500;
   transition: color 0.2s ease;
 
   &:hover {
-    color: ${props => props.theme.colors.primaryDark};
+    color: ${(props) => props.theme.colors.primaryDark};
   }
 
   svg {
@@ -36,20 +37,20 @@ const Header = styled.div`
   margin-bottom: 3rem;
 
   h1 {
-    color: ${props => props.theme.colors.text};
+    color: ${(props) => props.theme.colors.text};
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
   }
 
   h2 {
-    color: ${props => props.theme.colors.primary};
+    color: ${(props) => props.theme.colors.primary};
     font-size: 1.5rem;
     margin-bottom: 1rem;
     font-weight: 500;
   }
 
   .meta {
-    color: ${props => props.theme.colors.textSecondary};
+    color: ${(props) => props.theme.colors.textSecondary};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -81,7 +82,7 @@ const SecondaryImage = styled.img`
 `;
 
 const Content = styled.div`
-  color: ${props => props.theme.colors.text};
+  color: ${(props) => props.theme.colors.text};
   line-height: 1.8;
   font-size: 1.1rem;
 
@@ -103,7 +104,7 @@ const ContentSection = styled(Section)`
 `;
 
 const SectionContent = styled.div`
-  color: ${props => props.theme.colors.text};
+  color: ${(props) => props.theme.colors.text};
   line-height: 1.8;
   font-size: 1.1rem;
 
@@ -113,11 +114,11 @@ const SectionContent = styled.div`
 `;
 
 const SectionTitle = styled.h3`
-  color: ${props => props.theme.colors.primary};
+  color: ${(props) => props.theme.colors.primary};
   font-size: 1.5rem;
   margin-bottom: 1rem;
   padding-bottom: 0.5rem;
-  border-bottom: 1px solid ${props => props.theme.colors.border};
+  border-bottom: 1px solid ${(props) => props.theme.colors.border};
 `;
 
 const TechnologiesContainer = styled.div`
@@ -128,8 +129,8 @@ const TechnologiesContainer = styled.div`
 `;
 
 const Technology = styled.span`
-  background: ${props => props.theme.colors.primary}20;
-  color: ${props => props.theme.colors.primary};
+  background: ${(props) => props.theme.colors.primary}20;
+  color: ${(props) => props.theme.colors.primary};
   padding: 0.5rem 1rem;
   border-radius: 1rem;
   font-size: 0.875rem;
@@ -143,8 +144,8 @@ const TagsContainer = styled.div`
 `;
 
 const Tag = styled.span`
-  background: ${props => props.theme.colors.textSecondary}20;
-  color: ${props => props.theme.colors.textSecondary};
+  background: ${(props) => props.theme.colors.textSecondary}20;
+  color: ${(props) => props.theme.colors.textSecondary};
   padding: 0.5rem 1rem;
   border-radius: 1rem;
   font-size: 0.875rem;
@@ -155,12 +156,12 @@ const ProjectLinks = styled.div`
   gap: 1.5rem;
   margin-top: 2rem;
   padding-top: 2rem;
-  border-top: 1px solid ${props => props.theme.colors.border};
+  border-top: 1px solid ${(props) => props.theme.colors.border};
   flex-wrap: wrap;
 `;
 
 const ProjectLink = styled.a`
-  color: ${props => props.theme.colors.primary};
+  color: ${(props) => props.theme.colors.primary};
   text-decoration: none;
   font-size: 1rem;
   display: flex;
@@ -169,7 +170,7 @@ const ProjectLink = styled.a`
   transition: color 0.2s ease;
 
   &:hover {
-    color: ${props => props.theme.colors.primaryDark};
+    color: ${(props) => props.theme.colors.primaryDark};
   }
 
   svg {
@@ -194,8 +195,8 @@ const ProjectDetail = () => {
       setProject(response.data);
       setError(null);
     } catch (error) {
-      console.error('Error fetching project:', error);
-      setError('Failed to fetch project details');
+      console.error("Error fetching project:", error);
+      setError("Failed to fetch project details");
       setProject(null);
     } finally {
       setLoading(false);
@@ -216,8 +217,18 @@ const ProjectDetail = () => {
         <Header>
           <h1>Project not found</h1>
           <BackButton to="/projects">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              />
             </svg>
             Back to Projects
           </BackButton>
@@ -229,42 +240,82 @@ const ProjectDetail = () => {
   return (
     <Container>
       <BackButton to="/projects">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M10 19l-7-7m0 0l7-7m-7 7h18"
+          />
         </svg>
         Back to Projects
       </BackButton>
-
+      {project.secondaryimage && (
+        <SecondaryImage
+          src={project.secondaryimage}
+          alt={`${project.title} - Additional view`}
+        />
+      )}
       <Header>
         <h1>{project.title}</h1>
         {project.subtitle && <h2>{project.subtitle}</h2>}
-        
       </Header>
-
-      <ImageContainer>
-        {project.mainimage && (
-          <MainImage src={project.mainimage} alt={project.title} />
-        )}
-        {project.secondaryimage && (
-          <SecondaryImage src={project.secondaryimage} alt={`${project.title} - Additional view`} />
-        )}
-      </ImageContainer>
-
       <ContentSection>
         <SectionTitle>Overview</SectionTitle>
         <SectionContent>{project.shortDescription}</SectionContent>
       </ContentSection>
 
-      <ContentSection>
-        <SectionTitle>Technical Details</SectionTitle>
-        <SectionContent>{project.technicalDescription}</SectionContent>
-      </ContentSection>
-
-      <ContentSection>
-        <SectionTitle>Learning Outcomes</SectionTitle>
-        <SectionContent>{project.learningDescription}</SectionContent>
-      </ContentSection>
-
+      <ProjectLinks>
+        {project.gitHubLink && (
+          <ProjectLink
+            href={project.gitHubLink}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+              />
+            </svg>
+            View on GitHub
+          </ProjectLink>
+        )}
+        {project.officialWebsiteLink && (
+          <ProjectLink
+            href={project.officialWebsiteLink}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
+              />
+            </svg>
+            Visit Website
+          </ProjectLink>
+        )}
+      </ProjectLinks>
       {project.technologies && project.technologies.length > 0 && (
         <Section>
           <SectionTitle>Technologies Used</SectionTitle>
@@ -298,27 +349,25 @@ const ProjectDetail = () => {
         </Section>
       )}
 
-      <ProjectLinks>
-        {project.gitHubLink && (
-          <ProjectLink href={project.gitHubLink} target="_blank" rel="noopener noreferrer">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
-            </svg>
-            View on GitHub
-          </ProjectLink>
+      <ImageContainer>
+        {project.mainimage && (
+          <MainImage src={project.mainimage} alt={project.title} />
         )}
-        {project.officialWebsiteLink && (
-          <ProjectLink href={project.officialWebsiteLink} target="_blank" rel="noopener noreferrer">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-            </svg>
-            Visit Website
-          </ProjectLink>
-        )}
-        
-      </ProjectLinks>
+      </ImageContainer>
+
+      <ContentSection>
+        <SectionTitle>Technical Details</SectionTitle>
+        <SectionContent>{project.technicalDescription}</SectionContent>
+      </ContentSection>
+
+      <ContentSection>
+        <SectionTitle>Learning Outcomes</SectionTitle>
+        <SectionContent>{project.learningDescription}</SectionContent>
+      </ContentSection>
+<CallToAction/>
     </Container>
+
   );
 };
 
-export default ProjectDetail; 
+export default ProjectDetail;

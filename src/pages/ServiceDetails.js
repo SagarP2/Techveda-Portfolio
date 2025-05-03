@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import API from '../api';
 import LoadingSpinner from '../components/LoadingSpinner';
+import CallToAction from '../components/CallToAction';
 
 const Container = styled.div`
   padding: 0;
@@ -17,7 +18,7 @@ const Container = styled.div`
 
 const ServiceHeader = styled.div`
   background: linear-gradient(135deg, rgba(var(--color-primary-rgb), 0.1) 0%, rgba(66, 63, 63, 0.8) 100%);
-  padding: 8rem 2rem 6rem;
+  padding: 6rem 2rem 6rem;
   position: relative;
   overflow: hidden;
   margin-bottom: 4rem;
@@ -59,10 +60,10 @@ const DecorativeCircle = styled.div`
 const Title = styled(motion.h1)`
   font-family: 'Poppins', sans-serif;
   font-size: clamp(2.5rem, 5vw, 4rem);
-  font-weight: 700;
+  font-weight: 600;
   color: var(--color-heading);
   margin-bottom: 1.5rem;
-  max-width: 800px;
+  max-width: 1200px;
   line-height: 1.2;
   position: relative;
   display: inline-block;
@@ -89,7 +90,7 @@ const Description = styled(motion.p)`
   font-size: clamp(1rem, 2vw, 1.25rem);
   line-height: 1.8;
   color: var(--color-text-secondary);
-  max-width: 800px;
+  max-width: 1200px;
   margin-bottom: 2.5rem;
   font-weight: 400;
   position: relative;
@@ -101,7 +102,8 @@ const Description = styled(motion.p)`
 const ContentSection = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem 6rem;
+  padding-bottom:6rem;
+  
 `;
 
 const SubSectionTitle = styled(motion.h2)`
@@ -134,10 +136,10 @@ const SubSectionTitle = styled(motion.h2)`
 
 const SubServicesGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 2.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 3rem;
   margin-top: 3rem;
-  padding: 1rem;
+  padding: 1rem 0 6rem 0rem;
 `;
 
 const SubServiceCard = styled(motion.div)`
@@ -178,7 +180,7 @@ const SubServiceCard = styled(motion.div)`
 
 const SubServiceImage = styled(motion.img)`
   width: 100%;
-  height: 240px;
+  height: 200px;
   object-fit: cover;
   display: block;
   background-color: rgba(var(--color-primary-rgb), 0.2);
@@ -232,13 +234,10 @@ const SubServiceTitle = styled.h3`
 const SubServiceDescription = styled.p`
   color: var(--color-text-secondary);
   line-height: 1.7;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.5rem;
   font-size: 1.1rem;
   transition: color 0.3s ease;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  
 
   ${SubServiceCard}:hover & {
     color: var(--color-text-primary);
@@ -300,181 +299,26 @@ const ErrorMessage = styled.div`
   backdrop-filter: blur(5px);
 `;
 
-// New styled components for service features cards
-const FeaturesSection = styled.div`
-  margin-top: 4rem;
-  background:rgb(84, 84, 155);
-  padding: 4rem 0;
-`;
-
-const FeaturesSectionInner = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
-`;
-
-const FeaturesTitle = styled.h2`
-  font-size: 2.2rem;
-  text-align: center;
-  margin-bottom: 3rem;
-  color: #333;
-`;
-
-const FeaturesGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 2.5rem;
-`;
-
-const FeatureCard = styled.div`
-  background: white;
-  border-radius: 16px;
-  padding: 2.5rem 2rem;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-  &:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-  }
-`;
-
-const FeatureIconWrapper = styled.div`
-  width: 80px;
-  height: 80px;
-  background: #f0e7ff;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1.5rem;
-`;
-
-const FeatureIcon = styled.img`
-  width: 40px;
-  height: 40px;
-`;
-
-// Default icon as SVG data URI for fallback
-const defaultIconSvg = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236d43b8'%3E%3Cpath d='M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z'/%3E%3C/svg%3E`;
-
-const FeatureTitle = styled.h3`
-  font-size: 1.4rem;
-  margin-bottom: 1rem;
-  color: #333;
-`;
-
-const FeatureDescription = styled.p`
-  color: #333;
-  line-height: 1.6;
-`;
-
-// New styled components for individual subService detailed cards
-const SubServiceDetailSection = styled.div`
-  margin-top: 4rem;
-  padding: 4rem 0;
-  background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
-`;
-
-const SubServiceDetailInner = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
-`;
-
-const SubServiceDetailTitle = styled.h2`
-  font-size: 2.2rem;
-  text-align: center;
-  margin-bottom: 3rem;
-  color: #333;
-`;
-
-const SubServiceDetailGrid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 3rem;
-`;
-
-const SubServiceDetailCard = styled.div`
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+const Emphasis = styled.span`
+  background: linear-gradient(90deg, #4299e1, #2563eb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+  position: relative;
   
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-  }
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    opacity: 0;
+    transform: scaleX(0.7);
+    transition: all 0.3s ease;
+  }  
 `;
 
-const SubServiceDetailContent = styled.div`
-  padding: 3rem;
-`;
-
-const SubServiceDetailHeader = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 2rem;
-`;
-
-const SubServiceDetailIconWrapper = styled.div`
-  width: 60px;
-  height: 60px;
-  background: #f0e7ff;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 1.5rem;
-`;
-
-const SubServiceDetailIcon = styled.img`
-  width: 30px;
-  height: 30px;
-`;
-
-const SubServiceDetailTitleH3 = styled.h3`
-  font-size: 1.8rem;
-  color: #333;
-  margin: 0;
-`;
-
-const SubServiceDetailDescription = styled.p`
-  color: #333;
-  line-height: 1.8;
-  font-size: 1.1rem;
-  margin-bottom: 2rem;
-`;
-
-const SubServiceDetailImage = styled.img`
-  width: 100%;
-  height: 300px;
-  object-fit: cover;
-`;
-
-const SubServiceDetailButton = styled.button`
-  background: #6d43b8;
-  color: white;
-  border: none;
-  padding: 0.8rem 2rem;
-  font-size: 1rem;
-  font-weight: 600;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-  margin-top: 1rem;
-
-  &:hover {
-    background: #5a35a0;
-  }
-`;
 
 const ServiceDetails = () => {
   const { id: slug } = useParams();
@@ -658,7 +502,7 @@ const ServiceDetails = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              Our Services
+              Our <Emphasis>Services</Emphasis>
             </SubSectionTitle>
             <SubServicesGrid>
               <AnimatePresence>
@@ -693,6 +537,7 @@ const ServiceDetails = () => {
             </SubServicesGrid>
           </>
         )}
+      <CallToAction/>
       </ContentSection>
     </Container>
   );

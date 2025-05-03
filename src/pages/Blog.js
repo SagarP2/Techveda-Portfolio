@@ -8,7 +8,7 @@ import LoadingSpinner from "../components/LoadingSpinner";
 const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  padding: 3rem 1rem;
+  padding: 3rem 0rem;
   padding-bottom: 6rem;
 `;
 
@@ -166,6 +166,27 @@ const Select = styled.select`
   }
 `;
 
+const Emphasis = styled.span`
+  background: linear-gradient(90deg, #4299e1, #2563eb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    opacity: 0;
+    transform: scaleX(0.7);
+    transition: all 0.3s ease;
+  }  
+`;
+
+
 const Blog = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -209,7 +230,7 @@ const Blog = () => {
   return (
     <Container>
       <Header>
-        <h1>Our Blog</h1>
+        <h1>Our <Emphasis>Blog</Emphasis></h1>
         <p>Discover insights, updates, and stories from our team</p>
       </Header>
 

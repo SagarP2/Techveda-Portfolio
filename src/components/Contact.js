@@ -236,21 +236,6 @@ const SubmitButton = styled(motion.button)`
   }
 `;
 
-const BackgroundShape = styled(motion.div)`
-  position: absolute;
-  width: 60vh;
-  height: 60vh;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(37, 99, 235, 0.15) 0%,
-    rgba(37, 99, 235, 0) 70%
-  );
-  z-index: -1;
-  bottom: -20vh;
-  right: -20vh;
-  filter: blur(70px);
-`;
 
 const MessageStatus = styled(motion.div)`
   padding: 1rem;
@@ -577,20 +562,7 @@ const Contact = () => {
       exit="exit"
       id="contact"
     >
-      <BackgroundShape 
-        style={prefersReducedMotion ? {} : {
-          opacity: backgroundOpacity,
-          scale: backgroundScale
-        }}
-        animate={prefersReducedMotion ? {} : {
-          rotate: 360,
-        }}
-        transition={{
-          duration: 15,
-          ease: "linear",
-          repeat: Infinity
-        }}
-      />
+      
       
       <Container>
         <ContactGrid>
