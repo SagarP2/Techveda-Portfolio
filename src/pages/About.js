@@ -149,7 +149,7 @@ const FounderCard = styled.div`
   display: grid;
   grid-template-columns: ${props => props.imagePosition === 'left' ? '250px 1fr' : '1fr 250px'};
   gap: 2rem;
-  margin-bottom: 2rem;
+
   padding: 2rem 0;
   background: var(--color-background);
   border-radius: 1rem;

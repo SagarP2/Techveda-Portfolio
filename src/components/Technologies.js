@@ -81,25 +81,26 @@ const TechGrid = styled.div`
   padding: 1rem 0;
   position: relative;
   display: flex;
-  justify-content: center;
+  justify-content: ${props => (props.shouldScroll ? 'flex-start' : 'start')};
 `;
 
 const CardRow = styled.div`
   display: flex;
   flex-wrap: nowrap;
   gap: 2rem;
-  justify-content: ${props => (props.shouldScroll ? 'flex-start' : 'center')};
+  justify-content: ${props => (props.shouldScroll ? 'flex-start' : 'start')};
   animation: ${props => props.shouldScroll ? 'scroll 20s linear infinite' : 'none'};
   width: fit-content;
 
   @keyframes scroll {
-    0% {
-      transform: translateX(0%);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
+  0% {
+    transform: translateX(0%);
   }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
 
   @media (max-width: 768px) {
     gap: 1rem;
@@ -224,18 +225,18 @@ const Technologies = () => {
           <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--color-error)' }}>{error}</div>
         ) : (
           <AnimatePresence mode="wait">
-            <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+            <div style={{ display: 'flex', justifyContent: 'center', width: 'fitcontent' }}>
               <TechGrid>
-                <CardRow shouldScroll={technologies[activeTab].length > 3}>
-                  {technologies[activeTab].map((tech, index) => (
-                    <TechCard key={`${tech.name}-${index}`}>
-                      <TechLogo src={tech.logo} alt={tech.name} />
-                      <TechName>{tech.name}</TechName>
-                    </TechCard>
-                  ))}
+                <CardRow shouldScroll={technologies[activeTab].length > 4}>
+                  {[...technologies[activeTab], ...(technologies[activeTab].length > 4 ? technologies[activeTab] : [])]
+                    .map((tech, index) => (
+                      <TechCard key={`${tech.name}-${index}`}>
+                        <TechLogo src={tech.logo} alt={tech.name} />
+                        <TechName>{tech.name}</TechName>
+                      </TechCard>
+                    ))}
                 </CardRow>
               </TechGrid>
-
             </div>
           </AnimatePresence>
         )}

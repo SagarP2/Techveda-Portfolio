@@ -23,7 +23,7 @@ const Container = styled(motion.div)`
 const ProjectsGrid = styled(motion.div)`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 2.5rem;
+  gap: 2rem;
   margin-top: 2.2rem;
 `;
 
@@ -80,7 +80,7 @@ const ProjectImage = styled.img`
 `;
 
 const ProjectContent = styled.div`
-  padding: 2rem;
+  padding: 1.5rem;
   position: relative;
 
   &::before {
@@ -129,33 +129,43 @@ const TechStack = styled.div`
   display: flex;
   flex-wrap: nowrap;
   gap: 0.75rem;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   overflow-x: auto;
   padding-bottom: 0.5rem;
   -ms-overflow-style: none;
   scrollbar-width: none;
   white-space: nowrap;
   position: relative;
-`;
-
-const TechBadge = styled(motion.span)`
-  background: rgba(66, 153, 225, 0.1);
-  color: #4299e1;
-  padding: 0.5rem 1rem;
-  border-radius: 12px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  flex-shrink: 0;
-  cursor: default;
-
-  &:hover {
-    background: rgba(66, 153, 225, 0.2);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(66, 153, 225, 0.1);
+  overflow: hidden;
+  width: 100%;
+  mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  
+  & > .scroll-track {
+    display: inline-flex;
+    white-space: nowrap;
+    animation: scroll 15s linear infinite;
   }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+    ;`
+
+    const Technology = styled.span`
+  background: rgba(59, 130, 246, 0.1);
+  color: #60a5fa;
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-right:10px;
 `;
+
 
 const ProjectLinks = styled.div`
   display: flex;
@@ -357,15 +367,15 @@ const Projects = () => {
           viewport={{ once: true }}
         >
           Latest <Emphasis>Projects</Emphasis>
-           </SectionHeading>
-           <Description
+        </SectionHeading>
+        <Description
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          At Techveda, we deliver tailored solutions for businesses of all sizes. 
-          Explore our portfolio of successfully completed client projects that demonstrate 
+          At Techveda, we deliver tailored solutions for businesses of all sizes.
+          Explore our portfolio of successfully completed client projects that demonstrate
           our technical expertise and commitment to excellence.
         </Description>
         {loading ? (
@@ -387,11 +397,11 @@ const Projects = () => {
                     <ProjectTitle>{project.title}</ProjectTitle>
                     <ProjectDescription>{project.shortDescription}</ProjectDescription>
                     <TechStack>
-                      {project.technologies.map((tech, index) => (
-                        <TechBadge key={index} variants={techBadgeVariants}>
-                          {tech}
-                        </TechBadge>
-                      ))}
+                      <div className="scroll-track">
+                        {[...project.technologies, ...project.technologies].map((tech, index) => (
+                          <Technology key={index}>{tech}</Technology>
+                        ))}
+                      </div>
                     </TechStack>
                     <ProjectLinks>
                       <GitHubLink href={project.githubLink} target="_blank" rel="noopener noreferrer">

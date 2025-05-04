@@ -10,6 +10,7 @@ const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem 0;
+  padding-bottom:6rem;
 `;
 
 const BackButton = styled(Link)`
@@ -60,11 +61,40 @@ const Header = styled.div`
   }
 `;
 
+const GitHubLink = styled.a`
+  display: inline-flex;
+  align-items: center;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+ 
+border:1px solid rgb(255, 255, 255);
+  padding: 0.6rem 1.4rem;
+  border-radius: 18px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-right:20px;
+
+  svg {
+    width: 23px;
+    height: 23px;
+  }
+  span{
+    padding-left:6px;
+    font-size:18px;
+  }
+
+  &:hover {
+    color: #3b82f6;
+    border:1px solid #3b82f6;
+  }
+`;
+
 const ImageContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  margin-bottom: 3rem;
+  margin-bottom: 8rem;
 `;
 
 const MainImage = styled.img`
@@ -126,7 +156,9 @@ const InfoCard = styled(motion.div)`
 `;
 
 const SectionLabel = styled.div`
-  color: #2563eb;
+ background: linear-gradient(90deg, #4299e1, #2563eb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   font-weight: 700;
   margin-bottom: 0.7rem;
   letter-spacing: 0.04em;
@@ -141,8 +173,8 @@ const TechRow = styled(motion.div)`
 `;
 
 const TechPill = styled.div`
-  background: #2563eb22;
-  color: #2563eb;
+  background:rgba(58, 78, 121, 0.13);
+  color:rgb(61, 94, 164);
   padding: 0.5rem 1.1rem;
   border-radius: 1.2rem;
   font-size: 1rem;
@@ -172,14 +204,16 @@ const DetailCard = styled(motion.div)`
 `;
 
 const DetailTitle = styled.h3`
-  color: #2563eb;
-  font-size: 1.4rem;
+ background: linear-gradient(90deg, #2563eb , rgb(255, 255, 255) );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 2.4rem;
   font-weight: 1200;
   margin-bottom: 1.2rem;
 `;
 
 const ProjectDetail = () => {
-  const { id } = useParams();
+  const { id } = useParams()
   const [project, setProject] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -307,20 +341,25 @@ const ProjectDetail = () => {
             transition={{ duration: 0.7, delay: 1.0 }}
             style={{ marginTop: '2rem' }}
           >
-            {project.officialWebsiteLink && (
-              <LinkStyled href={project.officialWebsiteLink} target="_blank" rel="noopener noreferrer">
-                Official Website ↗
-              </LinkStyled>
-            )}
+
             {project.gitHubLink && (
-              <LinkStyled
-                href={project.gitHubLink}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                GitHub ↗
-              </LinkStyled>
+              <GitHubLink href={project.githubLink} target="_blank" rel="noopener noreferrer">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                </svg><span>GitHub</span>
+              </GitHubLink>
             )}
+            {project.officialWebsiteLink && (
+              <GitHubLink href={project.officialWebsiteLink} target="_blank" rel="noopener noreferrer">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="2" y1="12" x2="22" y2="12" />
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                </svg>
+                <span>Website</span>
+              </GitHubLink>
+            )}
+
           </motion.div>
 
         </InfoCard>
@@ -341,10 +380,6 @@ const ProjectDetail = () => {
           ))}
         </InfoCard>
       </InfoGrid>
-
-
-
-
 
       <DetailCard
         initial={{ opacity: 0, y: 20 }}
@@ -371,7 +406,7 @@ const ProjectDetail = () => {
         transition={{ duration: 0.7, delay: 1.3 }}
       >
         <DetailTitle>Learning Outcomes</DetailTitle>
-        <div style={{ color: '#fff', fontSize: '1.08rem', lineHeight: 1.7 }}>{project.learningDescription}</div>
+        <div style={{ color: '#fff', fontSize: '1.1rem', lineHeight: 1.7 }}>{project.learningDescription}</div>
       </DetailCard>
       {project.secondaryimage && (
         <ImageContainer>

@@ -17,13 +17,13 @@ const Header = styled.div`
   margin-bottom: 3rem;
 
   h1 {
-    color: ${(props) => props.theme.colors.text};
+    color: ${props => props.theme.colors.text};
     font-size: 2.5rem;
     margin-bottom: 1rem;
   }
 
   p {
-    color: ${(props) => props.theme.colors.textSecondary};
+    color: ${props => props.theme.colors.textSecondary};
     font-size: 1.1rem;
     max-width: 600px;
     margin: 0 auto;
@@ -44,7 +44,8 @@ const BlogCard = styled(motion.div)`
   transition: transform 0.2s ease;
   display: flex;
   flex-direction: column;
-
+border-radius: 1rem;
+border: 1px solid rgba(66, 153, 225, 0.1);
   &:hover {
     transform: translateY(-5px);
   }

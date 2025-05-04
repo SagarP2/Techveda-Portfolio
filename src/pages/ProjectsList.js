@@ -9,7 +9,7 @@ const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding: 4rem 0rem;
-  padding-bottom: 10rem;
+  padding-bottom: 6rem;
 `;
 
 
@@ -56,7 +56,7 @@ const ProjectsGrid = styled.div`
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
   padding: rem;
-  padding-bottom: 10rem;
+  padding-bottom: 8rem;
 `;
 
 const ProjectCard = styled(motion.div)`

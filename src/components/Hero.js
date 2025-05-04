@@ -66,7 +66,7 @@ const Hero = () => {
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mt-8">
               <a 
-                href="#projects" 
+                href="/projects"
                 className="px-6 py-3 bg-primary-500 hover:bg-primary-600 text-white font-medium rounded-lg transition-colors duration-300 flex items-center justify-center font-body"
               >
                 See Our Work

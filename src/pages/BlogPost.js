@@ -16,32 +16,36 @@ const Header = styled.div`
   text-align: center;
 
   h1 {
-    color: ${(props) => props.theme.colors.text};
-    font-size: 2.5rem;
+     background: linear-gradient(90deg,#2563eb, rgb(255, 255, 255) );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+    font-size: 3.5rem;
     margin-bottom: 1rem;
     line-height: 1.3;
   }
 
   .meta {
     color: ${(props) => props.theme.colors.textSecondary};
+    width:1200px;
     font-size: 1rem;
     display: flex;
-    justify-content: center;
+    justify-content:right;
     gap: 1rem;
     margin-bottom: 1rem;
+    padding:0.5rem 0;
   }
 
   .date {
     color: ${(props) => props.theme.colors.textSecondary};
-    font-size: 0.875rem;
+    font-size: 1rem;
   }
 `;
 
 const Content = styled.div`
   color: ${(props) => props.theme.colors.text};
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   line-height: 1.8;
-  margin-bottom: 2rem;
+ 
 
   p {
     margin-bottom: 1.5rem;
@@ -59,7 +63,7 @@ const Tag = styled.span`
   background: ${(props) => props.theme.colors.primary}20;
   color: ${(props) => props.theme.colors.primary};
   padding: 0.25rem 0.75rem;
-  border-radius: 1rem;
+  border-radius:0.8rem;
   font-size: 0.875rem;
 `;
 
@@ -69,7 +73,7 @@ const BackButton = styled(Link)`
   color: ${(props) => props.theme.colors.primary};
   text-decoration: none;
   font-weight: 500;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   transition: all 0.2s ease;
 
   &:hover {
@@ -89,7 +93,7 @@ const BlogImage = styled.div`
   height: 300px;
   overflow: hidden;
   position: relative;
-  
+  border-radius: 1rem;
 
   img {
     width: 100%;
@@ -186,7 +190,7 @@ const BlogPost = () => {
             )}
             <div className="meta">
               <span>By {post.author}</span>
-              <span>•</span>
+              <span>/</span>
               <span className="date">
                 {new Date(post.date).toLocaleDateString()}
               </span>
