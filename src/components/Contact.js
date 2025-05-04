@@ -481,6 +481,9 @@ const statusVariants = {
   }
 };
 
+// Replace with your Web3Forms Access Key
+const ACCESS_KEY = "81585f28-8058-47d5-a317-976e787c77da";
+
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -496,7 +499,6 @@ const Contact = () => {
   });
   
   const [loading, setLoading] = useState(false);
-  
   
   // Use reduced motion for accessibility
   const prefersReducedMotion = useReducedMotion();
@@ -521,37 +523,69 @@ const Contact = () => {
     }));
   };
   
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     
-    // Simulate form submission
-    setTimeout(() => {
-      setLoading(false);
-      setStatus({
-        submitted: true,
-        success: true,
-        message: 'Your message has been sent successfully! We will get back to you soon.'
+    try {
+      // Create a new FormData object using the form element
+      const form = e.target;
+      const formDataObj = new FormData(form);
+      
+      // Add the Web3Forms access key
+      formDataObj.append("access_key", ACCESS_KEY);
+      
+      // Send the form data to Web3Forms API
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formDataObj
       });
       
-      // Reset form after successful submission
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
-      });
+      const data = await response.json();
       
-      // Clear status message after 5 seconds
-      setTimeout(() => {
+      if (data.success) {
+        // Success message
         setStatus({
-          submitted: false,
-          success: false,
+          submitted: true,
+          success: true,
+          message: 'Your message has been sent successfully! We will get back to you soon.'
+        });
+        
+        // Reset form after successful submission
+        setFormData({
+          name: '',
+          email: '',
+          subject: '',
           message: ''
         });
-      }, 5000);
-    }, 1500);
-  };
+        
+        // Clear status message after 5 seconds
+        setTimeout(() => {
+          setStatus({
+            submitted: false,
+            success: false,
+            message: ''
+          });
+        }, 5000);
+      } else {
+        // Error message
+        setStatus({
+          submitted: true,
+          success: false,
+          message: data.message || 'Something went wrong. Please try again.'
+        });
+      }
+    } catch (error) {
+      // Handle network errors
+      setStatus({
+        submitted: true,
+        success: false,
+        message: 'Network error. Please check your connection and try again.'
+      });
+    } finally {
+      setLoading(false);
+    }
+  }
   
   return (
     <ContactSection

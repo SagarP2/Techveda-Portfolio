@@ -271,7 +271,7 @@ const About = () => {
           console.log('Using default founders data');
           // Set default founders data
           setFoundersData({
-            title: 'Meet Our Team',
+            title: 'Meet Our Founders',
             founders: [
               {
                 name: 'John Smith',
@@ -456,7 +456,7 @@ const About = () => {
         {foundersData && foundersData.founders && foundersData.founders.length > 0 && (
           <FounderSection>
             <SectionDivider />
-            <FounderTitle>{foundersData.title || 'Meet Our Team'}</FounderTitle>
+            <FounderTitle>{foundersData.title || 'Meet Our Founders'}</FounderTitle>
             {foundersData.founders.map((founder, index) => (
               <FounderCard key={index} imagePosition={founder.imagePosition || 'left'}>
                 <FounderImageSection imagePosition={founder.imagePosition || 'left'}>
