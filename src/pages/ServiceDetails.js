@@ -1,23 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
-import styled from 'styled-components';
-import { motion, AnimatePresence } from 'framer-motion';
-import API from '../api';
-import LoadingSpinner from '../components/LoadingSpinner';
-import CallToAction from '../components/CallToAction';
+import React, { useState, useEffect } from "react";
+import { useParams, useLocation } from "react-router-dom";
+import styled from "styled-components";
+import { motion, AnimatePresence } from "framer-motion";
+import API from "../api";
+import LoadingSpinner from "../components/LoadingSpinner";
+import CallToAction from "../components/CallToAction";
 
 const Container = styled.div`
   padding: 0;
   margin: 0 auto;
   width: 100%;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   background: #0a0a0a;
   color: var(--color-text-primary);
   min-height: 100vh;
 `;
 
 const ServiceHeader = styled.div`
-  background: linear-gradient(135deg, rgba(var(--color-primary-rgb), 0.1) 0%, rgba(66, 63, 63, 0.8) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(var(--color-primary-rgb), -0.7) 15%,
+    hsl(217, 76.7%, 48.8%) 150%
+  );
   padding: 6rem 2rem 6rem;
   position: relative;
   overflow: hidden;
@@ -42,7 +46,11 @@ const DecorativeCircle = styled.div`
   position: absolute;
   width: 600px;
   height: 600px;
-  background: linear-gradient(135deg, rgba(var(--color-primary-rgb), 0.1) 0%, rgba(var(--color-primary-rgb), 0) 70%);
+  background: linear-gradient(
+    135deg,
+    rgba(var(--color-primary-rgb), 0.1) 0%,
+    rgba(var(--color-primary-rgb), 0) 70%
+  );
   border-radius: 50%;
   top: -200px;
   left: -200px;
@@ -51,14 +59,20 @@ const DecorativeCircle = styled.div`
   filter: blur(40px);
 
   @keyframes float {
-    0% { transform: translate(0, 0) rotate(0deg); }
-    50% { transform: translate(20px, 20px) rotate(5deg); }
-    100% { transform: translate(0, 0) rotate(0deg); }
+    0% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    50% {
+      transform: translate(20px, 20px) rotate(5deg);
+    }
+    100% {
+      transform: translate(0, 0) rotate(0deg);
+    }
   }
 `;
 
 const Title = styled(motion.h1)`
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 600;
   color: var(--color-heading);
@@ -70,13 +84,17 @@ const Title = styled(motion.h1)`
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: -10px;
     left: 0;
     width: 60px;
     height: 4px;
-    background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light));
+    background: linear-gradient(
+      90deg,
+      var(--color-primary),
+      var(--color-primary-light)
+    );
     border-radius: 2px;
     transition: width 0.3s ease;
   }
@@ -102,12 +120,11 @@ const Description = styled(motion.p)`
 const ContentSection = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  padding-bottom:6rem;
-  
+  padding-bottom: 6rem;
 `;
 
 const SubSectionTitle = styled(motion.h2)`
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: clamp(1.8rem, 3vw, 2.5rem);
   color: var(--color-heading);
   margin-bottom: 3rem;
@@ -117,14 +134,18 @@ const SubSectionTitle = styled(motion.h2)`
   padding-bottom: 1rem;
 
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
     width: 80px;
     height: 4px;
-    background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light));
+    background: linear-gradient(
+      90deg,
+      var(--color-primary),
+      var(--color-primary-light)
+    );
     border-radius: 2px;
     transition: width 0.3s ease;
   }
@@ -162,13 +183,17 @@ const SubServiceCard = styled(motion.div)`
   }
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(var(--color-primary-rgb), 0.1) 0%, rgba(var(--color-primary-rgb), 0) 60%);
+    background: linear-gradient(
+      135deg,
+      rgba(var(--color-primary-rgb), 0.1) 0%,
+      rgba(var(--color-primary-rgb), 0) 60%
+    );
     opacity: 0;
     transition: opacity 0.3s ease;
   }
@@ -206,22 +231,26 @@ const SubServiceContent = styled.div`
 `;
 
 const SubServiceTitle = styled.h3`
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 1.5rem;
   margin-bottom: 1rem;
   color: var(--color-heading);
   position: relative;
   padding-bottom: 0.8rem;
   font-weight: 600;
-  
+
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 0;
     height: 3px;
     width: 50px;
-    background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light));
+    background: linear-gradient(
+      90deg,
+      var(--color-primary),
+      var(--color-primary-light)
+    );
     border-radius: 3px;
     transition: width 0.3s ease;
   }
@@ -237,7 +266,6 @@ const SubServiceDescription = styled.p`
   margin-bottom: 0.5rem;
   font-size: 1.1rem;
   transition: color 0.3s ease;
-  
 
   ${SubServiceCard}:hover & {
     color: var(--color-text-primary);
@@ -245,7 +273,11 @@ const SubServiceDescription = styled.p`
 `;
 
 const RequestButton = styled(motion.button)`
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--color-primary) 0%,
+    var(--color-primary-dark) 100%
+  );
   color: var(--color-text-primary);
   border: none;
   padding: 1rem 2.5rem;
@@ -261,13 +293,17 @@ const RequestButton = styled(motion.button)`
   align-self: flex-start;
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0) 100%
+    );
     transform: translateX(-100%);
     transition: transform 0.3s ease;
   }
@@ -305,9 +341,9 @@ const Emphasis = styled.span`
   -webkit-text-fill-color: transparent;
   font-weight: 700;
   position: relative;
-  
+
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: -2px;
     left: 0;
@@ -316,9 +352,8 @@ const Emphasis = styled.span`
     opacity: 0;
     transform: scaleX(0.7);
     transition: all 0.3s ease;
-  }  
+  }
 `;
-
 
 const ServiceDetails = () => {
   const { id: slug } = useParams();
@@ -332,35 +367,37 @@ const ServiceDetails = () => {
   useEffect(() => {
     // Use the database data directly (from your request)
     const databaseData = {
-      "_id": "67f0e71133569e2019f8aa0f",
-      "title": "New Service",
-      "slug": "new",
-      "description": "New Service demo",
-      "icon": "✨",
-      "createdAt": "1743841041056",
-      "updatedAt": "1743841041059",
-      "subServices": [
+      _id: "67f0e71133569e2019f8aa0f",
+      title: "New Service",
+      slug: "new",
+      description: "New Service demo",
+      icon: "✨",
+      createdAt: "1743841041056",
+      updatedAt: "1743841041059",
+      subServices: [
         {
-          "title": "Sub-services",
-          "description": "Sub-services Description",
-          "imageUrl": "https://placehold.co/800x400/6d43b8/ffffff?text=Sub-services",
-          "features": [],
-          "_id": "67f0eec59a0bdd0a4cb8741a"
+          title: "Sub-services",
+          description: "Sub-services Description",
+          imageUrl:
+            "https://placehold.co/800x400/6d43b8/ffffff?text=Sub-services",
+          features: [],
+          _id: "67f0eec59a0bdd0a4cb8741a",
         },
         {
-          "title": "Second sub service",
-          "description": "Second sub",
-          "imageUrl": "https://placehold.co/800x400/9a7ed0/ffffff?text=Second+Sub+Service",
-          "features": [],
-          "_id": "67f0eec59a0bdd0a4cb8741b"
-        }
-      ]
+          title: "Second sub service",
+          description: "Second sub",
+          imageUrl:
+            "https://placehold.co/800x400/9a7ed0/ffffff?text=Second+Sub+Service",
+          features: [],
+          _id: "67f0eec59a0bdd0a4cb8741b",
+        },
+      ],
     };
 
     // Use the database data instead of state or API data
     setService(databaseData);
     setLoading(false);
-    
+
     // Only fall back to API call if no database data is available
     // (keeping this part as fallback, but it won't run with the above code)
     if (false && stateData.title && stateData.description && stateData.slug) {
@@ -376,27 +413,30 @@ const ServiceDetails = () => {
     const fetchServiceDetails = async () => {
       try {
         setLoading(true);
-        
+
         // Directly use the API.get method with the full URL for debugging
         const response = await API.get(`/api/services/slug/${slug}`);
-        
+
         if (!response.data || !response.data.success) {
-          throw new Error((response.data && response.data.message) || 'Failed to fetch service details');
+          throw new Error(
+            (response.data && response.data.message) ||
+              "Failed to fetch service details"
+          );
         }
-        
+
         const serviceData = response.data.data;
-        
+
         // Ensure subServices is always an array, even if it's null or undefined
         if (!serviceData.subServices) {
           serviceData.subServices = [];
         }
-        
+
         // No longer adding sample subService data when none is found
-        
+
         setService(serviceData);
       } catch (err) {
-        console.error('Error fetching service details:', err);
-        setError(err.message || 'Failed to load service details');
+        console.error("Error fetching service details:", err);
+        setError(err.message || "Failed to load service details");
       } finally {
         setLoading(false);
       }
@@ -406,11 +446,11 @@ const ServiceDetails = () => {
       fetchServiceDetails();
     }
   }, [slug, stateData]);
-  
+
   // Add debug effect to check image URLs (moved before conditionals)
   useEffect(() => {
     if (!service || !service.subServices) return;
-    
+
     const subServices = service.subServices;
     // Check each subService image
     if (subServices.length > 0) {
@@ -418,12 +458,17 @@ const ServiceDetails = () => {
         if (subService.imageUrl) {
           // Test image loading
           const testImage = new Image();
-          testImage.onload = () => console.log(`Image ${index} loaded: ${subService.imageUrl}`);
+          testImage.onload = () =>
+            console.log(`Image ${index} loaded: ${subService.imageUrl}`);
           testImage.onerror = () => {
-            console.error(`Image ${index} failed to load: ${subService.imageUrl}`);
+            console.error(
+              `Image ${index} failed to load: ${subService.imageUrl}`
+            );
             // If we're in development, suggest a solution
-            if (process.env.NODE_ENV === 'development') {
-              console.log(`Try using a reliable image service like: https://placehold.co/800x400`);
+            if (process.env.NODE_ENV === "development") {
+              console.log(
+                `Try using a reliable image service like: https://placehold.co/800x400`
+              );
             }
           };
           testImage.src = subService.imageUrl;
@@ -457,10 +502,11 @@ const ServiceDetails = () => {
   }
 
   // Use subServices array if it exists and has items, otherwise use empty array
-  const subServices = Array.isArray(service.subServices) && service.subServices.length > 0 
-    ? service.subServices 
-    : [];
-  
+  const subServices =
+    Array.isArray(service.subServices) && service.subServices.length > 0
+      ? service.subServices
+      : [];
+
   return (
     <Container>
       <ServiceHeader>
@@ -514,21 +560,27 @@ const ServiceDetails = () => {
                     transition={{ duration: 0.6, delay: index * 0.1 }}
                     whileHover={{ y: -8 }}
                   >
-                    <SubServiceImage 
-                      src={subService.imageUrl || 'https://placehold.co/800x400/cccccc/666666?text=No+Image'}
-                      alt={subService.title || 'Untitled Service'} 
+                    <SubServiceImage
+                      src={
+                        subService.imageUrl ||
+                        "https://placehold.co/800x400/cccccc/666666?text=No+Image"
+                      }
+                      alt={subService.title || "Untitled Service"}
                       onLoad={(e) => {
-                        e.target.style.display = 'block';
+                        e.target.style.display = "block";
                       }}
                       onError={(e) => {
                         e.target.onerror = null;
-                        e.target.src = 'https://placehold.co/800x400/cccccc/666666?text=Image+Not+Available';
+                        e.target.src =
+                          "https://placehold.co/800x400/cccccc/666666?text=Image+Not+Available";
                       }}
                     />
                     <SubServiceContent>
-                      <SubServiceTitle>{subService.title || 'Untitled Service'}</SubServiceTitle>
+                      <SubServiceTitle>
+                        {subService.title || "Untitled Service"}
+                      </SubServiceTitle>
                       <SubServiceDescription>
-                        {subService.description || 'No description available'}
+                        {subService.description || "No description available"}
                       </SubServiceDescription>
                     </SubServiceContent>
                   </SubServiceCard>
@@ -537,7 +589,7 @@ const ServiceDetails = () => {
             </SubServicesGrid>
           </>
         )}
-      <CallToAction/>
+        <CallToAction />
       </ContentSection>
     </Container>
   );

@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { fetchTechnologies as fetchTechnologiesAPI } from '../api';
-import LoadingSpinner from './LoadingSpinner';
+
 const TechnologiesSection = styled(motion.section)`
-  padding: 8rem 2rem;
+  padding: 5rem 2rem;
   background: #0a0a0a;
   position: relative;
   overflow: hidden;
-  
+
   @media (max-width: 768px) {
     padding: 6rem 1rem;
   }
@@ -28,7 +28,7 @@ const SectionTitle = styled(motion.h2)`
   font-size: clamp(2.5rem, 5vw, 3.5rem);
   margin-bottom: 1.5rem;
   position: relative;
-  
+
   &::after {
     content: '';
     position: absolute;
@@ -68,67 +68,66 @@ const Tab = styled(motion.button)`
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-bottom:2rem;
-  
+
   &:hover {
     background: rgba(66, 153, 225, 0.2);
     color: #4299e1;
     transform: translateY(-3px);
   }
 `;
+const TechGrid = styled.div`
+  overflow: hidden;
+  width: 100%;
+  padding: 1rem 0;
+  position: relative;
+  display: flex;
+  justify-content: center;
+`;
 
+const CardRow = styled.div`
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 2rem;
+  justify-content: ${props => (props.shouldScroll ? 'flex-start' : 'center')};
+  animation: ${props => props.shouldScroll ? 'scroll 20s linear infinite' : 'none'};
+  width: fit-content;
 
-const TechGrid = styled(motion.div)`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 6rem;
-  
+  @keyframes scroll {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
   @media (max-width: 768px) {
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    gap: 1.5rem;
+    gap: 1rem;
+    animation: ${props => props.shouldScroll ? 'scroll 30s linear infinite' : 'none'};
   }
 `;
 
-const BackgroundGlow = styled(motion.div)`
-  position: absolute;
-  width: 60vw;
-  height: 60vw;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(var(--color-primary-rgb), 0.15) 0%,
-    rgba(var(--color-primary-rgb), 0) 70%
-  );
-  z-index: -1;
-  top: 10%;
-  left: 10%;
-  filter: blur(50px);
-  opacity: 0.7;
-`;
-
 const TechCard = styled(motion.div)`
-  position: relative;
-  width: 90%;
+  flex: 0 0 auto;
+  width: 160px;
   aspect-ratio: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  backdrop-filter: blur(10px);
-margin-bottom:-3rem;
-  transition: all 0.3s ease;
-  
+
   @media (max-width: 768px) {
-    padding: 0.75rem;
+    width: 120px;
   }
 `;
 
+
 const TechLogo = styled(motion.img)`
-  width: 100%;
+  width: 60%;
   height: auto;
   margin-bottom: 0.75rem;
   object-fit: contain;
-  
+
   @media (max-width: 768px) {
     width: 40%;
   }
@@ -138,125 +137,12 @@ const TechName = styled(motion.h4)`
   font-size: 0.9rem;
   font-weight: 500;
   text-align: center;
-  color:rgb(255, 255, 255);
-  
+  color: rgb(255, 255, 255);
+
   @media (max-width: 768px) {
     font-size: 0.8rem;
   }
 `;
-
-// Animation variants
-const containerVariants = {
-  initial: { opacity: 0 },
-  animate: { 
-    opacity: 1, 
-    transition: { 
-      duration: 0.5,
-      when: "beforeChildren",
-      staggerChildren: 0.1
-    }
-  },
-  exit: { opacity: 0, transition: { duration: 0.3 } }
-};
-
-const titleVariants = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
-};
-
-const descriptionVariants = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut", delay: 0.2 } }
-};
-
-const tabsContainerVariants = {
-  initial: { opacity: 0, y: 20 },
-  animate: { 
-    opacity: 1, 
-    y: 0, 
-    transition: { 
-      duration: 0.5, 
-      ease: "easeOut", 
-      delay: 0.3,
-      when: "beforeChildren",
-      staggerChildren: 0.1
-    } 
-  }
-};
-
-const tabVariants = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.4 } },
-  hover: { y: -5, transition: { duration: 0.2 } },
-  tap: { scale: 0.95 }
-};
-
-const techGridVariants = {
-  initial: { opacity: 0 },
-  animate: { 
-    opacity: 1, 
-    transition: { 
-      duration: 0.5, 
-      staggerChildren: 0.05
-    } 
-  },
-  exit: { 
-    opacity: 0,
-    transition: { 
-      duration: 0.3,
-      when: "afterChildren",
-      staggerChildren: 0.03,
-      staggerDirection: -1
-    }
-  }
-};
-
-const techCardVariants = {
-  initial: { opacity: 0, scale: 0.8 },
-  animate: { 
-    opacity: 1, 
-    scale: 1,
-    transition: { 
-      duration: 0.5,
-      ease: "easeOut"
-    }
-  },
-  exit: { 
-    opacity: 0, 
-    scale: 0.8,
-    transition: { 
-      duration: 0.3,
-      ease: "easeIn"
-    }
-  },
-  hover: { 
-    y: -10, 
-    scale: 1.05,
-   
-    transition: { 
-      duration: 0.3,
-      ease: "easeOut"
-    }
-  }
-};
-
-const logoVariants = {
-  initial: { opacity: 0, y: 10 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.3, delay: 0.1 } },
-  hover: { 
-    rotate: [0, -5, 5, -5, 0],
-    transition: { 
-      duration: 0.5,
-      ease: "easeInOut"
-    }
-  }
-};
-
-const nameVariants = {
-  initial: { opacity: 0 },
-  animate: { opacity: 1, transition: { duration: 0.3, delay: 0.2 } }
-};
-
 const Technologies = () => {
   const [activeTab, setActiveTab] = useState('frontend');
   const [technologies, setTechnologies] = useState({
@@ -264,12 +150,11 @@ const Technologies = () => {
     backend: [],
     database: [],
     design: [],
-    devops: [],
-    api: []
+    devops: []
   });
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  
+
   const tabs = [
     { id: 'frontend', label: 'Frontend' },
     { id: 'backend', label: 'Backend' },
@@ -279,145 +164,79 @@ const Technologies = () => {
   ];
 
   useEffect(() => {
+    const fetchTechnologies = async () => {
+      try {
+        setIsLoading(true);
+        setError(null);
+        const response = await fetchTechnologiesAPI();
+        const selectedTechs = response.data.technologies.filter(tech => tech.isSelected);
+
+        const categorized = {
+          frontend: [],
+          backend: [],
+          database: [],
+          design: [],
+          devops: []
+        };
+
+        selectedTechs.forEach(tech => {
+          if (categorized[tech.category]) {
+            categorized[tech.category].push({ name: tech.name, logo: tech.logo });
+          }
+        });
+
+        setTechnologies(categorized);
+      } catch (err) {
+        setError('Failed to load technologies. Please try again later.');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
     fetchTechnologies();
   }, []);
 
-  const fetchTechnologies = async () => {
-    try {
-      setIsLoading(true);
-      setError(null);
-      const response = await fetchTechnologiesAPI();
-      console.log('Response data:', response.data);
-      const selectedTechs = response.data.technologies.filter(tech => tech.isSelected);
-      
-      const categorizedTechs = {
-        frontend: [],
-        backend: [],
-        database: [],
-        design: [],
-        devops: []
-      };
-
-      selectedTechs.forEach(tech => {
-        if (categorizedTechs[tech.category]) {
-          categorizedTechs[tech.category].push({
-            name: tech.name,
-            logo: tech.logo
-          });
-        }
-      });
-
-      setTechnologies(categorizedTechs);
-    } catch (error) {
-      console.error('Error fetching technologies:', error);
-      console.error('Error response:', error.response);
-      setError('Failed to load technologies. Please try again later.');
-    } finally {
-      setIsLoading(false);
-    }
-  };
-  
   return (
-    <TechnologiesSection
-      variants={containerVariants}
-      initial="initial"
-      animate="animate"
-      exit="exit"
-      id="technologies"
-    >
-      <BackgroundGlow 
-        animate={{ 
-          x: [0, 50, -50, 0],
-          y: [0, 30, -30, 0],
-          scale: [1, 1.1, 0.9, 1],
-          rotate: [0, 90, 180, 270, 360],
-        }}
-        transition={{ 
-          duration: 20, 
-          ease: "linear", 
-          repeat: Infinity,
-          repeatType: "reverse"
-        }}
-      />
-      
+    <TechnologiesSection id="technologies">
       <Container>
         <SectionHeader>
-          <SectionTitle variants={titleVariants}>
-            Technologies & Platforms
-          </SectionTitle>
-          <SectionDescription variants={descriptionVariants}>
-            At Techveda, we leverage cutting-edge technologies to build scalable, efficient, and innovative solutions for our clients. Our expertise spans across various domains of modern software development.
+          <SectionTitle>Technologies & Platforms</SectionTitle>
+          <SectionDescription>
+            At Techveda, we leverage cutting-edge technologies to build scalable, efficient, and innovative solutions for our clients.
           </SectionDescription>
         </SectionHeader>
-        
-        <TabsContainer 
-          variants={tabsContainerVariants}
-          initial="initial"
-          animate="animate"
-        >
+
+        <TabsContainer>
           {tabs.map(tab => (
             <Tab
               key={tab.id}
               active={activeTab === tab.id}
               onClick={() => setActiveTab(tab.id)}
-              variants={tabVariants}
-              whileHover="hover"
-              whileTap="tap"
             >
               {tab.label}
             </Tab>
           ))}
         </TabsContainer>
-        
 
-        
         {isLoading ? (
-          <div style={{ textAlign: 'center', padding: '2rem' }}>
-            Loading technologies...
-          </div>
+          <div style={{ textAlign: 'center', padding: '2rem' }}>Loading technologies...</div>
         ) : error ? (
-          <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--color-error)' }}>
-            {error}
-          </div>
+          <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--color-error)' }}>{error}</div>
         ) : (
           <AnimatePresence mode="wait">
-            <TechGrid
-              key={activeTab}
-              variants={techGridVariants}
-              initial="initial"
-              animate="animate"
-              exit="exit"
-            >
-              {technologies[activeTab].length > 0 ? (
-                technologies[activeTab].map((tech, index) => (
-                  <div style={{display:'flex',justifyContent:'center'}}>
-                  <TechCard
-                    key={tech.name}
-                    variants={techCardVariants}
-                    whileHover="hover"
-                    custom={index}
-                  >
-                    <TechLogo 
-                      src={tech.logo}
-                      alt={tech.name}
-                      variants={logoVariants}
-                      layoutId={`tech-logo-${tech.name}`}
-                    />
-                    <TechName variants={nameVariants}>{tech.name}</TechName>
-                  </TechCard>
-                  </div>
-                ))
-              ) : (
-                <div style={{ 
-                  gridColumn: '1 / -1', 
-                  textAlign: 'center', 
-                  padding: '2rem',
-                  color: 'var(--color-text-light)'
-                }}>
-                  No technologies selected for this category
-                </div>
-              )}
-            </TechGrid>
+            <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+              <TechGrid>
+                <CardRow shouldScroll={technologies[activeTab].length > 3}>
+                  {technologies[activeTab].map((tech, index) => (
+                    <TechCard key={`${tech.name}-${index}`}>
+                      <TechLogo src={tech.logo} alt={tech.name} />
+                      <TechName>{tech.name}</TechName>
+                    </TechCard>
+                  ))}
+                </CardRow>
+              </TechGrid>
+
+            </div>
           </AnimatePresence>
         )}
       </Container>
@@ -425,4 +244,4 @@ const Technologies = () => {
   );
 };
 
-export default Technologies; 
+export default Technologies;

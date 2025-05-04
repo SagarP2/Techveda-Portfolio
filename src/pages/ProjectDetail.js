@@ -69,114 +69,113 @@ const ImageContainer = styled.div`
 
 const MainImage = styled.img`
   width: 100%;
-  max-height: 500px;
+  max-height: 400px;
   object-fit: cover;
   border-radius: 0.5rem;
 `;
 
 const SecondaryImage = styled.img`
   width: 100%;
-  max-height: 300px;
+  max-height: 450px;
   object-fit: cover;
   border-radius: 0.5rem;
 `;
 
-const Content = styled.div`
-  color: ${(props) => props.theme.colors.text};
-  line-height: 1.8;
-  font-size: 1.1rem;
-
-  p {
-    margin-bottom: 1.5rem;
-  }
-`;
-
-const Section = styled.div`
-  margin-bottom: 3rem;
-`;
-
-const ContentSection = styled(Section)`
-  background: rgba(30, 30, 30, 0.6);
-  backdrop-filter: blur(10px);
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  padding: 1.5rem;
-`;
-
-const SectionContent = styled.div`
-  color: ${(props) => props.theme.colors.text};
-  line-height: 1.8;
-  font-size: 1.1rem;
-
-  p {
-    margin-bottom: 1.5rem;
-  }
-`;
-
-const SectionTitle = styled.h3`
-  color: ${(props) => props.theme.colors.primary};
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid ${(props) => props.theme.colors.border};
-`;
-
-const TechnologiesContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin: 2rem 0;
-`;
-
-const Technology = styled.span`
-  background: ${(props) => props.theme.colors.primary}20;
-  color: ${(props) => props.theme.colors.primary};
-  padding: 0.5rem 1rem;
-  border-radius: 1rem;
-  font-size: 0.875rem;
-`;
-
-const TagsContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin: 1rem 0;
-`;
-
-const Tag = styled.span`
-  background: ${(props) => props.theme.colors.textSecondary}20;
-  color: ${(props) => props.theme.colors.textSecondary};
-  padding: 0.5rem 1rem;
-  border-radius: 1rem;
-  font-size: 0.875rem;
-`;
-
-const ProjectLinks = styled.div`
-  display: flex;
-  gap: 1.5rem;
-  margin-top: 2rem;
-  padding-top: 2rem;
-  border-top: 1px solid ${(props) => props.theme.colors.border};
-  flex-wrap: wrap;
-`;
-
-const ProjectLink = styled.a`
-  color: ${(props) => props.theme.colors.primary};
-  text-decoration: none;
+const PublishedBadge = styled(motion.div)`
+  display: inline-block;
+  background: #2563eb;
+  color: #fff;
   font-size: 1rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  padding: 0.4em 1.2em;
+  margin: 1.6rem 0;
+  letter-spacing: 0.05em;
+`;
+
+const Title = styled(motion.h1)`
+  font-size: 4.5rem;
+  font-weight: 900;
+  color: #fff;
+  margin-bottom: 1.2rem;
+  line-height: 1.1;
+`;
+
+const Subtitle = styled(motion.h2)`
+  font-size: 3rem;
+  font-weight: 1200;
+  background:linear-gradient(80deg, #2563eb , #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 2.5rem;
+`;
+
+const InfoGrid = styled(motion.div)`
+  display: grid;
+   grid-template-columns: 650px 200px 220px; /* Column 1: fixed 300px, Column 2: flexible, Column 3: fixed 200px */
+  gap: 5rem;
+  margin: 2rem 0 0 0;
+`;
+
+const InfoCard = styled(motion.div)`
+
+  
+
+`;
+
+const SectionLabel = styled.div`
+  color: #2563eb;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+  letter-spacing: 0.04em;
+  font-size: 1.1rem;
+`;
+
+const TechRow = styled(motion.div)`
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  transition: color 0.2s ease;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin:0 0 1rem 0;
+`;
 
+const TechPill = styled.div`
+  background: #2563eb22;
+  color: #2563eb;
+  padding: 0.5rem 1.1rem;
+  border-radius: 1.2rem;
+  font-size: 1rem;
+  font-weight: 1200;
+`;
+
+const LinkStyled = styled(motion.a)`
+  color: #2563eb;
+  text-decoration: underline;
+  font-weight: 400;
+  margin-right: 1.2rem;
+  font-size: 1.3rem;
   &:hover {
-    color: ${(props) => props.theme.colors.primaryDark};
+    color: #fff;
+    background: #2563eb;
+    text-decoration: none;
+    border-radius: 0.3em;
+    padding: 0.1em 0.4em;
+    transition: all 0.2s;
   }
+`;
 
-  svg {
-    width: 20px;
-    height: 20px;
-  }
+const DetailCard = styled(motion.div)`
+ 
+  padding: 2rem 0rem;
+  
+`;
+
+const DetailTitle = styled.h3`
+  color: #2563eb;
+  font-size: 1.4rem;
+  font-weight: 1200;
+  margin-bottom: 1.2rem;
 `;
 
 const ProjectDetail = () => {
@@ -236,7 +235,6 @@ const ProjectDetail = () => {
       </Container>
     );
   }
-
   return (
     <Container>
       <BackButton to="/projects">
@@ -255,118 +253,137 @@ const ProjectDetail = () => {
         </svg>
         Back to Projects
       </BackButton>
-      {project.secondaryimage && (
-        <SecondaryImage
-          src={project.secondaryimage}
-          alt={`${project.title} - Additional view`}
-        />
-      )}
-      <Header>
-        <h1>{project.title}</h1>
-        {project.subtitle && <h2>{project.subtitle}</h2>}
-      </Header>
-      <ContentSection>
-        <SectionTitle>Overview</SectionTitle>
-        <SectionContent>{project.shortDescription}</SectionContent>
-      </ContentSection>
 
-      <ProjectLinks>
-        {project.gitHubLink && (
-          <ProjectLink
-            href={project.gitHubLink}
-            target="_blank"
-            rel="noopener noreferrer"
+
+      {project.mainimage && (
+        <MainImage src={project.mainimage} alt={project.title} />
+      )}
+
+      <PublishedBadge
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.1 }}
+      >
+        PUBLISHED IN {project.publishedYear || "2023"}
+      </PublishedBadge>
+      <Title
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.2 }}
+      >
+        {project.title}
+      </Title>
+
+      <Subtitle
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.3 }}
+      >
+        {project.subtitle}
+      </Subtitle>
+
+      <InfoGrid
+        initial="hidden"
+        animate="visible"
+        variants={{
+          hidden: {},
+          visible: {
+            transition: {
+              staggerChildren: 0.18,
+              delayChildren: 0.4,
+            },
+          },
+        }}
+      >
+        <InfoCard
+          variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7 } } }}
+        >
+
+          <div style={{ color: "#fff", fontSize: "1.1rem" }}>{project.shortDescription}</div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 1.0 }}
+            style={{ marginTop: '2rem' }}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
-              />
-            </svg>
-            View on GitHub
-          </ProjectLink>
-        )}
-        {project.officialWebsiteLink && (
-          <ProjectLink
-            href={project.officialWebsiteLink}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
-              />
-            </svg>
-            Visit Website
-          </ProjectLink>
-        )}
-      </ProjectLinks>
+            {project.officialWebsiteLink && (
+              <LinkStyled href={project.officialWebsiteLink} target="_blank" rel="noopener noreferrer">
+                Official Website ↗
+              </LinkStyled>
+            )}
+            {project.gitHubLink && (
+              <LinkStyled
+                href={project.gitHubLink}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub ↗
+              </LinkStyled>
+            )}
+          </motion.div>
+
+        </InfoCard>
+        <InfoCard
+          variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7 } } }}
+        >
+          <SectionLabel>SERVICES</SectionLabel>
+          {project.services && project.services.map((service, i) => (
+            <div key={i} style={{ color: "#fff", marginBottom: "0.5rem" }}>{service}</div>
+          ))}
+        </InfoCard>
+        <InfoCard
+          variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7 } } }}
+        >
+          <SectionLabel>INDUSTRIES</SectionLabel>
+          {project.industries && project.industries.map((industry, i) => (
+            <div key={i} style={{ color: "#fff", marginBottom: "0.5rem" }}>{industry}</div>
+          ))}
+        </InfoCard>
+      </InfoGrid>
+
+
+
+
+
+      <DetailCard
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 1.2 }}
+      >
+        <DetailTitle>Technical Details</DetailTitle>
+        <div style={{ color: '#fff', fontSize: '1.08rem', lineHeight: 1.7 }}>{project.technicalDescription}</div>
+      </DetailCard>
       {project.technologies && project.technologies.length > 0 && (
-        <Section>
-          <SectionTitle>Technologies Used</SectionTitle>
-          <TechnologiesContainer>
-            {project.technologies.map((tech, index) => (
-              <Technology key={index}>{tech}</Technology>
-            ))}
-          </TechnologiesContainer>
-        </Section>
+        <TechRow
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.8 }}
+        >
+          {project.technologies.map((tech, i) => (
+            <TechPill key={i}>{tech}</TechPill>
+          ))}
+        </TechRow>
+      )}
+      <DetailCard
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 1.3 }}
+      >
+        <DetailTitle>Learning Outcomes</DetailTitle>
+        <div style={{ color: '#fff', fontSize: '1.08rem', lineHeight: 1.7 }}>{project.learningDescription}</div>
+      </DetailCard>
+      {project.secondaryimage && (
+        <ImageContainer>
+          <SecondaryImage
+            src={project.secondaryimage}
+            alt={`${project.title} - Additional view`}
+          />
+        </ImageContainer>
       )}
 
-      {project.services && project.services.length > 0 && (
-        <Section>
-          <SectionTitle>Services</SectionTitle>
-          <TagsContainer>
-            {project.services.map((service, index) => (
-              <Tag key={index}>{service}</Tag>
-            ))}
-          </TagsContainer>
-        </Section>
-      )}
-
-      {project.industries && project.industries.length > 0 && (
-        <Section>
-          <SectionTitle>Industries</SectionTitle>
-          <TagsContainer>
-            {project.industries.map((industry, index) => (
-              <Tag key={index}>{industry}</Tag>
-            ))}
-          </TagsContainer>
-        </Section>
-      )}
-
-      <ImageContainer>
-        {project.mainimage && (
-          <MainImage src={project.mainimage} alt={project.title} />
-        )}
-      </ImageContainer>
-
-      <ContentSection>
-        <SectionTitle>Technical Details</SectionTitle>
-        <SectionContent>{project.technicalDescription}</SectionContent>
-      </ContentSection>
-
-      <ContentSection>
-        <SectionTitle>Learning Outcomes</SectionTitle>
-        <SectionContent>{project.learningDescription}</SectionContent>
-      </ContentSection>
-<CallToAction/>
+      <CallToAction />
     </Container>
-
   );
 };
 
