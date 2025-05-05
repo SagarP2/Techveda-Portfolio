@@ -7,7 +7,7 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import CallToAction from '../components/CallToAction';
 
 const Container = styled.div`
-  padding: 0;
+
   margin: 0 auto;
   width: 100%;
   font-family: 'Inter', sans-serif;
@@ -17,13 +17,18 @@ const Container = styled.div`
 `;
 
 const ServiceHeader = styled.div`
-background: linear-gradient(135deg, rgba(var(--color-primary-rgb), -0.7) 15%,hsl(217, 76.70%,48.80%) 150%);  padding: 6rem 2rem 6rem;
+  background: linear-gradient(135deg, rgba(var(--color-primary-rgb), -0.7) 15%,hsl(217, 76.70%,48.80%) 150%);
+  padding: clamp(3rem, 8vw, 6rem) 1rem;
   position: relative;
   overflow: hidden;
-  margin-bottom: 4rem;
+  margin-bottom: clamp(2rem, 5vw, 4rem);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
   backdrop-filter: blur(10px);
+
+  @media (max-width: 768px) {
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+  }
 `;
 
 const HeaderContent = styled.div`
@@ -34,13 +39,18 @@ const HeaderContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 2rem;
+  gap: clamp(1rem, 3vw, 2rem);
+
+  @media (max-width: 768px) {
+    align-items: center;
+    text-align: center;
+  }
 `;
 
 const DecorativeCircle = styled.div`
   position: absolute;
-  width: 600px;
-  height: 600px;
+  width: clamp(300px, 60vw, 600px);
+  height: clamp(300px, 60vw, 600px);
   background: linear-gradient(135deg, rgba(var(--color-primary-rgb), 0.1) 0%, rgba(var(--color-primary-rgb), 0) 70%);
   border-radius: 50%;
   top: -200px;
@@ -48,6 +58,11 @@ const DecorativeCircle = styled.div`
   z-index: 1;
   animation: float 6s ease-in-out infinite;
   filter: blur(40px);
+
+  @media (max-width: 768px) {
+    top: -100px;
+    left: -100px;
+  }
 
   @keyframes float {
     0% { transform: translate(0, 0) rotate(0deg); }
@@ -58,15 +73,19 @@ const DecorativeCircle = styled.div`
 
 const Title = styled(motion.h1)`
   font-family: 'Poppins', sans-serif;
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-size: clamp(2rem, 5vw, 4rem);
   font-weight: 600;
   color: var(--color-heading);
-  margin-bottom: 1.5rem;
+  margin-bottom: clamp(1rem, 2vw, 1.5rem);
   max-width: 1200px;
   line-height: 1.2;
   position: relative;
   display: inline-block;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+  @media (max-width: 768px) {
+    text-align: center;
+  }
 
   &::after {
     content: '';
@@ -78,6 +97,11 @@ const Title = styled(motion.h1)`
     background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light));
     border-radius: 2px;
     transition: width 0.3s ease;
+
+    @media (max-width: 768px) {
+      left: 50%;
+      transform: translateX(-50%);
+    }
   }
 
   &:hover::after {
@@ -90,26 +114,31 @@ const Description = styled(motion.p)`
   line-height: 1.8;
   color: var(--color-text-secondary);
   max-width: 1200px;
-  margin-bottom: 2.5rem;
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
   font-weight: 400;
   position: relative;
   padding-left: 1.5rem;
   border-left: 3px solid rgba(var(--color-primary-rgb), 0.2);
   backdrop-filter: blur(5px);
+
+  @media (max-width: 768px) {
+    padding-left: 0;
+    border-left: none;
+    text-align: center;
+  }
 `;
 
 const ContentSection = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  padding-bottom:6rem;
-  
+  padding-bottom: clamp(3rem, 8vw, 6rem);
 `;
 
 const SubSectionTitle = styled(motion.h2)`
   font-family: 'Poppins', sans-serif;
-  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
   color: var(--color-heading);
-  margin-bottom: 3rem;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
   font-weight: 600;
   text-align: center;
   position: relative;
@@ -135,10 +164,10 @@ const SubSectionTitle = styled(motion.h2)`
 
 const SubServicesGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-  gap: 3rem;
-  margin-top: 3rem;
-  padding: 1rem 0 6rem 0rem;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 400px), 1fr));
+  gap: clamp(1.5rem, 4vw, 3rem);
+  margin-top: clamp(1.5rem, 4vw, 3rem);
+  padding: 1rem 0 clamp(3rem, 8vw, 6rem) 0;
 `;
 
 const SubServiceCard = styled(motion.div)`
@@ -154,10 +183,20 @@ const SubServiceCard = styled(motion.div)`
   transform-origin: center;
   backdrop-filter: blur(10px);
 
+  @media (max-width: 768px) {
+    border-radius: 16px;
+  }
+
   &:hover {
     transform: translateY(-8px) scale(1.02);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
     border-color: rgba(var(--color-primary-rgb), 0.3);
+  }
+
+  @media (max-width: 480px) {
+    &:hover {
+      transform: translateY(-4px) scale(1.01);
+    }
   }
 
   &::before {
@@ -179,11 +218,10 @@ const SubServiceCard = styled(motion.div)`
 
 const SubServiceImage = styled(motion.img)`
   width: 100%;
-  height: 200px;
+  height: clamp(180px, 30vw, 240px);
   object-fit: cover;
   display: block;
   background-color: rgba(var(--color-primary-rgb), 0.2);
-  min-height: 240px;
   border-bottom: 1px solid var(--color-border);
   transform-origin: center;
   transition: transform 0.3s ease;
@@ -196,7 +234,7 @@ const SubServiceImage = styled(motion.img)`
 `;
 
 const SubServiceContent = styled.div`
-  padding: 2rem;
+  padding: clamp(1.5rem, 3vw, 2rem);
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -206,8 +244,8 @@ const SubServiceContent = styled.div`
 
 const SubServiceTitle = styled.h3`
   font-family: 'Poppins', sans-serif;
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  margin-bottom: clamp(0.8rem, 2vw, 1rem);
   color: var(--color-heading);
   position: relative;
   padding-bottom: 0.8rem;
@@ -234,9 +272,8 @@ const SubServiceDescription = styled.p`
   color: var(--color-text-secondary);
   line-height: 1.7;
   margin-bottom: 0.5rem;
-  font-size: 1.1rem;
+  font-size: clamp(0.9rem, 1.8vw, 1.1rem);
   transition: color 0.3s ease;
-  
 
   ${SubServiceCard}:hover & {
     color: var(--color-text-primary);
@@ -247,17 +284,21 @@ const RequestButton = styled(motion.button)`
   background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
   color: var(--color-text-primary);
   border: none;
-  padding: 1rem 2.5rem;
-  font-size: 1.1rem;
+  padding: clamp(0.8rem, 2vw, 1rem) clamp(1.5rem, 3vw, 2.5rem);
+  font-size: clamp(0.9rem, 1.8vw, 1.1rem);
   font-weight: 600;
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-top: 1.5rem;
+  margin-top: clamp(1rem, 2vw, 1.5rem);
   box-shadow: 0 4px 15px rgba(var(--color-primary-rgb), 0.3);
   position: relative;
   overflow: hidden;
   align-self: flex-start;
+
+  @media (max-width: 768px) {
+    align-self: center;
+  }
 
   &::before {
     content: '';
@@ -359,7 +400,7 @@ const ServiceDetails = () => {
     // Use the database data instead of state or API data
     setService(databaseData);
     setLoading(false);
-    
+
     // Only fall back to API call if no database data is available
     // (keeping this part as fallback, but it won't run with the above code)
     if (false && stateData.title && stateData.description && stateData.slug) {
@@ -375,23 +416,23 @@ const ServiceDetails = () => {
     const fetchServiceDetails = async () => {
       try {
         setLoading(true);
-        
+
         // Directly use the API.get method with the full URL for debugging
         const response = await API.get(`/api/services/slug/${slug}`);
-        
+
         if (!response.data || !response.data.success) {
           throw new Error((response.data && response.data.message) || 'Failed to fetch service details');
         }
-        
+
         const serviceData = response.data.data;
-        
+
         // Ensure subServices is always an array, even if it's null or undefined
         if (!serviceData.subServices) {
           serviceData.subServices = [];
         }
-        
+
         // No longer adding sample subService data when none is found
-        
+
         setService(serviceData);
       } catch (err) {
         console.error('Error fetching service details:', err);
@@ -405,11 +446,11 @@ const ServiceDetails = () => {
       fetchServiceDetails();
     }
   }, [slug, stateData]);
-  
+
   // Add debug effect to check image URLs (moved before conditionals)
   useEffect(() => {
     if (!service || !service.subServices) return;
-    
+
     const subServices = service.subServices;
     // Check each subService image
     if (subServices.length > 0) {
@@ -456,10 +497,10 @@ const ServiceDetails = () => {
   }
 
   // Use subServices array if it exists and has items, otherwise use empty array
-  const subServices = Array.isArray(service.subServices) && service.subServices.length > 0 
-    ? service.subServices 
+  const subServices = Array.isArray(service.subServices) && service.subServices.length > 0
+    ? service.subServices
     : [];
-  
+
   return (
     <Container>
       <ServiceHeader>
@@ -486,8 +527,10 @@ const ServiceDetails = () => {
               transition={{ duration: 0.6, delay: 0.4 }}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-            >
-              Request {service.title}
+            ><a
+              href="/contact">
+                Request {service.title}
+              </a>
             </RequestButton>
           </AnimatePresence>
         </HeaderContent>
@@ -513,9 +556,9 @@ const ServiceDetails = () => {
                     transition={{ duration: 0.6, delay: index * 0.1 }}
                     whileHover={{ y: -8 }}
                   >
-                    <SubServiceImage 
+                    <SubServiceImage
                       src={subService.imageUrl || 'https://placehold.co/800x400/cccccc/666666?text=No+Image'}
-                      alt={subService.title || 'Untitled Service'} 
+                      alt={subService.title || 'Untitled Service'}
                       onLoad={(e) => {
                         e.target.style.display = 'block';
                       }}
@@ -536,7 +579,7 @@ const ServiceDetails = () => {
             </SubServicesGrid>
           </>
         )}
-      <CallToAction/>
+        <CallToAction />
       </ContentSection>
     </Container>
   );

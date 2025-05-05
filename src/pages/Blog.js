@@ -8,25 +8,47 @@ import LoadingSpinner from "../components/LoadingSpinner";
 const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  padding: 3rem 0rem;
+  padding: 3rem 1rem;
   padding-bottom: 6rem;
+
+  @media (max-width: 768px) {
+    padding: 2rem 1rem;
+    padding-bottom: 4rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1.5rem 1rem;
+    padding-bottom: 3rem;
+  }
 `;
 
 const Header = styled.div`
   text-align: center;
   margin-bottom: 3rem;
 
+  @media (max-width: 768px) {
+    margin-bottom: 2rem;
+  }
+
   h1 {
     color: ${props => props.theme.colors.text};
-    font-size: 2.5rem;
+    font-size: clamp(2rem, 4vw, 2.5rem);
     margin-bottom: 1rem;
+
+    @media (max-width: 768px) {
+      margin-bottom: 0.8rem;
+    }
   }
 
   p {
     color: ${props => props.theme.colors.textSecondary};
-    font-size: 1.1rem;
+    font-size: clamp(1rem, 2vw, 1.1rem);
     max-width: 600px;
     margin: 0 auto;
+
+    @media (max-width: 768px) {
+      max-width: 100%;
+    }
   }
 `;
 
@@ -34,6 +56,16 @@ const BlogGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 2rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
 `;
 
 const BlogCard = styled(motion.div)`
@@ -41,13 +73,21 @@ const BlogCard = styled(motion.div)`
   border-radius: 0.5rem;
   overflow: hidden;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   flex-direction: column;
-border-radius: 1rem;
-border: 1px solid rgba(66, 153, 225, 0.1);
+  border-radius: 1rem;
+  border: 1px solid rgba(66, 153, 225, 0.1);
+
   &:hover {
     transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  }
+
+  @media (max-width: 480px) {
+    &:hover {
+      transform: translateY(-3px);
+    }
   }
 `;
 
@@ -56,6 +96,10 @@ const BlogImage = styled.div`
   height: 200px;
   overflow: hidden;
   position: relative;
+
+  @media (max-width: 480px) {
+    height: 180px;
+  }
 
   img {
     width: 100%;
@@ -74,13 +118,21 @@ const BlogContent = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 480px) {
+    padding: 1.2rem;
+  }
 `;
 
 const BlogTitle = styled.h2`
   color: ${(props) => props.theme.colors.text};
-  font-size: 1.5rem;
+  font-size: clamp(1.3rem, 2.5vw, 1.5rem);
   margin-bottom: 1rem;
   line-height: 1.4;
+
+  @media (max-width: 480px) {
+    margin-bottom: 0.8rem;
+  }
 
   a {
     color: inherit;
@@ -101,6 +153,11 @@ const BlogExcerpt = styled.p`
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  font-size: clamp(1rem, 2vw, 1.1rem);
+
+  @media (max-width: 480px) {
+    margin-bottom: 0.8rem;
+  }
 `;
 
 const TagsContainer = styled.div`
@@ -108,6 +165,11 @@ const TagsContainer = styled.div`
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-bottom: 1rem;
+
+  @media (max-width: 480px) {
+    gap: 0.4rem;
+    margin-bottom: 0.8rem;
+  }
 `;
 
 const Tag = styled.span`
@@ -115,22 +177,38 @@ const Tag = styled.span`
   color: ${(props) => props.theme.colors.primary};
   padding: 0.25rem 0.75rem;
   border-radius: 1rem;
-  font-size: 0.875rem;
+  font-size: clamp(0.8rem, 1.5vw, 0.875rem);
+
+  @media (max-width: 480px) {
+    padding: 0.2rem 0.6rem;
+    font-size: 0.8rem;
+  }
 `;
 
 const MetaInfo = styled.div`
   display: flex;
   justify-content: space-between;
   color: ${(props) => props.theme.colors.textSecondary};
-  font-size: 0.875rem;
+  font-size: clamp(0.8rem, 1.5vw, 0.875rem);
   padding-top: 1rem;
   border-top: 1px solid ${(props) => props.theme.colors.border};
+
+  @media (max-width: 480px) {
+    font-size: 0.8rem;
+    padding-top: 0.8rem;
+  }
 `;
 
 const SearchContainer = styled.div`
   margin-bottom: 2rem;
   display: flex;
   gap: 1rem;
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+  }
 `;
 
 const SearchInput = styled.input`
@@ -140,8 +218,12 @@ const SearchInput = styled.input`
   border-radius: 0.5rem;
   background: ${(props) => props.theme.colors.background};
   color: ${(props) => props.theme.colors.text};
-  font-size: 1rem;
-  transition: all 0.2s ease;
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+  transition: all 0.3s ease;
+
+  @media (max-width: 480px) {
+    padding: 0.6rem;
+  }
 
   &:focus {
     outline: none;
@@ -156,9 +238,13 @@ const Select = styled.select`
   border-radius: 0.5rem;
   background: ${(props) => props.theme.colors.background};
   color: ${(props) => props.theme.colors.text};
-  font-size: 1rem;
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
+
+  @media (max-width: 480px) {
+    padding: 0.6rem;
+  }
 
   &:focus {
     outline: none;
@@ -231,8 +317,20 @@ const Blog = () => {
   return (
     <Container>
       <Header>
-        <h1>Our <Emphasis>Blog</Emphasis></h1>
-        <p>Discover insights, updates, and stories from our team</p>
+        <motion.h1
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          Our <Emphasis>Blog</Emphasis>
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          Discover insights, updates, and stories from our team
+        </motion.p>
       </Header>
 
       {loading ? (
@@ -240,38 +338,66 @@ const Blog = () => {
       ) : (
         <>
           <SearchContainer>
-            <SearchInput
-              type="text"
-              placeholder="Search posts..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-            <Select
-              value={selectedTag}
-              onChange={(e) => setSelectedTag(e.target.value)}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              style={{ flex: 1 }}
             >
-              <option value="all">All Tags</option>
-              {tags.map((tag) => (
-                <option key={tag} value={tag}>
-                  {tag}
-                </option>
-              ))}
-            </Select>
+              <SearchInput
+                type="text"
+                placeholder="Search posts..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
+              <Select
+                value={selectedTag}
+                onChange={(e) => setSelectedTag(e.target.value)}
+              >
+                <option value="all">All Tags</option>
+                {tags.map((tag) => (
+                  <option key={tag} value={tag}>
+                    {tag}
+                  </option>
+                ))}
+              </Select>
+            </motion.div>
           </SearchContainer>
         </>
       )}
       <BlogGrid>
-        {filteredPosts.map((post) => (
+        {filteredPosts.map((post, index) => (
           <BlogCard
             key={post._id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ 
+              duration: 0.5,
+              delay: index * 0.1,
+              type: "spring",
+              stiffness: 100
+            }}
+            whileHover={{ 
+              y: -5,
+              transition: { duration: 0.2 }
+            }}
           >
             {post.image && (
-              <BlogImage>
-                <img src={post.image} alt={post.title} />
-              </BlogImage>
+              <motion.div
+                initial={{ scale: 1 }}
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.3 }}
+              >
+                <BlogImage>
+                  <img src={post.image} alt={post.title} />
+                </BlogImage>
+              </motion.div>
             )}
             <BlogContent>
               <BlogTitle>
@@ -279,13 +405,32 @@ const Blog = () => {
               </BlogTitle>
               <BlogExcerpt>{post.content.substring(0, 150)}...</BlogExcerpt>
               <TagsContainer>
-                {post.tags.map((tag) => (
-                  <Tag key={tag}>{tag}</Tag>
+                {post.tags.map((tag, i) => (
+                  <motion.div
+                    key={tag}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.5 + (i * 0.1) }}
+                  >
+                    <Tag>{tag}</Tag>
+                  </motion.div>
                 ))}
               </TagsContainer>
               <MetaInfo>
-                <span>{post.author}</span>
-                <span>{new Date(post.date).toLocaleDateString()}</span>
+                <motion.span
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.6 }}
+                >
+                  {post.author}
+                </motion.span>
+                <motion.span
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.7 }}
+                >
+                  {new Date(post.date).toLocaleDateString()}
+                </motion.span>
               </MetaInfo>
             </BlogContent>
           </BlogCard>

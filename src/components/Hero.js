@@ -52,32 +52,32 @@ const Hero = () => {
     onMouseMove={handleMouseMove}
     >
       {/* Hero content */}
-      <div className="container mx-auto max-w-7xl relative z-10">
+      <div className="container mx-auto max-w-7xl relative z-10 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Text content */}
           <div className="text-center lg:text-left">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white font-heading leading-tight mb-4">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white font-heading leading-tight mb-4">
               We create <span className="text-primary-500">digital</span> experiences
             </h1>
             
-            <h2 className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto lg:mx-0 mb-8 font-body">
+            <h2 className="text-base sm:text-lg md:text-xl text-gray-300 max-w-2xl mx-auto lg:mx-0 mb-6 sm:mb-8 font-body">
               Techveda delivers innovative web applications and digital solutions that drive growth and enhance user experiences
             </h2>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mt-8">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mt-6 sm:mt-8">
               <a 
                 href="/projects"
-                className="px-6 py-3 bg-primary-500 hover:bg-primary-600 text-white font-medium rounded-lg transition-colors duration-300 flex items-center justify-center font-body"
+                className="px-4 sm:px-6 py-2.5 sm:py-3 bg-primary-500 hover:bg-primary-600 text-white text-sm sm:text-base font-medium rounded-lg transition-colors duration-300 flex items-center justify-center font-body"
               >
                 See Our Work
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                 </svg>
               </a>
               
               <a 
                 href="#contact" 
-                className="px-6 py-3 border border-primary-500 text-primary-400 hover:bg-primary-500/10 font-medium rounded-lg transition-colors duration-300 flex items-center justify-center font-body"
+                className="px-4 sm:px-6 py-2.5 sm:py-3 border border-primary-500 text-primary-400 hover:bg-primary-500/10 text-sm sm:text-base font-medium rounded-lg transition-colors duration-300 flex items-center justify-center font-body"
               >
                 Contact Us
               </a>
@@ -86,7 +86,7 @@ const Hero = () => {
           
           {/* Image/visual content */}
           <div 
-            className="mt-12 lg:mt-0 relative"
+            className="mt-8 sm:mt-12 lg:mt-0 relative"
             style={{ 
               transform: `perspective(1000px) rotateX(${mousePosition.y * -5}deg) rotateY(${mousePosition.x * 5}deg)`,
               transition: 'transform 0.1s ease-out'
@@ -130,9 +130,9 @@ const Hero = () => {
                 />
               </motion.div>
               
-              {/* Corner accents - removed border and kept only subtle corner elements */}
+              {/* Corner accents */}
               <motion.div 
-                className="absolute top-0 left-0 w-16 h-16 z-30"
+                className="absolute top-0 left-0 w-12 sm:w-16 h-12 sm:h-16 z-30"
                 initial={{ opacity: 0, x: -20, y: -20 }}
                 animate={{ 
                   opacity: (imageLoaded && animationReady) ? 0.7 : 0, 
@@ -141,10 +141,10 @@ const Hero = () => {
                 }}
                 transition={{ duration: 0.6, delay: 1 }}
               >
-                <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-white/30 rounded-tl-2xl"></div>
+                <div className="absolute top-0 left-0 w-6 sm:w-8 h-6 sm:h-8 border-t-2 border-l-2 border-white/30 rounded-tl-2xl"></div>
               </motion.div>
               <motion.div 
-                className="absolute bottom-0 right-0 w-16 h-16 z-30"
+                className="absolute bottom-0 right-0 w-12 sm:w-16 h-12 sm:h-16 z-30"
                 initial={{ opacity: 0, x: 20, y: 20 }}
                 animate={{ 
                   opacity: (imageLoaded && animationReady) ? 0.7 : 0, 
@@ -153,7 +153,7 @@ const Hero = () => {
                 }}
                 transition={{ duration: 0.6, delay: 1 }}
               >
-                <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-white/30 rounded-br-2xl"></div>
+                <div className="absolute bottom-0 right-0 w-6 sm:w-8 h-6 sm:h-8 border-b-2 border-r-2 border-white/30 rounded-br-2xl"></div>
               </motion.div>
             </motion.div>
           </div>
@@ -162,7 +162,7 @@ const Hero = () => {
       
       {/* Scroll indicator */}
       <motion.div 
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-gray-400 cursor-pointer hover:text-primary-500 transition-colors duration-300"
+        className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-gray-400 cursor-pointer hover:text-primary-500 transition-colors duration-300"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: animationReady ? 1 : 0, y: animationReady ? 0 : -20 }}
         transition={{ delay: 1.2, duration: 0.6 }}
@@ -173,10 +173,10 @@ const Hero = () => {
           }
         }}
       >
-        <p className="text-sm mb-2 font-body">Scroll Down</p>
+        <p className="text-xs sm:text-sm mb-2 font-body">Scroll Down</p>
         <motion.svg 
           xmlns="http://www.w3.org/2000/svg" 
-          className="h-6 w-6"
+          className="h-5 w-5 sm:h-6 sm:w-6"
           fill="none" 
           viewBox="0 0 24 24" 
           stroke="currentColor"

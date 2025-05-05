@@ -10,7 +10,11 @@ const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem 0;
-  padding-bottom:6rem;
+  padding-bottom: 6rem;
+
+  @media (max-width: 768px) {
+    padding: 1.5rem 1rem;
+  }
 `;
 
 const BackButton = styled(Link)`
@@ -67,26 +71,41 @@ const GitHubLink = styled.a`
   color: #ffffff;
   text-decoration: none;
   font-weight: 500;
- 
-border:1px solid rgb(255, 255, 255);
+  border: 1px solid rgb(255, 255, 255);
   padding: 0.6rem 1.4rem;
   border-radius: 18px;
   font-size: 0.875rem;
   font-weight: 500;
-  margin-right:20px;
+  margin-right: 20px;
+  transition: all 0.3s ease;
+
+  @media (max-width: 768px) {
+    padding: 0.5rem 1.2rem;
+    font-size: 0.8rem;
+  }
 
   svg {
     width: 23px;
     height: 23px;
   }
-  span{
-    padding-left:6px;
-    font-size:18px;
+  
+  span {
+    padding-left: 6px;
+    font-size: 18px;
+
+    @media (max-width: 768px) {
+      font-size: 16px;
+    }
   }
 
   &:hover {
     color: #3b82f6;
-    border:1px solid #3b82f6;
+    border: 1px solid #3b82f6;
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
   }
 `;
 
@@ -102,6 +121,15 @@ const MainImage = styled.img`
   max-height: 400px;
   object-fit: cover;
   border-radius: 0.5rem;
+  transition: transform 0.3s ease;
+
+  @media (max-width: 768px) {
+    max-height: 300px;
+  }
+
+  @media (max-width: 480px) {
+    max-height: 250px;
+  }
 `;
 
 const SecondaryImage = styled.img`
@@ -129,24 +157,50 @@ const Title = styled(motion.h1)`
   color: #fff;
   margin-bottom: 1.2rem;
   line-height: 1.1;
+
+  @media (max-width: 768px) {
+    font-size: 3rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 2.5rem;
+  }
 `;
 
 const Subtitle = styled(motion.h2)`
   font-size: 3rem;
   font-weight: 1200;
-  background:linear-gradient(80deg, #2563eb , #fff);
+  background: linear-gradient(80deg, #2563eb, #fff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   color: transparent;
   margin-bottom: 2.5rem;
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.8rem;
+  }
 `;
 
 const InfoGrid = styled(motion.div)`
   display: grid;
-   grid-template-columns: 650px 200px 220px; /* Column 1: fixed 300px, Column 2: flexible, Column 3: fixed 200px */
+  grid-template-columns: 650px 200px 220px;
   gap: 5rem;
   margin: 2rem 0 0 0;
+
+  @media (max-width: 1200px) {
+    grid-template-columns: 1fr 200px 220px;
+    gap: 3rem;
+  }
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
 `;
 
 const InfoCard = styled(motion.div)`
@@ -169,16 +223,25 @@ const TechRow = styled(motion.div)`
   display: flex;
   flex-wrap: wrap;
   gap: 0.7rem;
-  margin:0 0 1rem 0;
+  margin: 0 0 1rem 0;
+
+  @media (max-width: 480px) {
+    gap: 0.5rem;
+  }
 `;
 
 const TechPill = styled.div`
-  background:rgba(58, 78, 121, 0.13);
-  color:rgb(61, 94, 164);
+  background: rgba(58, 78, 121, 0.13);
+  color: rgb(61, 94, 164);
   padding: 0.5rem 1.1rem;
   border-radius: 1.2rem;
   font-size: 1rem;
   font-weight: 1200;
+
+  @media (max-width: 480px) {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
 `;
 
 const LinkStyled = styled(motion.a)`
@@ -204,12 +267,20 @@ const DetailCard = styled(motion.div)`
 `;
 
 const DetailTitle = styled.h3`
- background: linear-gradient(90deg, #2563eb , rgb(255, 255, 255) );
+  background: linear-gradient(90deg, #2563eb, rgb(255, 255, 255));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-size: 2.4rem;
   font-weight: 1200;
   margin-bottom: 1.2rem;
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.8rem;
+  }
 `;
 
 const ProjectDetail = () => {
@@ -271,7 +342,11 @@ const ProjectDetail = () => {
   }
   return (
     <Container>
-      <BackButton to="/projects">
+      <BackButton 
+        to="/projects"
+        whileHover={{ x: -5 }}
+        whileTap={{ x: 0 }}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -288,9 +363,14 @@ const ProjectDetail = () => {
         Back to Projects
       </BackButton>
 
-
       {project.mainimage && (
-        <MainImage src={project.mainimage} alt={project.title} />
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <MainImage src={project.mainimage} alt={project.title} />
+        </motion.div>
       )}
 
       <PublishedBadge
@@ -300,6 +380,7 @@ const ProjectDetail = () => {
       >
         PUBLISHED IN {project.publishedYear || "2023"}
       </PublishedBadge>
+
       <Title
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -330,10 +411,27 @@ const ProjectDetail = () => {
         }}
       >
         <InfoCard
-          variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7 } } }}
+          variants={{ 
+            hidden: { opacity: 0, y: 30 }, 
+            visible: { 
+              opacity: 1, 
+              y: 0, 
+              transition: { 
+                duration: 0.7,
+                type: "spring",
+                stiffness: 100
+              } 
+            } 
+          }}
         >
-
-          <div style={{ color: "#fff", fontSize: "1.1rem" }}>{project.shortDescription}</div>
+          <motion.div 
+            style={{ color: "#fff", fontSize: "1.1rem" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6 }}
+          >
+            {project.shortDescription}
+          </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -341,16 +439,28 @@ const ProjectDetail = () => {
             transition={{ duration: 0.7, delay: 1.0 }}
             style={{ marginTop: '2rem' }}
           >
-
             {project.gitHubLink && (
-              <GitHubLink href={project.githubLink} target="_blank" rel="noopener noreferrer">
+              <GitHubLink 
+                href={project.githubLink} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                </svg><span>GitHub</span>
+                </svg>
+                <span>GitHub</span>
               </GitHubLink>
             )}
             {project.officialWebsiteLink && (
-              <GitHubLink href={project.officialWebsiteLink} target="_blank" rel="noopener noreferrer">
+              <GitHubLink 
+                href={project.officialWebsiteLink} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
                   <circle cx="12" cy="12" r="10" />
                   <line x1="2" y1="12" x2="22" y2="12" />
@@ -359,24 +469,62 @@ const ProjectDetail = () => {
                 <span>Website</span>
               </GitHubLink>
             )}
-
           </motion.div>
-
         </InfoCard>
+
         <InfoCard
-          variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7 } } }}
+          variants={{ 
+            hidden: { opacity: 0, y: 30 }, 
+            visible: { 
+              opacity: 1, 
+              y: 0, 
+              transition: { 
+                duration: 0.7,
+                type: "spring",
+                stiffness: 100
+              } 
+            } 
+          }}
         >
           <SectionLabel>SERVICES</SectionLabel>
           {project.services && project.services.map((service, i) => (
-            <div key={i} style={{ color: "#fff", marginBottom: "0.5rem" }}>{service}</div>
+            <motion.div 
+              key={i} 
+              style={{ color: "#fff", marginBottom: "0.5rem" }}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.5 + (i * 0.1) }}
+            >
+              {service}
+            </motion.div>
           ))}
         </InfoCard>
+
         <InfoCard
-          variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7 } } }}
+          variants={{ 
+            hidden: { opacity: 0, y: 30 }, 
+            visible: { 
+              opacity: 1, 
+              y: 0, 
+              transition: { 
+                duration: 0.7,
+                type: "spring",
+                stiffness: 100
+              } 
+            } 
+          }}
         >
           <SectionLabel>INDUSTRIES</SectionLabel>
           {project.industries && project.industries.map((industry, i) => (
-            <div key={i} style={{ color: "#fff", marginBottom: "0.5rem" }}>{industry}</div>
+            <motion.div 
+              key={i} 
+              style={{ color: "#fff", marginBottom: "0.5rem" }}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.5 + (i * 0.1) }}
+            >
+              {industry}
+            </motion.div>
           ))}
         </InfoCard>
       </InfoGrid>
@@ -387,8 +535,16 @@ const ProjectDetail = () => {
         transition={{ duration: 0.7, delay: 1.2 }}
       >
         <DetailTitle>Technical Details</DetailTitle>
-        <div style={{ color: '#fff', fontSize: '1.08rem', lineHeight: 1.7 }}>{project.technicalDescription}</div>
+        <motion.div 
+          style={{ color: '#fff', fontSize: '1.08rem', lineHeight: 1.7 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.4 }}
+        >
+          {project.technicalDescription}
+        </motion.div>
       </DetailCard>
+
       {project.technologies && project.technologies.length > 0 && (
         <TechRow
           initial={{ opacity: 0, y: 20 }}
@@ -396,24 +552,46 @@ const ProjectDetail = () => {
           transition={{ duration: 0.7, delay: 0.8 }}
         >
           {project.technologies.map((tech, i) => (
-            <TechPill key={i}>{tech}</TechPill>
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.9 + (i * 0.1) }}
+            >
+              <TechPill>{tech}</TechPill>
+            </motion.div>
           ))}
         </TechRow>
       )}
+
       <DetailCard
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 1.3 }}
       >
         <DetailTitle>Learning Outcomes</DetailTitle>
-        <div style={{ color: '#fff', fontSize: '1.1rem', lineHeight: 1.7 }}>{project.learningDescription}</div>
+        <motion.div 
+          style={{ color: '#fff', fontSize: '1.1rem', lineHeight: 1.7 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5 }}
+        >
+          {project.learningDescription}
+        </motion.div>
       </DetailCard>
+
       {project.secondaryimage && (
         <ImageContainer>
-          <SecondaryImage
-            src={project.secondaryimage}
-            alt={`${project.title} - Additional view`}
-          />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 1.6 }}
+          >
+            <SecondaryImage
+              src={project.secondaryimage}
+              alt={`${project.title} - Additional view`}
+            />
+          </motion.div>
         </ImageContainer>
       )}
 

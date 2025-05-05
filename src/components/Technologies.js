@@ -10,24 +10,44 @@ const TechnologiesSection = styled(motion.section)`
   overflow: hidden;
 
   @media (max-width: 768px) {
-    padding: 6rem 1rem;
+    padding: 4rem 1rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 3rem 0.5rem;
   }
 `;
 
 const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
+
+  @media (max-width: 768px) {
+    padding: 0 0.5rem;
+  }
 `;
 
 const SectionHeader = styled.div`
   text-align: center;
   margin-bottom: 4rem;
+
+  @media (max-width: 768px) {
+    margin-bottom: 3rem;
+  }
+
+  @media (max-width: 480px) {
+    margin-bottom: 2rem;
+  }
 `;
 
 const SectionTitle = styled(motion.h2)`
-  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-size: clamp(2rem, 5vw, 3.5rem);
   margin-bottom: 1.5rem;
   position: relative;
+
+  @media (max-width: 768px) {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+  }
 
   &::after {
     content: '';
@@ -39,15 +59,25 @@ const SectionTitle = styled(motion.h2)`
     height: 4px;
     background: var(--color-primary);
     border-radius: 2px;
+
+    @media (max-width: 480px) {
+      width: 60px;
+      height: 3px;
+    }
   }
 `;
 
 const SectionDescription = styled(motion.p)`
-  font-size: 1.1rem;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
   max-width: 700px;
   margin: 0 auto;
   line-height: 1.7;
   color: var(--color-text-light);
+  padding: 0 1rem;
+
+  @media (max-width: 768px) {
+    padding: 0 0.5rem;
+  }
 `;
 
 const TabsContainer = styled(motion.div)`
@@ -56,6 +86,17 @@ const TabsContainer = styled(motion.div)`
   flex-wrap: wrap;
   gap: 1rem;
   margin-bottom: 3rem;
+  padding: 0 1rem;
+
+  @media (max-width: 768px) {
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: 480px) {
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
 `;
 
 const Tab = styled(motion.button)`
@@ -64,10 +105,18 @@ const Tab = styled(motion.button)`
   color: ${props => props.active ? '#4299e1' : '#cbd5e0'};
   border: 1px solid ${props => props.active ? 'rgba(66, 153, 225, 0.3)' : 'rgba(66, 153, 225, 0.1)'};
   border-radius: 30px;
-  font-size: 1rem;
+  font-size: clamp(0.8rem, 2vw, 1rem);
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
+
+  @media (max-width: 768px) {
+    padding: 0.6rem 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.5rem 1.2rem;
+  }
 
   &:hover {
     background: rgba(66, 153, 225, 0.2);
@@ -75,6 +124,7 @@ const Tab = styled(motion.button)`
     transform: translateY(-3px);
   }
 `;
+
 const TechGrid = styled.div`
   overflow: hidden;
   width: 100%;
@@ -92,25 +142,27 @@ const CardRow = styled.div`
   animation: ${props => props.shouldScroll ? 'scroll 20s linear infinite' : 'none'};
   width: fit-content;
 
-  @keyframes scroll {
-  0% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-
   @media (max-width: 768px) {
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
     gap: 1rem;
-    animation: ${props => props.shouldScroll ? 'scroll 30s linear infinite' : 'none'};
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
   }
 `;
 
 const TechCard = styled(motion.div)`
   flex: 0 0 auto;
-  width: 160px;
+  width: clamp(120px, 15vw, 160px);
   aspect-ratio: 1;
   display: flex;
   flex-direction: column;
@@ -118,10 +170,13 @@ const TechCard = styled(motion.div)`
   justify-content: center;
 
   @media (max-width: 768px) {
-    width: 120px;
+    width: clamp(100px, 12vw, 120px);
+  }
+
+  @media (max-width: 480px) {
+    width: clamp(80px, 10vw, 100px);
   }
 `;
-
 
 const TechLogo = styled(motion.img)`
   width: 60%;
@@ -130,20 +185,27 @@ const TechLogo = styled(motion.img)`
   object-fit: contain;
 
   @media (max-width: 768px) {
-    width: 40%;
+    width: 50%;
+    margin-bottom: 0.5rem;
+  }
+
+  @media (max-width: 480px) {
+    width: 45%;
+    margin-bottom: 0.4rem;
   }
 `;
 
 const TechName = styled(motion.h4)`
-  font-size: 0.9rem;
+  font-size: clamp(0.7rem, 1.5vw, 0.9rem);
   font-weight: 500;
   text-align: center;
   color: rgb(255, 255, 255);
 
   @media (max-width: 768px) {
-    font-size: 0.8rem;
+    font-size: clamp(0.6rem, 1.2vw, 0.8rem);
   }
 `;
+
 const Technologies = () => {
   const [activeTab, setActiveTab] = useState('frontend');
   const [technologies, setTechnologies] = useState({

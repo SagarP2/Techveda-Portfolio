@@ -17,13 +17,21 @@ const api = axios.create({
 const PageContainer = styled.div`
   min-height: 100vh;
   position: relative;
-  padding: 4rem 0rem;
+  padding: 4rem 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow-x: hidden;
   background-color: var(--color-background);
   color: var(--color-text);
+
+  @media (max-width: 768px) {
+    padding: 3rem 1rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 2rem 1rem;
+  }
 `;
 
 const ContentContainer = styled.div`
@@ -32,12 +40,16 @@ const ContentContainer = styled.div`
   margin: 0 auto;
 `;
 
-const Title = styled.h1`
-  font-size: 3rem;
+const Title = styled(motion.h1)`
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
   margin-bottom: 2rem;
   color: var(--color-heading);
   font-weight: 700;
   text-align: center;
+
+  @media (max-width: 768px) {
+    margin-bottom: 1.5rem;
+  }
 `;
 
 const Grid = styled.div`
@@ -50,16 +62,27 @@ const Grid = styled.div`
   }
 `;
 
-const ImageContainer = styled.div`
+const ImageContainer = styled(motion.div)`
   position: relative;
   border-radius: 1rem;
   overflow: hidden;
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  height: 100%;
+  min-height: 300px;
+
+  @media (max-width: 768px) {
+    min-height: 250px;
+  }
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.05);
+    }
   }
 `;
 
@@ -69,19 +92,21 @@ const ContentSection = styled.div`
   justify-content: center;
 `;
 
-const Paragraph = styled.p`
+const Paragraph = styled(motion.p)`
   margin-bottom: 1.5rem;
-  font-size: 1.125rem;
+  font-size: clamp(1rem, 2vw, 1.125rem);
   line-height: 1.7;
   color: var(--color-text-secondary);
+
+  @media (max-width: 768px) {
+    margin-bottom: 1rem;
+  }
 `;
 
 const Highlight = styled.span`
   color: var(--color-primary);
   font-weight: 600;
 `;
-
-
 
 const ErrorContainer = styled.div`
   display: flex;
@@ -92,23 +117,35 @@ const ErrorContainer = styled.div`
   color: #ef4444;
   text-align: center;
   padding: 2rem;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    padding: 1.5rem;
+  }
 `;
 
-// New styled components for the additional section
-const SectionDivider = styled.div`
+const SectionDivider = styled(motion.div)`
   width: 100%;
   height: 1px;
   background: linear-gradient(to right, transparent, var(--color-primary), transparent);
   margin: 4rem 0;
   opacity: 0.3;
+
+  @media (max-width: 768px) {
+    margin: 3rem 0;
+  }
 `;
 
-const SectionTitle = styled.h2`
-  font-size: 2.5rem;
+const SectionTitle = styled(motion.h2)`
+  font-size: clamp(2rem, 4vw, 2.5rem);
   margin-bottom: 2rem;
   color: var(--color-heading);
   font-weight: 700;
   text-align: center;
+
+  @media (max-width: 768px) {
+    margin-bottom: 1.5rem;
+  }
 `;
 
 const ContentGrid = styled.div`
@@ -121,7 +158,7 @@ const ContentGrid = styled.div`
   }
 `;
 
-const SideImage = styled.div`
+const SideImage = styled(motion.div)`
   position: relative;
   border-radius: 1rem;
   overflow: hidden;
@@ -129,35 +166,53 @@ const SideImage = styled.div`
   height: 100%;
   min-height: 300px;
 
+  @media (max-width: 768px) {
+    min-height: 250px;
+  }
+
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.05);
+    }
   }
 `;
 
 const FounderSection = styled.div`
   margin-top: 4rem;
   width: 100%;
+
+  @media (max-width: 768px) {
+    margin-top: 3rem;
+  }
 `;
 
 const FounderTitle = styled(SectionTitle)`
   margin-top: 2rem;
+
+  @media (max-width: 768px) {
+    margin-top: 1.5rem;
+  }
 `;
 
-const FounderCard = styled.div`
+const FounderCard = styled(motion.div)`
   display: grid;
   grid-template-columns: ${props => props.imagePosition === 'left' ? '250px 1fr' : '1fr 250px'};
   gap: 2rem;
-
-  padding: 2rem 0;
   background: var(--color-background);
   border-radius: 1rem;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  margin-bottom: 2rem;
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
     text-align: center;
+    padding: 1.5rem;
+    gap: 1.5rem;
   }
 `;
 
@@ -172,17 +227,26 @@ const FounderImageSection = styled.div`
   }
 `;
 
-const FounderImage = styled.div`
+const FounderImage = styled(motion.div)`
   width: 100%;
   height: 250px;
   border-radius: 1rem;
   overflow: hidden;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 
+  @media (max-width: 768px) {
+    height: 200px;
+  }
+
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.05);
+    }
   }
 `;
 
@@ -197,27 +261,39 @@ const FounderInfo = styled.div`
   }
 `;
 
-const FounderName = styled.h3`
-  font-size: 1.8rem;
+const FounderName = styled(motion.h3)`
+  font-size: clamp(1.5rem, 3vw, 1.8rem);
   color: var(--color-heading);
   margin-bottom: 1rem;
+
+  @media (max-width: 768px) {
+    margin-bottom: 0.8rem;
+  }
 `;
 
-const FounderBio = styled.p`
-  font-size: 1.1rem;
+const FounderBio = styled(motion.p)`
+  font-size: clamp(1rem, 2vw, 1.1rem);
   line-height: 1.6;
   color: var(--color-text-secondary);
   margin-bottom: 1.5rem;
+
+  @media (max-width: 768px) {
+    margin-bottom: 1rem;
+  }
 `;
 
-const SocialLinks = styled.div`
+const SocialLinks = styled(motion.div)`
   display: flex;
   gap: 1rem;
   justify-content: center;
   margin-top: 1rem;
+
+  @media (max-width: 768px) {
+    gap: 0.8rem;
+  }
 `;
 
-const SocialLink = styled.a`
+const SocialLink = styled(motion.a)`
   color: var(--color-text);
   font-size: 1.5rem;
   transition: all 0.3s ease;
@@ -226,6 +302,11 @@ const SocialLink = styled.a`
   border-radius: 0.5rem;
   background: rgba(255, 255, 255, 0.05);
   
+  @media (max-width: 768px) {
+    font-size: 1.3rem;
+    padding: 0.4rem;
+  }
+
   &:hover {
     color: var(--color-primary);
     opacity: 1;
@@ -411,10 +492,19 @@ const About = () => {
   return (
     <PageContainer>
       <ContentContainer>
-        {/* Original design */}
-        <Title>{aboutData.title || 'About Us'}</Title>
+        <Title
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          {aboutData.title || 'About Us'}
+        </Title>
         <Grid>
-          <ImageContainer>
+          <ImageContainer
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
             <img 
               src={aboutData.image || "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"} 
               alt="About Techveda" 
@@ -429,16 +519,29 @@ const About = () => {
           </ContentSection>
         </Grid>
 
-        {/* New section with content on left and image on right */}
         {aboutData.additionalParagraphs && aboutData.additionalParagraphs.length > 0 && (
           <>
-            <SectionDivider />
-            <SectionTitle>Our Story</SectionTitle>
+            <SectionDivider
+              initial={{ opacity: 0, scaleX: 0 }}
+              animate={{ opacity: 1, scaleX: 1 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            />
+            <SectionTitle
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+            >
+              Our Story
+            </SectionTitle>
             <ContentGrid>
               <ContentSection>
                 {renderParagraphs(aboutData.additionalParagraphs, aboutData.additionalHighlights)}
               </ContentSection>
-              <SideImage>
+              <SideImage
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+              >
                 <img 
                   src={aboutData.sideImage || aboutData.image || "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"} 
                   alt="About Techveda Side" 
@@ -452,15 +555,34 @@ const About = () => {
           </>
         )}
 
-        {/* New Founders Section */}
         {foundersData && foundersData.founders && foundersData.founders.length > 0 && (
           <FounderSection>
-            <SectionDivider />
-            <FounderTitle>{foundersData.title || 'Meet Our Founders'}</FounderTitle>
+            <SectionDivider
+              initial={{ opacity: 0, scaleX: 0 }}
+              animate={{ opacity: 1, scaleX: 1 }}
+              transition={{ duration: 0.6, delay: 0.7 }}
+            />
+            <FounderTitle
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+            >
+              {foundersData.title || 'Meet Our Founders'}
+            </FounderTitle>
             {foundersData.founders.map((founder, index) => (
-              <FounderCard key={index} imagePosition={founder.imagePosition || 'left'}>
+              <FounderCard 
+                key={index} 
+                imagePosition={founder.imagePosition || 'left'}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.9 + (index * 0.1) }}
+              >
                 <FounderImageSection imagePosition={founder.imagePosition || 'left'}>
-                  <FounderImage>
+                  <FounderImage
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.6, delay: 1 + (index * 0.1) }}
+                  >
                     <img 
                       src={founder.image} 
                       alt={founder.name}
@@ -470,13 +592,19 @@ const About = () => {
                       }}
                     />
                   </FounderImage>
-                  <SocialLinks>
+                  <SocialLinks
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 1.1 + (index * 0.1) }}
+                  >
                     {founder.social?.github && (
                       <SocialLink 
                         href={founder.social.github} 
                         target="_blank" 
                         rel="noopener noreferrer"
                         aria-label="GitHub Profile"
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.95 }}
                       >
                         <FaGithub />
                       </SocialLink>
@@ -487,6 +615,8 @@ const About = () => {
                         target="_blank" 
                         rel="noopener noreferrer"
                         aria-label="Portfolio Website"
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.95 }}
                       >
                         <FaGlobe />
                       </SocialLink>
@@ -497,6 +627,8 @@ const About = () => {
                         target="_blank" 
                         rel="noopener noreferrer"
                         aria-label="LinkedIn Profile"
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.95 }}
                       >
                         <FaLinkedin />
                       </SocialLink>
@@ -507,6 +639,8 @@ const About = () => {
                         target="_blank" 
                         rel="noopener noreferrer"
                         aria-label="Instagram Profile"
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.95 }}
                       >
                         <FaInstagram />
                       </SocialLink>
@@ -514,8 +648,20 @@ const About = () => {
                   </SocialLinks>
                 </FounderImageSection>
                 <FounderInfo imagePosition={founder.imagePosition || 'left'}>
-                  <FounderName>{founder.name}</FounderName>
-                  <FounderBio>{founder.bio}</FounderBio>
+                  <FounderName
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 1.2 + (index * 0.1) }}
+                  >
+                    {founder.name}
+                  </FounderName>
+                  <FounderBio
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 1.3 + (index * 0.1) }}
+                  >
+                    {founder.bio}
+                  </FounderBio>
                 </FounderInfo>
               </FounderCard>
             ))}

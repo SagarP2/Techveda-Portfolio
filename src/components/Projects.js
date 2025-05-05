@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
-import SectionHeading from "./SectionHeading";
+
 import { Link } from "react-router-dom";
 import LoadingSpinner from "./LoadingSpinner";
 
@@ -12,19 +12,81 @@ const ProjectsSection = styled.section`
   position: relative;
   overflow: hidden;
   id: "Projects";
+
+  @media (max-width: 768px) {
+    padding: 4rem 0;
+  }
+
+  @media (max-width: 480px) {
+  
+     padding: 0 1.5rem 3rem;
+  }
 `;
 
+const SectionHeading = styled(motion.h2)`
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3vw, 2.5rem);
+  font-weight: 700;
+  margin-bottom: ${props => props.theme.spacing.md};
+  position: relative;
+  display: inline-block;
+  
+  @media (max-width: 768px) {
+    margin-bottom: ${props => props.theme.spacing.sm};
+  }
+  
+  &:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 80px;
+    height: 4px;
+    background: var(--color-primary);
+    transition: width 0.3s ease;
+    
+    @media (max-width: 992px) {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    @media (max-width: 480px) {
+      width: 60px;
+      height: 3px;
+      bottom: -8px;
+    }
+  }
+`;
 const Container = styled(motion.div)`
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0;
+
+  @media (max-width: 768px) {
+    padding: 0 0.75rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0 0.5rem;
+  }
 `;
 
 const ProjectsGrid = styled(motion.div)`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
   margin-top: 2.2rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.8rem;
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+  }
 `;
 
 const ProjectCard = styled(motion.div)`
@@ -38,6 +100,10 @@ const ProjectCard = styled(motion.div)`
   position: relative;
   isolation: isolate;
 
+  @media (max-width: 768px) {
+    border-radius: 12px;
+  }
+
   &:hover {
     transform: translateY(-8px) scale(1.02);
     box-shadow: 0 12px 40px rgba(66, 153, 225, 0.1);
@@ -49,6 +115,14 @@ const ProjectImageWrapper = styled.div`
   position: relative;
   overflow: hidden;
   height: 200px;
+
+  @media (max-width: 768px) {
+    height: 180px;
+  }
+
+  @media (max-width: 480px) {
+    height: 160px;
+  }
 
   &::after {
     content: '';
@@ -81,7 +155,14 @@ const ProjectImage = styled.img`
 
 const ProjectContent = styled.div`
   padding: 1.5rem;
-  position: relative;
+
+  @media (max-width: 768px) {
+    padding: 1.25rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 1rem;
+  }
 
   &::before {
     content: '';
@@ -97,10 +178,15 @@ const ProjectContent = styled.div`
 
 const ProjectTitle = styled.h3`
   color: linear-gradient(135deg, #4299e1, #38b2ac);
-  font-size: 1.75rem;
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
   margin-bottom: 1rem;
   font-weight: 600;
   transition: all 0.3s ease;
+
+  @media (max-width: 768px) {
+    margin-bottom: 0.75rem;
+  }
+    
 
   ${ProjectCard}:hover & {
     color: #4299e1;
@@ -109,7 +195,7 @@ const ProjectTitle = styled.h3`
 
 const ProjectDescription = styled.p`
   color: #cbd5e0;
-  font-size: 1.1rem;
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
   margin-bottom: 1.75rem;
   line-height: 1.7;
   display: -webkit-box;
@@ -119,6 +205,16 @@ const ProjectDescription = styled.p`
   text-overflow: ellipsis;
   height: 5.1rem;
   transition: color 0.3s ease;
+
+  @media (max-width: 768px) {
+    margin-bottom: 1.5rem;
+    height: 4.5rem;
+  }
+
+  @media (max-width: 480px) {
+    margin-bottom: 1.25rem;
+    height: 4rem;
+  }
 
   ${ProjectCard}:hover & {
     color: #e2e8f0;
@@ -140,6 +236,16 @@ const TechStack = styled.div`
   width: 100%;
   mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
   
+  @media (max-width: 768px) {
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    gap: 0.4rem;
+    margin-bottom: 1.25rem;
+  }
+  
   & > .scroll-track {
     display: inline-flex;
     white-space: nowrap;
@@ -154,18 +260,25 @@ const TechStack = styled.div`
       transform: translateX(-50%);
     }
   }
-    ;`
-
-    const Technology = styled.span`
-  background: rgba(59, 130, 246, 0.1);
-  color: #60a5fa;
-  padding: 0.5rem 1rem;
-  border-radius: 15px;
-  font-size: 0.875rem;
-  font-weight: 500;
-  margin-right:10px;
 `;
 
+const Technology = styled.span`
+  background: rgba(59, 130, 246, 0.1);
+  color: #60a5fa;
+  padding: 0.4rem 0.75rem;
+  border-radius: 15px;
+  font-size: clamp(0.75rem, 1.2vw, 0.875rem);
+  font-weight: 500;
+  margin-right: 10px;
+
+  @media (max-width: 768px) {
+    padding: 0.35rem 0.6rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.3rem 0.5rem;
+  }
+`;
 
 const ProjectLinks = styled.div`
   display: flex;
@@ -173,16 +286,31 @@ const ProjectLinks = styled.div`
   opacity: 0.9;
   transition: opacity 0.3s ease;
 
+  @media (max-width: 768px) {
+    gap: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    gap: 0.75rem;
+  }
+
   ${ProjectCard}:hover & {
     opacity: 1;
   }
 `;
 
-
 const ViewMoreSection = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 4rem;
+
+  @media (max-width: 768px) {
+    margin-top: 3rem;
+  }
+
+  @media (max-width: 480px) {
+    margin-top: 2.5rem;
+  }
 `;
 
 const ViewMoreButton = styled(Link)`
@@ -191,8 +319,8 @@ const ViewMoreButton = styled(Link)`
   gap: 0.75rem;
   color: #ffffff;
   text-decoration: none;
-  font-size: 1.1rem;
-  padding: 1rem 2rem;
+  font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+  padding: 0.875rem 1.75rem;
   border-radius: 12px;
   background: linear-gradient(90deg, #4299e1, #2563eb);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -200,6 +328,14 @@ const ViewMoreButton = styled(Link)`
   box-shadow: 0 4px 20px rgba(66, 153, 225, 0.3);
   position: relative;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    padding: 0.75rem 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.7rem 1.25rem;
+  }
 
   &::before {
     content: '';
@@ -223,8 +359,8 @@ const ViewMoreButton = styled(Link)`
   }
 
   svg {
-    width: 24px;
-    height: 24px;
+    width: clamp(20px, 2vw, 24px);
+    height: clamp(20px, 2vw, 24px);
     transition: transform 0.3s ease;
   }
 
@@ -253,27 +389,35 @@ const Emphasis = styled.span`
   }  
 `;
 
-
 const ViewDetailsButton = styled(Link)`
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.75rem 1.8rem;
+  padding: 0.6rem 1.5rem;
   background: #3b82f6;
   color: white;
   text-decoration: none;
   border-radius: 0.3rem;
   font-weight: 500;
+  font-size: clamp(0.8rem, 1.1vw, 0.9rem);
   transition: background 0.2s ease;
-  margin-left:auto;
+  margin-left: auto;
+
+  @media (max-width: 768px) {
+    padding: 0.5rem 1.25rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.45rem 1rem;
+  }
 
   &:hover {
     background: #2563eb;
   }
 
   svg {
-    width: 20px;
-    height: 20px;
+    width: clamp(16px, 1.5vw, 20px);
+    height: clamp(16px, 1.5vw, 20px);
   }
 `;
 
@@ -283,19 +427,26 @@ const GitHubLink = styled.a`
   color: #ffffff;
   text-decoration: none;
   font-weight: 500;
+  font-size: clamp(0.8rem, 1.1vw, 0.9rem);
 
   svg {
-    width: 30px;
-    height: 30px;
+    width: clamp(24px, 2vw, 30px);
+    height: clamp(24px, 2vw, 30px);
   }
-  span{
-    padding-left:10px;
+  
+  span {
+    padding-left: 8px;
+    
+    @media (max-width: 480px) {
+      padding-left: 6px;
+    }
   }
 
   &:hover {
     color: #3b82f6;
   }
 `;
+
 const container = {
   hidden: { opacity: 0 },
   visible: {
@@ -335,6 +486,7 @@ const Description = styled(motion.p)`
   max-width: 1200px;
   color: rgba(255, 255, 255, 0.7);
 `;
+
 const Projects = () => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -408,7 +560,6 @@ const Projects = () => {
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                           <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
                         </svg><span>GitHub</span>
-
                       </GitHubLink>
                       <ViewDetailsButton to={`/projects/${project._id}`}>
                         View Details
