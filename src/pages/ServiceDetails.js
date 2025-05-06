@@ -7,13 +7,13 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import CallToAction from '../components/CallToAction';
 
 const Container = styled.div`
-
   margin: 0 auto;
   width: 100%;
   font-family: 'Inter', sans-serif;
   background: #0a0a0a;
   color: var(--color-text-primary);
   min-height: 100vh;
+  
 `;
 
 const ServiceHeader = styled.div`
@@ -132,7 +132,13 @@ const ContentSection = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding-bottom: clamp(3rem, 8vw, 6rem);
+  @media (max-width: 768px) {
+    padding: 1rem 1rem;
+  
+  }
+
 `;
+
 
 const SubSectionTitle = styled(motion.h2)`
   font-family: 'Poppins', sans-serif;
