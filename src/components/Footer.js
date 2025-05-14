@@ -140,10 +140,19 @@ const Footer = () => {
         
         <div className="mt-10 pt-3 pb-3 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-gray-500 font-body">&copy; {currentYear} TECHVEDA. All rights reserved.</p>
-          <div className="mt-4 md:mt-0 space-x-4">
-            <a href="#" className="text-xs text-gray-500 hover:text-primary-400 transition-colors font-body hoverable">Privacy Policy</a>
-            <a href="#" className="text-xs text-gray-500 hover:text-primary-400 transition-colors font-body hoverable">Terms of Service</a>
-            <a href="#" className="text-xs text-gray-500 hover:text-primary-400 transition-colors font-body hoverable">Cookie Policy</a>
+         <div className="mt-4 md:mt-0 space-x-4">
+            <Link
+              to="/privacypolicy"
+              className="text-xs text-gray-500 hover:text-primary-400 transition-colors font-body hoverable"
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              to="/termsofservice"
+              className="text-xs text-gray-500 hover:text-primary-400 transition-colors font-body hoverable"
+            >
+              Terms of Service
+            </Link>
           </div>
         </div>
       </div>

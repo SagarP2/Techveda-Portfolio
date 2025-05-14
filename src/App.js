@@ -29,6 +29,8 @@ import AdminDashboard from './pages/AdminDashboard';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
 import ServiceDetails from './pages/ServiceDetails';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
 
 // ScrollToTop component for better scroll management
 const ScrollToTop = () => {
@@ -61,6 +63,8 @@ const AnimationWrapper = () => {
       <Route path="/services/:id" element={<ServiceDetails />} />
       <Route path="/blog" element={<Blog />} />
       <Route path="/blog/:id" element={<BlogPost />} />
+       <Route path="/privacypolicy" element={<PrivacyPolicy />}/>
+      <Route path="/termsofservice" element={<TermsOfService />}/>
       
       {/* Admin routes */}
       <Route path="/admin/login" element={<AdminLogin />} />
