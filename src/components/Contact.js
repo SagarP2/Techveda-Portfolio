@@ -707,7 +707,7 @@ const Contact = () => {
               amazing together.
             </ContactSubtitle>
             <img
-              src="https://www.appgenixinfotech.com/wp-content/uploads/2022/08/OBJECTS.png"
+              src="https://www.creativefabrica.com/product/golden-retriever-svg-file-dog-svg"
               alt="Digital experience"
               className="w-full h-full object-cover"
             />

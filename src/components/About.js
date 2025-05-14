@@ -212,7 +212,9 @@ const ImageWrapper = styled(motion.div)`
 
 const ProfileImage = styled.img`
   width: 100%;
-  border-radius: 20px;
+      padding-bottom: 21%;
+
+  border-radius: 0px;
   box-shadow: ${props => props.theme.shadows.medium};
   filter: brightness(0.9);
 
@@ -227,7 +229,7 @@ const ProfileImage = styled.img`
 
 const ExperienceBox = styled(motion.div)`
   position: absolute;
-  bottom: -25px;
+  bottom: -10px;
   left: -25px;
   background: #4299e1;
   padding: ${props => props.theme.spacing.md};
@@ -337,7 +339,7 @@ const About = () => {
               <StatTitle>Years Experience</StatTitle>
             </StatItem>
             <StatItem>
-              <StatNumber>35+</StatNumber>
+              <StatNumber>25+</StatNumber>
               <StatTitle>Projects Completed</StatTitle>
             </StatItem>
             <StatItem>
@@ -360,7 +362,7 @@ const About = () => {
           viewport={{ once: true }}
         >
           <ProfileImage 
-            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" 
+            src="https://www.appgenixinfotech.com/wp-content/uploads/2022/04/Group.png" 
             alt="Techveda Team" 
           />
           <ExperienceBox

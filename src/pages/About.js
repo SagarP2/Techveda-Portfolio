@@ -336,11 +336,12 @@ const About = () => {
         // Set default about data if API fails
         setAboutData(aboutResponse.data || {
           title: 'About Us',
-          image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+          image: 'https://i.pinimg.com/736x/e0/5d/2f/e05d2f55b5a8803c0bb85a9c0ac8d040.jpg',
           paragraphs: [
             'At Techveda, we believe in the power of technology to transform businesses and enhance lives. Founded in 2020, our journey began with a simple mission: to create digital solutions that make a difference.',
             'We\'re a team of passionate designers, developers, and strategists who thrive on solving complex problems through innovative technology. With expertise spanning web development, mobile applications, UI/UX design, and digital marketing, we bring a comprehensive approach to every project.',
-            'What sets us apart is our commitment to understanding your unique needs. We don\'t just build products; we craft experiences that align with your business goals and resonate with your audience. Our collaborative process ensures that your vision is at the heart of everything we create.'
+            'What sets us apart is our commitment to understanding your unique needs. We don\'t just build products; we craft experiences that align with your business goals and resonate with your audience. Our collaborative process ensures that your vision is at the heart of everything we create.',
+            'From startups to established enterprises, we\'ve helped clients across industries elevate their digital presence and achieve measurable results. We\'re excited about the possibilities that technology brings and look forward to helping you navigate the ever-evolving digital landscape.'
           ]
         });
 
@@ -355,27 +356,27 @@ const About = () => {
             title: 'Meet Our Founders',
             founders: [
               {
-                name: 'John Smith',
-                bio: 'Founder & CEO with over 10 years of experience in software development and team leadership. Passionate about creating innovative solutions that make a difference.',
+                name: 'Priyanshu Patel',
+                bio: 'Priyanshu Patel is the CEO of a collaborative tech platform TechVeda where passionate developers, designers, and innovators come together to showcase their work and build impactful digital solutions. With expertise in full-stack development, AI, and modern UI/UX, he leads with a vision to simplify workflows through cutting-edge technology. Known for his technical depth, clear communication, and leadership, Priyanshu is driven by a mission to turn ideas into scalable, real-world products.',
                 image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80',
-                imagePosition: 'left',
+                imagePosition: 'right',
                 social: {
-                  github: 'https://github.com',
-                  portfolio: 'https://portfolio.com',
+                  github: 'https://github.com/12princ',
+                  portfolio: 'https://www.priyanshupatel.online/',
                   linkedin: 'https://linkedin.com',
-                  instagram: 'https://instagram.com'
+                  instagram: 'https://www.instagram.com/__p12.5.__/'
                 }
               },
               {
-                name: 'Jane Doe',
-                bio: 'Creative Director & Co-founder specializing in UI/UX design. Brings a perfect blend of aesthetics and functionality to every project.',
+                name: 'Sagar Panchal',
+                bio: 'Sagar Panchal is the Co-Founder and Chief Technology Officer, known for turning vision into reality. As the technical backbone of the team, Sagar takes charge of end-to-end project execution—managing workflows, guiding teams, and contributing directly to development. While Priyanshu sets the direction, Sagar ensures every technical element aligns perfectly and delivers results. A close friend and trusted collaborator, Sagar’s disciplined approach, technical precision, and leadership make him a driving force behind the platform’s success.',
                 image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80',
-                imagePosition: 'right',
+                imagePosition: 'left',
                 social: {
-                  github: 'https://github.com',
-                  portfolio: 'https://portfolio.com',
+                  github: 'https://github.com/SagarP2',
+                  portfolio: 'https://sagarp2.github.io/SagarPanchal/',
                   linkedin: 'https://linkedin.com',
-                  instagram: 'https://instagram.com'
+                  instagram: 'https://www.instagram.com/_sagarpanchal._/'
                 }
               }
             ]

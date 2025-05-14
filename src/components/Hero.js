@@ -93,7 +93,7 @@ const Hero = () => {
             }}
           >
             <motion.div 
-              className="relative rounded-2xl overflow-hidden aspect-video lg:aspect-square shadow-2xl"
+              className="relative rounded-2xl aspect-video lg:aspect-square shadow-2xl"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ 
                 opacity: (imageLoaded && animationReady) ? 1 : 0, 
@@ -107,7 +107,7 @@ const Hero = () => {
               }}
             >
               <motion.div
-                className="absolute inset-0 bg-primary-500/20 z-10"
+                className=""
                 initial={{ opacity: 0 }}
                 animate={{ 
                   opacity: (imageLoaded && animationReady) ? 0.2 : 0 
@@ -123,7 +123,7 @@ const Hero = () => {
                 transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
               >
                 <img 
-                  src="https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" 
+                  src="https://www.appgenixinfotech.com/wp-content/uploads/2022/05/header-1-3-1.png" 
                   alt="Digital experience" 
                   className="w-full h-full object-cover"
                   onLoad={handleImageLoad}
@@ -141,7 +141,7 @@ const Hero = () => {
                 }}
                 transition={{ duration: 0.6, delay: 1 }}
               >
-                <div className="absolute top-0 left-0 w-6 sm:w-8 h-6 sm:h-8 border-t-2 border-l-2 border-white/30 rounded-tl-2xl"></div>
+                {/* <div className="absolute top-0 left-0 w-6 sm:w-8 h-6 sm:h-8 border-t-2 border-l-2 border-white/30 rounded-tl-2xl"></div> */}
               </motion.div>
               <motion.div 
                 className="absolute bottom-0 right-0 w-12 sm:w-16 h-12 sm:h-16 z-30"
@@ -153,7 +153,7 @@ const Hero = () => {
                 }}
                 transition={{ duration: 0.6, delay: 1 }}
               >
-                <div className="absolute bottom-0 right-0 w-6 sm:w-8 h-6 sm:h-8 border-b-2 border-r-2 border-white/30 rounded-br-2xl"></div>
+                {/* <div className="absolute bottom-0 right-0 w-6 sm:w-8 h-6 sm:h-8 border-b-2 border-r-2 border-white/30 rounded-br-2xl"></div> */}
               </motion.div>
             </motion.div>
           </div>
